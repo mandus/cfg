@@ -26,7 +26,7 @@ set $altmod Mod3
 # clear in small sizes. However, if you need a lot of unicode glyphs or
 # right-to-left text rendering, you should instead use pango for rendering and
 # chose a FreeType font, such as:
-font pango:DejaVu Sans Mono 12
+font pango:DejaVu Sans Mono 10
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -37,20 +37,22 @@ bindsym $mod+Return exec urxvt
 bindsym $altmod+Return exec uxterm
 #bindsym $altmod+Return exec alacritty
 bindsym  $mod+Shift+Return exec gnome-terminal  --window-with-profile=contrasy
-bindsym  $altmod+Shift+Return exec gnome-terminal  --window-with-profile=contrasy-big
 
 # start a cute-browser
-bindsym $altmod+b exec qutebrowser
+bindsym $altmod+b exec qutebrowser --backend webengine
 
 # adjust touchpad feeling
-bindsym $altmod+t exec toggle_xps_touchpad.sh
+# bindsym $altmod+t exec toggle_xps_touchpad.sh
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
+# scratchpad
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
+
 # lock screen
-#bindsym $mod+q exec --no-startup-id i3lock -c 000000
-bindsym $mod+q exec --no-startup-id /home/aasmundo/bin/fuzzy_lock.sh
+bindsym $mod+q exec --no-startup-id i3lock -c 000000
 #bindsym $mod+q exec --no-startup-id gnome-screensaver-command --lock
 
 # start dmenu (a program launcher)
@@ -61,7 +63,7 @@ bindsym $mod+q exec --no-startup-id /home/aasmundo/bin/fuzzy_lock.sh
 #bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 bindsym $mod+d exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu -i -fn 'Roboto Sans-14' -nb '#202020' -nf '#30d020' -sf '#30d020' -sb '#404040'" --usage-log=$HOME/.j4dmenulog
 bindsym Control+space exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu -i -fn 'Roboto Sans-14' -nb '#202020' -nf '#30d020' -sf '#30d020' -sb '#404040'" --usage-log=$HOME/.j4dmenulog
-bindsym $mod+p exec --no-startup-id sbcl --script /home/aasmundo/Dropbox/Prosjekter/gits/powerlisp/powerlisp.debxps.fasl --no-linedit
+bindsym $mod+p exec --no-startup-id sbcl --script /home/aasmundo/Dropbox/Prosjekter/gits/powerlisp/powerlisp.deb304.fasl --no-linedit
 
 # change focus
 bindsym $mod+j focus left
@@ -102,7 +104,7 @@ bindsym $mod+f fullscreen
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
+bindsym $mod+t layout tabbed
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
@@ -143,8 +145,9 @@ bindsym $mod+Shift+0 move container to workspace 10
 
 bindsym $altmod+n workspace next
 bindsym $altmod+p workspace prev
-bindsym $altmod+g exec /home/aasmundo/bin/quickswitch.py -d "dmenu -b -i -l 20 -fn 'Roboto Sans-14' -nb '#202020' -nf '#30d020' -sf '#30d020' -sb '#404040'"
-bindsym $altmod+Shift+g exec /home/aasmundo/bin/quickswitch.py -m -d "dmenu -b -i -l 20 -fn 'Roboto Sans-14' -nb '#202020' -nf '#30d020' -sf '#30d020' -sb '#404040'"
+bindsym $altmod+g exec /home/aasmundo/bin/quickswitch.py
+bindsym $altmod+Shift+g exec /home/aasmundo/bin/quickswitch.py -m
+bindsym $altmod+Shift+n exec --no-startup-id ~/bin/move_out_i3.sh
 
 # screen-grab
 # can't get this to work... 
@@ -165,24 +168,24 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 #bindsym XF86AudioMute exec amixer -q -D pulse set Master 1+ toggle
 
 # audio through pulseaudio/hdmi (headphones on screen or D6000)
-#bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 1 '+2%'
-#bindsym XF86AudioLowerVolume exec pactl set-sink-volume 1 '-2%'
+#bindsym XF86AudioRaiseVolume exec /home/aasmundo/bin/running_sink_vol.sh p
+#bindsym XF86AudioLowerVolume exec /home/aasmundo/bin/running_sink_vol.sh m
 #bindsym XF86AudioMute exec pactl set-sink-mute 1 toggle
 
 # main running sink:
-bindsym XF86AudioRaiseVolume exec running_sink_vol.sh p
-bindsym XF86AudioLowerVolume exec running_sink_vol.sh m
-bindsym XF86AudioMute exec running_sink_vol.sh mute
+bindsym $altmod+Shift+1 exec  /home/aasmundo/bin/running_sink_vol.sh m
+bindsym $altmod+Shift+2 exec /home/aasmundo/bin/running_sink_vol.sh p
+bindsym $altmod+Shift+3 exec /home/aasmundo/bin/running_sink_vol.sh mute
 
 # audio through pulseaudio/bluetooth 
 #bindsym Shift+XF86AudioRaiseVolume exec pactl set-sink-volume 1 '+2%'
-bindsym Shift+XF86AudioRaiseVolume exec bt_sink_vol.sh p
-bindsym $altmod+Shift+2 exec bt_sink_vol.sh p
+#bindsym Shift+XF86AudioRaiseVolume exec bt_sink_vol.sh p
+#bindsym $altmod+Shift+2 exec bt_sink_vol.sh p
 #bindsym Shift+XF86AudioLowerVolume exec pactl set-sink-volume 1 '-2%'
-bindsym Shift+XF86AudioLowerVolume exec bt_sink_vol.sh m
-bindsym $altmod+Shift+1 exec bt_sink_vol.sh m
+#bindsym Shift+XF86AudioLowerVolume exec bt_sink_vol.sh m
+#bindsym $altmod+Shift+1 exec bt_sink_vol.sh m
 #bindsym Shift+XF86AudioMute exec pactl set-sink-mute 1 toggle
-bindsym Shift+XF86AudioMute exec bt_sink_vol.sh mute
+#bindsym Shift+XF86AudioMute exec bt_sink_vol.sh mute
 
 # play next/prev etc in spotify
 bindsym XF86AudioNext exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
@@ -229,31 +232,19 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
+        #position top
         tray_output primary
         status_command i3status
+        #status_command /home/aasmundo/bin/custom_i3status_home.sh
 }
 
-#exec xrandr --dpi 120
-#exec --no-startup-id xrdb -merge /home/aasmundo/.Xresources
+
 #exec --no-startup-id /usr/lib/unity-settings-daemon/unity-settings-daemon
 
-# autorun wireless network choser
-#exec --no-startup-id nm-applet
-#exec --no-startup-id dropbox start
+exec --no-startup-id xrdb -merge /home/aasmundo/.Xresources
+
+#exec --no-startup-id onboard
+exec --no-startup-id nm-applet
+exec --no-startup-id dropbox start
 #exec --no-startup-id clipit
 #exec --no-startup-id synapse
-#exec /usr/bin/skype
-
-#exec /opt/telegram/Telegram
-
-#exec /usr/bin/scudcloud --minimized True
-
-# autorun the google drive thingy
-# removed - not supported anymore
-#exec --no-startup-id /opt/thefanclub/grive-tools/grive-indicator 
-
-# start spotify minimized
-#exec --no-startup-id spotify --minimized
-
-# start autolock; will lock after 3 minutes
-exec xautolock -time 3 -locker 'i3lock -c 121212' &
