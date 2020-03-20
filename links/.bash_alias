@@ -1,0 +1,130 @@
+NORMAL=$(tty -s && tput sgr0)
+BLUE=$(tty -s && tput setaf 6)
+OTHERBLUE=$(tty -s && tput setaf 4)
+MAGENTA=$(tty -s && tput setaf 5)
+YELLOW=$(tty -s && tput setaf 3)
+GREEN=$(tty -s && tput setaf 2)
+RED=$(tty -s && tput setaf 1)
+BOLDCOL=$(tty -s && tput bold)
+function red() { echo -e "$RED$*$NORMAL"; }
+function green() { echo -e "$GREEN$*$NORMAL"; }
+function yellow() { echo -e "$YELLOW$*$NORMAL"; }
+function magenta() { echo -e "$MAGENTA$*$NORMAL"; }
+function blue() { echo -e "$BLUE$*$NORMAL"; }
+function edquick() { vim ~/.bash_alias; . ~/.bash_alias; }
+function french() { grep -i "$*" ~/Dropbox/Documents/french.txt; grep -i "$*" ~/Dropbox/Documents/french_notes.txt; }
+function getpid() { ps wax | grep $1 | grep -v grep | awk '{print $1}'; }
+function killProc() { for i in `getpid $1` ;  do ps -o user,pid -p $i | grep $i; kill -KILL $i; done; } 
+function pathsplitter() { echo $* | perl -pe 's/:/\n/g'; }
+function testme() { for i in "$@" ; do echo $i; done }
+function testyou() { for i in "$*" ; do echo $i; done }
+function quickcalc() { echo "$*" | bc -q -l; }
+function makeline() { printf "%${1:-$COLUMNS}s\n" ""|tr " " ${2:-#};}
+function repeatstring(){ printf  "%${2}s" "" | sed -e "s/ /$1/g"; }
+function findheader() { find . -iname "*$1*" -print; }
+function sumuserpids() { ps auwx | awk {'print $1'} | sort | uniq -c | while read -r count user ; do printf "%15s %3s %-$((${COLUMNS}-15-3))s\n" $user $count $(makeline $count); done; }
+function fopen() { FILE=$(fzf) && open $FILE; }
+function fd() { DIR=$(find ${1:-*} -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf) && cd "$DIR"; }
+function timetodec() { v="$*"; echo "${v%:*} + ${v#*:}*(1/60)" | bc -q -l; }
+function urldecode() { : "${*//+/ }"; echo -e "${_//%/\\x}"; }
+function urlencode() {
+    # urlencode <string>
+    old_lc_collate=$LC_COLLATE
+    LC_COLLATE=C
+    
+    local length="${#1}"
+    for (( i = 0; i < length; i++ )); do
+        local c="${1:i:1}"
+        case $c in
+            [a-zA-Z0-9.~_-]) printf "$c" ;;
+            *) printf '%%%02X' "'$c" ;;
+        esac
+    done
+    
+    LC_COLLATE=$old_lc_collate
+}
+_test_files() { 
+    local cur=${COMP_WORDS[COMP_CWORD]}
+    #prev="${COMP_WORDS[COMP_CWORD-1]}"
+    opts=$(git ls-files -x test_*.py -i | sed "s/.*test_//" | sed "s/\.py$//")
+    COMPREPLY=(  $(compgen -W "${opts}" -- ${cur}) )
+    #if [[ ${cur} == -* ]] ; then
+    #    COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+    #    return 0
+    #fi
+}
+
+function find_bashrc_go() { 
+    gogodir=`pwd`
+    while ! [[ -f $gogodir/.bashrc_go ]] && ! [[ $gogodir/.. -ef $gogodir ]] ; do
+        gogodir=${gogodir}/..
+    done
+    echo $gogodir
+}
+function gogo() {
+    gogodir=$(find_bashrc_go)
+    # if $GOPATH is set, remove its bin-dir
+    [[ -n $GOPATH ]] && export PATH=$(echo $PATH | sed 's/:/\n/g' | grep -v $GOPATH/bin | paste -s -d":")
+    [ -f ${gogodir}/.bashrc_go ] && cd $gogodir && source .bashrc_go && cd -
+}
+
+function mycal() {
+    gcalcli --calendar='asmund@xal.no#blue' --calendar='Kalender#brightred' --calendar='Dager#white' --calendar='Fam kalender#yellow' calw --monday --details location 
+}
+
+function agenda() {
+    gcalcli --calendar='asmund@xal.no#blue' --calendar='Kalender#brightred' --calendar='Dager#white' --calendar='Fam kalender#yellow' agenda --details location $(agenda_range.py)
+}
+
+function today() {
+    gcalcli --calendar='asmund@xal.no#blue' --calendar='Kalender#brightred' --calendar='Dager#white' --calendar='Fam kalender#yellow' agenda --details all $(date "+%Y-%m-%dT00:01") $(date "+%Y-%m-%dT23:59") 
+}
+
+function now() {
+    gcalcli --calendar='asmund@xal.no#blue' --calendar='Kalender#brightred' agenda --details location $(date "+%Y-%m-%dT%H:%M") $(date --date="@$(($(date +%s)+3600))" "+%Y-%m-%dT%H:%M") | tail +2 | head -n-1
+}
+
+_mypass_files() {
+    local cur=${COMP_WORDS[COMP_CWORD]}
+    opts=$(ls ~/Dropbox/Stuff/config/pw/pw_*pw | sed 's/.*pw_\(.*\).pw/\1/')
+    COMPREPLY=( $(compgen -W  "${opts}" -- ${cur}) )
+}
+complete -F _mypass_files mypass
+
+# Two variants of possible cabal locations
+[[ -f $HOME/Library/Haskell/bin/cabal ]] && alias cabal='~/Library/Haskell/bin/cabal'
+[[ -f $HOME/.cabal/bin/cabal ]] && alias cabal='~/.cabal/bin/cabal'
+alias cdm="cd ~/Projects/vipps/go/src/vipps.no/vaam; gogo"
+alias cdv="cd ~/Projects/vipps/"
+alias cdvs="cd ~/Projects/vipps/go/src/vipps.no/signup-backend/; gogo"
+alias cdxs="cd ~/Dropbox/Shares/ExpertAnalyticsMgmt/Juridisk\ og\ Finans/Styremøter"
+
+# Alias for git, and add git completion also when alias is used
+alias g="git"
+complete -o default -o nospace -F _git g
+alias ggn="git grep -n"
+alias gup="git pull"
+alias gpu="git push -u"
+alias gsl="gitstash"
+alias h="history | grep"
+alias l="less"
+[[ $currentos == "Linux" ]] && alias ls="ls --color=auto"
+[[ $currentos == "Linux" ]] && alias open="xdg-open"
+alias sshxaldev="mosh dev.xal.no -- tmux a"
+alias sshflexi="ssh -i ~/.ssh/ubuntu1.pem ubuntu@flexi.xal.no"
+alias sshhoyer="ssh -i ~/.ssh/hoyer.pem ubuntu@hoyer.xal.no"
+alias sshoro="mosh oro.simula.no -- screen -dr"
+alias sshode="ssh aasmundo@odegard.no.eu.org"
+alias flexicouchport="ssh -i ~/.ssh/ubuntu1.pem -L 5984:localhost:5984 ubuntu@flexi.xal.no"
+alias flexicouchreplicateport="ssh -i ~/.ssh/ubuntu1.pem -L 6984:localhost:5984 ubuntu@flexi.xal.no"
+#alias rossbcl="ros -Q -l ~/.sbclrc -L sbcl run"
+alias s="screen -r -x"
+#alias t="tmux a"
+alias xcli="xclip -i -selection clipboard"
+alias xs="cd"
+
+
+## compile c from command line (need allheads.h in some system include dir..
+#c_flags="-std=gnu11 -g -Wall -Werror -O3 -include allheads.h `pkg-config --cflags gsl`"
+#c_libs="-lm `pkg-config --libs gsl`"
+alias c_comp="gcc -xc - $c_libs $c_flags"

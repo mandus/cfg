@@ -1,0 +1,65 @@
+[user]
+	name = Åsmund Ødegård
+	email = mandus@gmail.com
+	signingkey = 51C25B61F0F672F354315181EB09921F04C4631F
+[core]
+	excludesfile = ~/.global_ignore
+	quotepath = false
+	editor = vim
+[credential]
+	helper = !/usr/lib/jvm/java-11-openjdk-amd64/bin/java -Ddebug=false -Djava.net.useSystemProxies=true -jar /home/aasmundo/software/bin/git-credential-manager-2.0.4.jar
+	canFallBackToInsecureStore = true
+	#helper = osxkeychain
+[push]
+	default = current
+[alias]
+   co = checkout
+   br = branch
+   cm = commit
+   up = pull
+   st = status
+   cpk = cherry-pick
+   g = grep --break --heading --line-number
+   s = stash
+   l = log --oneline --graph
+   quick-stats = ! /home/aasmundo/software/bin/git-quick-stats
+[color]
+	ui = true
+[grep]
+	extendRegexp = true
+	lineNumber = true
+[merge]
+	tool = fugitive
+    conflictstyle = diff3
+[diff]
+	tool = gvimdiff
+[mergetool]
+	prompt = false
+[difftool]
+	prompt = false
+[difftool "gvimdiff"]
+	path = /usr/bin/gvimdiff
+[mergetool "gvimdiff"]
+	path = /usr/bin/gvimdiff
+[mergetool "splice"]
+   cmd = "mvim -f $BASE $LOCAL $REMOTE $MERGED -c 'SpliceInit'"
+   trustExitCode = true
+[mergetool "fugitive"]
+	cmd = gvim -f -c \"Gdiff\" \"$MERGED\"
+[init]
+	templatedir = ~/.git_template
+[filter "media"]
+	clean = git-media-clean %f
+	smudge = git-media-smudge %f
+[filter "hawser"]
+	clean = git hawser clean %f
+	smudge = git hawser smudge %f
+	required = true
+[commit]
+    gpgsign = false
+[url "git@bitbucket.org:"]
+	insteadOf = https://bitbucket.org/
+[url "git@github.com:vippsas/"]
+	insteadOf = https://github.com/vippsas/
+[gpg]
+	program = gpg

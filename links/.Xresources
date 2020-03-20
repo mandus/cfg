@@ -1,0 +1,77 @@
+URxvt.font:     xft:bitstream vera sans mono:size=12:antialias=true
+URxvt.boldFont: xft:bitstream vera sans mono:bold:size=12:antialias=true
+URxvt.scrollBar: 0
+URxvt*depth: 32
+URxvt*background: rgba:0000/0000/0200/c800
+!URxvt*background:  #000000 // black
+URxvt*foreground:  #00aa00 // green
+URxvt*color0:  #001000 // green
+URxvt*color1:  #B40000 // red
+URxvt*color2:  #00AA00 // green
+URxvt*color3:  #AAAA00 // yellow
+URxvt*color4:  #5555AA // blue
+!URxvt*color5:  #AA00AA // magenta
+URxvt*color5:  #603030 // magenta
+URxvt*color6:  #00AAAA // cyan
+URxvt*color7:  #AAAAAA // white
+URxvt*color8:  #555555 // black (now and below: bright)
+!URxvt*color9:  #FF0000 // red
+URxvt*color9:  #500000 // red
+URxvt*color10: #00FF00 // green
+URxvt*color11: #FFFF00 // yellow
+URxvt*color12: #6464FF // blue
+URxvt*color13: #FF00FF // magenta
+URxvt*color14: #00FFFF // cyan
+URxvt*color15: #FFFFFF // white
+
+XTerm.vt100.background:  #010101
+XTerm.vt100.foreground:  #aaaaaa
+XTerm.vt100.color0:  #bbbbbb
+XTerm.vt100.color1:  #cccccc
+XTerm.vt100.color2:  #dddddd
+XTerm.vt100.color3:  #aaaaaa
+XTerm.vt100.color4:  #555555 
+XTerm.vt100.color5:  #606060 
+XTerm.vt100.color6:  #888888 
+XTerm.vt100.color7:  #b0b0b0 
+XTerm.vt100.color8:  #555555 
+XTerm.vt100.color9:  #323232 
+XTerm.vt100.color10: #d0d0d0 
+XTerm.vt100.color11: #ffffff 
+XTerm.vt100.color12: #646464 
+XTerm.vt100.color13: #ffffff 
+XTerm.vt100.color14: #707070 
+XTerm.vt100.color15: #ffffff 
+
+
+Xft.autohint: 0
+Xft.antialias: 1
+Xft.hinting: true
+Xft.hintstyle: hintslight
+Xft.dpi: 96
+Xft.rgba: rgb
+Xft.lcdfilter: lcddefault
+
+!UXTerm*faceName: Bitstream Vera Serif Mono
+UXTerm*faceName: Source Code Pro
+UXTerm*faceSize: 10
+UXTerm*background: #000000
+UXTerm*foreground: #00aa00
+UXTerm.vt100.color0:  #001000 // green
+UXTerm.vt100.color1:  #B40000 // red
+UXTerm.vt100.color2:  #00AA00 // green
+UXTerm.vt100.color3:  #AAAA00 // yellow
+UUXTerm.vt100.color4:  #5555AA // blue
+!UXTerm.vt100.color5:  #AA00AA // magenta
+UXTerm.vt100.color5:  #909090 // magenta
+UXTerm.vt100.color6:  #00AAAA // cyan
+UXTerm.vt100.color7:  #AAAAAA // white
+UXTerm.vt100.color8:  #555555 // black (now and below: bright)
+!UXTerm.vt100.color9:  #FF0000 // red
+UXTerm.vt100.color9:  #500000 // red
+UXTerm.vt100.color10: #00FF00 // green
+UXTerm.vt100.color11: #FFFF00 // yellow
+UXTerm.vt100.color12: #6464FF // blue
+UXTerm.vt100.color13: #FF00FF // magenta
+UXTerm.vt100.color14: #00FFFF // cyan
+UXTerm.vt100.color15: #FFFFFF // white
