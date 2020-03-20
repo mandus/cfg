@@ -10,6 +10,7 @@ cd ${LDIR}
 
 function compile_command_t () {
 	cd $HOME/.vim/bundle/command-t/ruby/command-t/ext/command-t
+	sudo apt install ruby
 	ruby extconf.rb
 	make
 	cd -

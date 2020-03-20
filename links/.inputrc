@@ -1,0 +1,37 @@
+set meta-flag on
+set output-meta on
+
+# Emacs-version
+#set editing-mode emacs
+#set convert-meta off
+
+# VI-version
+set editing-mode vi
+set keymap vi
+set convert-meta on
+
+set bell-style none
+set prefer-visible-bell
+
+set mark-directories on
+set horizontal-scroll-mode on
+set visible-stats on
+set show-all-if-ambiguous on
+
+#set inc-search
+
+"\C-f":forward-word
+"\C-b":backward-word
+"\C-g":forward-char
+"\C-j":backward-char
+
+# 
+$if mode=vi
+    set keymap vi-command
+    "gg": beginning-of-history
+    "G": end-of-history
+#    set keymap vi-insert       #notice how the "jj" movement is
+#    "jj": vi-movement-mode     #after 'set keymap vi-insert'?
+#    "\C-w": backward-kill-word
+#    "\C-p": history-search-backward
+$endif
