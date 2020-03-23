@@ -74,6 +74,10 @@ set -o vi
 source ~/.fzf.completion.bash
 source ~/.fzf.key-bindings.bash
 
+# opam configuration
+addinpath $HOME/software/ocaml-4.09.1/bin
+test -r /home/aasmundo/.opam/opam-init/init.sh && . /home/aasmundo/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
+
 #echo "node version mgr disabled"
 #export NVM_DIR="$HOME/.nvm"
 #[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
