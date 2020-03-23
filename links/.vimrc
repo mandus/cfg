@@ -77,3 +77,12 @@ let g:go_fmt_fail_silently = 0
 let g:go_fmt_experimental = 0
 nnoremap <F10> :GoFmt<CR>
 nnoremap <F11> :GoImports<CR>
+
+" ocaml
+if executable('ocamlmerlin') && has('python')
+  let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
+  execute "set rtp+=" . g:opamshare . "/merlin/vim"
+endif
+if executable('ocp-indent')
+  set rtp^="/home/aasmundo/.opam/default/share/ocp-indent/vim"
+endif
