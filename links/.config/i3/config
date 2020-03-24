@@ -63,7 +63,7 @@ bindsym $mod+q exec --no-startup-id i3lock -c 000000
 #bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 bindsym $mod+d exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu -i -fn 'Roboto Sans-14' -nb '#202020' -nf '#30d020' -sf '#30d020' -sb '#404040'" --usage-log=$HOME/.j4dmenulog
 bindsym Control+space exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu -i -fn 'Roboto Sans-14' -nb '#202020' -nf '#30d020' -sf '#30d020' -sb '#404040'" --usage-log=$HOME/.j4dmenulog
-bindsym $mod+p exec --no-startup-id sbcl --script /home/aasmundo/Dropbox/Prosjekter/gits/powerlisp/powerlisp.deb304.fasl --no-linedit
+#bindsym $mod+p exec --no-startup-id sbcl --script /home/aasmundo/Dropbox/Prosjekter/gits/powerlisp/powerlisp.deb304.fasl --no-linedit
 
 # change focus
 bindsym $mod+j focus left
