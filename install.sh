@@ -10,7 +10,7 @@ cd ${LDIR}
 
 function compile_command_t () {
 	cd $HOME/.vim/bundle/command-t/ruby/command-t/ext/command-t
-	sudo apt install ruby
+	sudo apt -y install ruby
 	ruby extconf.rb
 	make
 	cd -
@@ -28,7 +28,7 @@ done
 cd ${CURDIR}
 
 # configure vim modules
-sudo apt install vim vim-gtk3
+sudo apt -y install vim vim-gtk3
 [[ ! -x $HOME/.vim/bundle/Vundle.vim ]] && git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 vim +PluginInstall +qall
 
@@ -36,10 +36,19 @@ vim +PluginInstall +qall
 grep -q -i command-t ~/.vimrc && compile_command_t
 
 # install dependencies for tagbar, if requested 
-grep -q -i tagbar ~/.vimrc && sudo apt install exuberant-ctags
+grep -q -i tagbar ~/.vimrc && sudo apt -y install exuberant-ctags
 
 # install dependencies for ack, if requested
-grep -q -i ack ~/.vimrc && sudo apt install silversearcher-ag
+grep -q -i ack ~/.vimrc && sudo apt -y install silversearcher-ag
 
 # install i3 if we have config
-[[ -f $HOME/.config/i3/config ]] && sudo apt install i3 i3status i3blocks
+[[ -f $HOME/.config/i3/config ]] && sudo apt -y install i3 i3status i3blocks
+
+# dropbox needs to watch more files than the default
+sudo sed -i '/fs.inotify.max_user_watches.*/d' /etc/sysctl.conf
+echo fs.inotify.max_user_watches=1000000 | sudo tee -a /etc/sysctl.conf; sudo sysctl -p
+
+# install packages from the package list
+for p in $(cat ${DIR}/packages) ; do 
+	sudo apt -y install $p
+done
