@@ -34,4 +34,12 @@ vim +PluginInstall +qall
 
 # if command-t is in the plugins list, the extension must be compiled
 grep -q -i command-t ~/.vimrc && compile_command_t
+
+# install dependencies for tagbar, if requested 
 grep -q -i tagbar ~/.vimrc && sudo apt install exuberant-ctags
+
+# install dependencies for ack, if requested
+grep -q -i ack ~/.vimrc && sudo apt install silversearcher-ag
+
+# install i3 if we have config
+[[ -f $HOME/.config/i3/config ]] && sudo apt install i3 i3status i3blocks
