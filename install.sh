@@ -42,7 +42,7 @@ grep -q -i tagbar ~/.vimrc && sudo apt -y install exuberant-ctags
 grep -q -i ack ~/.vimrc && sudo apt -y install silversearcher-ag
 
 # install i3 if we have config
-[[ -f $HOME/.config/i3/config ]] && sudo apt -y install i3 i3status i3blocks
+[[ -f $HOME/.config/i3/config ]] && sudo apt -y install i3 i3status i3blocks j4-dmenu-desktop
 
 # dropbox needs to watch more files than the default
 sudo sed -i '/fs.inotify.max_user_watches.*/d' /etc/sysctl.conf
