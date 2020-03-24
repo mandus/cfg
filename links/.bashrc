@@ -36,7 +36,7 @@ export EDITOR=/usr/bin/vim
 export FCEDIT=/usr/bin/vim
 export LANG=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
-
+export MOZ_USE_XINPUT2=1
 
 # some history stuff
 HISTCONTROL=ignoredups
@@ -68,11 +68,13 @@ if ! ps -p $(echo $SSH_AGENT_PID) | grep -q 'ssh-agent' ; then
    source ~/.bash_ssh_settings
 fi
 
+[ -f ~/.git_completion ] && source ~/.git_completion 
+
 # Add fzf file finder...
 # Need to set vi mode before loading fzf
 set -o vi
-source ~/.fzf.completion.bash
-source ~/.fzf.key-bindings.bash
+[ -f ~/.fzf.completion.bash ] && source ~/.fzf.completion.bash
+[ -f ~/.fzf.key-bindings.bash ] && source ~/.fzf.key-bindings.bash
 
 # opam configuration
 addinpath $HOME/software/ocaml-4.09.1/bin
