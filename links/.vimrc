@@ -14,8 +14,13 @@ set   softtabstop=4
 set nosplitbelow
 set   splitright
 set   tabstop=4                                                                                                                                                               
+set   viminfo='75,\"500,f1,:250,n~/.viminfo
 set nowrap
 set nowritebackup
+
+
+" move cursor to last know position in file when opening
+au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
 
 colorscheme desert
 
