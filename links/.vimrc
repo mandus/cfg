@@ -5,6 +5,7 @@ set   cinkeys=0{,0},:,!^F,o,O,e
 set   cursorline
 set nocompatible             
 set   expandtab
+set   guioptions=aed
 set   ignorecase
 set   incsearch
 set   lazyredraw
