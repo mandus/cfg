@@ -27,6 +27,11 @@ done
 
 cd ${CURDIR}
 
+# install packages from the package list
+for p in $(cat ${DIR}/packages) ; do 
+	sudo apt -y install $p
+done
+
 # configure vim modules
 sudo apt -y install vim vim-gtk3
 [[ ! -x $HOME/.vim/bundle/Vundle.vim ]] && git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
@@ -48,7 +53,5 @@ grep -q -i ack ~/.vimrc && sudo apt -y install silversearcher-ag
 sudo sed -i '/fs.inotify.max_user_watches.*/d' /etc/sysctl.conf
 echo fs.inotify.max_user_watches=1000000 | sudo tee -a /etc/sysctl.conf; sudo sysctl -p
 
-# install packages from the package list
-for p in $(cat ${DIR}/packages) ; do 
-	sudo apt -y install $p
-done
+# install the ly display manager (fails unless other display mgr than lightdm hasn't been disabled first)
+${DIR}/ly.sh

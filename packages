@@ -1,5 +1,9 @@
+build-essential
 fonts-hack
 fzf
+git
+libpam0g-dev
+libxcb1-dev
 python3-pip
 ranger
 rofi
