@@ -1,6 +1,8 @@
 fonts-hack
 fzf
 python3-pip
+ranger
+rofi
 rxvt-unicode
 ttf-bitstream-vera
 xterm
