@@ -57,6 +57,7 @@ function addinpath() {
 
 addinpath $HOME/bin
 addinpath $HOME/go/bin
+addinpath $HOME/.local/bin
 addinpath /usr/lib/go-1.13/bin
 
 # ssh-agent stuff:
