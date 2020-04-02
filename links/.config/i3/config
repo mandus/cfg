@@ -62,7 +62,8 @@ bindsym $mod+q exec --no-startup-id i3lock -c 000000
 # installed.
 #bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 bindsym $mod+d exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu -i -fn 'Roboto Sans-14' -nb '#202020' -nf '#30d020' -sf '#30d020' -sb '#404040'" --usage-log=$HOME/.j4dmenulog
-bindsym Control+space exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu -i -fn 'Roboto Sans-14' -nb '#202020' -nf '#30d020' -sf '#30d020' -sb '#404040'" --usage-log=$HOME/.j4dmenulog
+#bindsym Control+space exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu -i -fn 'Roboto Sans-14' -nb '#202020' -nf '#30d020' -sf '#30d020' -sb '#404040'" --usage-log=$HOME/.j4dmenulog
+bindsym Control+space exec --no-startup-id rofi_grid
 #bindsym $mod+p exec --no-startup-id sbcl --script /home/aasmundo/Dropbox/Prosjekter/gits/powerlisp/powerlisp.deb304.fasl --no-linedit
 
 # change focus
@@ -145,7 +146,8 @@ bindsym $mod+Shift+0 move container to workspace 10
 
 bindsym $altmod+n workspace next
 bindsym $altmod+p workspace prev
-bindsym $mod+w exec rofi -show window
+bindsym $mod+w exec rofi -show window -theme themes/style_normal_grid.rasi
+bindsym $altmod+w exec rofi -show window -theme themes/style_normal_grid.rasi
 bindsym $altmod+g exec /home/aasmundo/bin/quickswitch.py
 bindsym $altmod+Shift+g exec /home/aasmundo/bin/quickswitch.py -m
 bindsym $altmod+Shift+n exec --no-startup-id ~/bin/move_out_i3.sh
@@ -189,13 +191,13 @@ bindsym $altmod+Shift+3 exec /home/aasmundo/bin/running_sink_vol.sh mute
 #bindsym Shift+XF86AudioMute exec bt_sink_vol.sh mute
 
 # play next/prev etc in spotify
-bindsym XF86AudioNext exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
-bindsym XF86AudioPrevious exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
-bindsym XF86AudioPlay exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
+#bindsym XF86AudioNext exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
+#bindsym XF86AudioPrevious exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
+#bindsym XF86AudioPlay exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
 
 # brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 25
-bindsym XF86MonBrightnessUp exec xbacklight -inc 25
+#bindsym XF86MonBrightnessDown exec xbacklight -dec 25
+#bindsym XF86MonBrightnessUp exec xbacklight -inc 25
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
