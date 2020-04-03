@@ -92,3 +92,9 @@ endif
 if executable('ocp-indent')
   set rtp^="/home/aasmundo/.opam/default/share/ocp-indent/vim"
 endif
+
+" silversearcher
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+
