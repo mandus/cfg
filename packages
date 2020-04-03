@@ -10,6 +10,7 @@ python3-virtualenv
 ranger
 rofi
 rxvt-unicode
+stterm
 ttf-bitstream-vera
 virtualenv
 xterm
