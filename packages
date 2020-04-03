@@ -4,9 +4,12 @@ fzf
 git
 libpam0g-dev
 libxcb1-dev
+jq
 python3-pip
+python3-virtualenv
 ranger
 rofi
 rxvt-unicode
 ttf-bitstream-vera
+virtualenv
 xterm
