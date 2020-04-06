@@ -22,7 +22,7 @@ if [ -f ~/.git-prompt.sh ] ; then
      #PS1='\[]2;\h: \w \]\[\e[31m\]\!\[\e[35m\]$(__git_ps1 " (%s)")\[\e[33;1m\]>\[\e[m\]'
      #PS1='\[]2;\w \]$(date +%H:%M)|\[\e[31m\]\!\[\e[35m\]$(__git_ps1 " (%s)")\[\e[33;1m\]>\[\e[m\]'
      #PS1="\[]2;\w\]$(date +%H:%M)|\[\e[31m\]\!\[\e[35m\]$(__git_ps1 "(%s)")\[\e[33;1m\]>\[\e[m\]"
-	 venv=$([[ -n $VIRTUAL_ENV ]] && echo "(`basename $VIRTUAL_ENV`)")
+	 venv=$([[ -n $VIRTUAL_ENV ]] && basename $VIRTUAL_ENV)
      PS1="\[]2;\w\]\[$bluecol\]${venv:-$(date +%H:%M)}\[$col_off\]|\[$redcol\]\!\[$magentacol\]$(__git_ps1 "(%s)")\[$yellowcol\]>\[$col_off\]"
    }
    PROMPT_COMMAND=set_bash_prompt
