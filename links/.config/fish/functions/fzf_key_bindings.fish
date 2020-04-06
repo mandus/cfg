@@ -1,0 +1,1 @@
+/home/aasmundo/Dropbox/Stuff/config/fzf/shell/key-bindings.fish
