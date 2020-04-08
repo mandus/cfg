@@ -8,7 +8,7 @@ set output-meta on
 # VI-version
 set editing-mode vi
 set keymap vi
-set convert-meta on
+set convert-meta off
 
 set bell-style none
 set prefer-visible-bell
