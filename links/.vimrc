@@ -98,3 +98,9 @@ if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
 
+" powerline
+if executable('powerline') && has('python3')
+  py3 from powerline.vim import setup as powerline_setup
+  py3 powerline_setup()
+  py3 del powerline_setup
+endif

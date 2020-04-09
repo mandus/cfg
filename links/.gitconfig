@@ -39,13 +39,8 @@
 	prompt = false
 [difftool "gvimdiff"]
 	path = /usr/bin/gvimdiff
-[mergetool "gvimdiff"]
-	path = /usr/bin/gvimdiff
-[mergetool "splice"]
-   cmd = "mvim -f $BASE $LOCAL $REMOTE $MERGED -c 'SpliceInit'"
-   trustExitCode = true
 [mergetool "fugitive"]
-	cmd = gvim -f -c \"Gdiff\" \"$MERGED\"
+	cmd = vim -f -c \"Gdiffsplit!\" \"$MERGED\"
 [init]
 	templatedir = ~/.git_template
 [filter "media"]
