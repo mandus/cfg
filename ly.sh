@@ -21,6 +21,7 @@ sudo make install
 
 # try to automatically disable lightdm
 ps ax | grep -v grep | grep -q '/sbin/lightdm' && sudo systemctl disable lightdm.service
+ps ax | grep -v grep | grep -q '/sbin/gdm3' && sudo systemctl disable gdm3.service
 ps ax | grep -v grep | grep -q '/systemd ' && sudo systemctl enable ly.service && sudo systemctl disable getty@tty2.service
 
 cd ${CURDIR}
