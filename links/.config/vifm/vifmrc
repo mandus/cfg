@@ -1,0 +1,11 @@
+" --- settings ---
+set ignorecase
+set incsearch
+set trash
+
+
+" --- mappings ---
+
+nnoremap ; : 
+nnoremap sd :set dotfiles!<cr>
+nnoremap w :view<cr>
