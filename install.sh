@@ -23,7 +23,7 @@ function create_venv() {
 	srcfile=$2
 	[[ ! -d $VENVDIR ]] && mkdir -p $VENVDIR
 	cd $VENVDIR
-	virtualenv $vname
+	[[ ! -d $vname ]] && virtualenv $vname
 	. ${vname}/bin/activate
 	pip install -r $srcfile
 	deactivate
@@ -31,9 +31,7 @@ function create_venv() {
 }
 
 # install packages from the package list
-for p in $(cat ${DIR}/packages) ; do
-	sudo apt -y install $p
-done
+cat ${DIR}/packages | xargs sudo apt -y install
 
 # link all rc files in the links directory
 # we force symlink, so destination is just overwritten
