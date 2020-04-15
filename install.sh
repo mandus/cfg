@@ -6,6 +6,9 @@
 CURDIR=$(pwd)
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 LDIR=${DIR}/links
+BDIR=${DIR}/bins
+VDIR=${DIR}/venvs
+VENVDIR=${HOME}/software/venvs
 
 function compile_command_t () {
 	cd $HOME/.vim/bundle/command-t/ruby/command-t/ext/command-t
@@ -14,6 +17,23 @@ function compile_command_t () {
 	make
 	cd -
 }
+
+function create_venv() {
+	vname=$1
+	srcfile=$2
+	[[ ! -d $VENVDIR ]] && mkdir -p $VENVDIR
+	cd $VENVDIR
+	virtualenv $vname
+	. ${vname}/bin/activate
+	pip install -r $srcfile
+	deactivate
+	cd -
+}
+
+# install packages from the package list
+for p in $(cat ${DIR}/packages) ; do
+	sudo apt -y install $p
+done
 
 # link all rc files in the links directory
 # we force symlink, so destination is just overwritten
@@ -26,12 +46,23 @@ for fn in $(find -type f -printf '%P\n') ; do
 	ln -sf ${LDIR}/${fn} $HOME/${fdir}.
 done
 
-cd ${CURDIR}
-
-# install packages from the package list
-for p in $(cat ${DIR}/packages) ; do 
-	sudo apt -y install $p
+# link all scripts in the bins directory
+# we force symlink, so destination is overwritten if exists
+cd ${BDIR}
+for fn in $(find -type f -printf '%P\n') ; do
+	echo ${fn}
+	ln -sf ${BDIR}/${fn} $HOME/bin/.
 done
+
+# For all files in the venvs directory, create a virtualenv
+# and use the file as source of packages to install
+cd ${VDIR}
+for fn in $(find -type f -printf '%P\n')  ; do
+	echo ${fn}
+	create_venv ${fn} ${VDIR}/${fn}
+done
+
+cd ${CURDIR}
 
 # configure vim modules
 sudo apt -y install vim vim-gtk3
