@@ -22,6 +22,12 @@ end
 
 fish_vi_key_bindings
 
+function fish_user_key_bindings
+    for mode in insert
+        bind -M $mode \co forward-char
+    end
+end
+
 set fish_function_path $fish_function_path "/usr/share/powerline/bindings/fish"
 source /usr/share/powerline/bindings/fish/powerline-setup.fish
 powerline-setup
