@@ -16,6 +16,7 @@ mpv
 mupdf
 poppler-utils
 powerline
+pulseaudio-utils
 python3-pil
 python3-pip
 python3-virtualenv
