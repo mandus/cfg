@@ -26,6 +26,13 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
+fun! <SID>StripTrailingWhitespaces()
+  let l = line(".")
+  let c = col(".")
+  %s/\s\+$//e
+  call cursor(l, c)
+endfun
+
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'fatih/vim-go'
@@ -38,6 +45,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'wincent/command-t'
 Plugin 'nvie/vim-flake8'
+Plugin 'davidhalter/jedi-vim'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -107,6 +115,7 @@ endif
 
 " move cursor to last know position in file when opening
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
-
 " Enable auto-flake8 on save:
 au BufWritePost *.py call Flake8()
+" Strip trailing white space in python-files
+autocmd BufWritePre *.py :call <SID>StripTrailingWhitespaces()
