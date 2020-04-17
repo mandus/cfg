@@ -179,6 +179,7 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 bindsym $altmod+Shift+1 exec  /home/aasmundo/bin/running_sink_vol.sh m
 bindsym $altmod+Shift+2 exec /home/aasmundo/bin/running_sink_vol.sh p
 bindsym $altmod+Shift+3 exec /home/aasmundo/bin/running_sink_vol.sh mute
+bindsym $altmod+Shift+4 exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
 
 # audio through pulseaudio/bluetooth 
 #bindsym Shift+XF86AudioRaiseVolume exec pactl set-sink-volume 1 '+2%'
