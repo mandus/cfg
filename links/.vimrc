@@ -19,10 +19,6 @@ set   viminfo='75,\"500,f1,:250,n~/.viminfo
 set nowrap
 set nowritebackup
 
-
-" move cursor to last know position in file when opening
-au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
-
 colorscheme desert
 
 " set the runtime path to include Vundle and initialize
@@ -41,6 +37,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'wincent/command-t'
+Plugin 'nvie/vim-flake8'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -104,3 +101,12 @@ if executable('powerline') && has('python3')
   py3 powerline_setup()
   py3 del powerline_setup
 endif
+
+
+" AutoCommands
+
+" move cursor to last know position in file when opening
+au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
+
+" Enable auto-flake8 on save:
+au BufWritePost *.py call Flake8()
