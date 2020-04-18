@@ -9,6 +9,7 @@ fzf
 git
 imagemagick
 jq
+libjpeg-dev
 libpam0g-dev
 libxcb1-dev
 libxext-dev
