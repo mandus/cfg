@@ -120,6 +120,7 @@ alias flexicouchreplicateport="ssh -i ~/.ssh/ubuntu1.pem -L 6984:localhost:5984 
 #alias rossbcl="ros -Q -l ~/.sbclrc -L sbcl run"
 alias s="screen -r -x"
 #alias t="tmux a"
+alias vifm=vifmrun
 alias xcli="xclip -i -selection clipboard"
 alias xs="cd"
 
