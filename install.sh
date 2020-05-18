@@ -31,6 +31,7 @@ function create_venv() {
 }
 
 # install packages from the package list
+sudo apt update
 cat ${DIR}/packages | xargs sudo apt -y install
 
 # link all rc files in the links directory
