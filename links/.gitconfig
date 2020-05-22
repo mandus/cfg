@@ -58,3 +58,5 @@
 	insteadOf = https://github.com/vippsas/
 [gpg]
 	program = gpg
+[pull]
+	ff = only
