@@ -5,16 +5,20 @@ set   cinkeys=0{,0},:,!^F,o,O,e
 set   cursorline
 set nocompatible             
 set   expandtab
+set   formatoptions=croql2
 set   guioptions=aed
 set   ignorecase
 set   incsearch
 set   lazyredraw
 set   listchars=tab:»·,trail:~,eol:·
+set   relativenumber
+set   ruler
 set   shiftwidth=4
 set   softtabstop=4
 set nosplitbelow
 set   splitright
 set   tabstop=4                                                                                                                                                               
+set   tags=./.git/tags,./tags,.git/tags,../.git/tags,.ctags,./TAGS,tags,TAGS
 set   viminfo='75,\"500,f1,:250,n~/.viminfo
 set nowrap
 set nowritebackup
@@ -35,6 +39,7 @@ endfun
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
+
 Plugin 'fatih/vim-go'
 Plugin 'majutsushi/tagbar'
 Plugin 'mileszs/ack.vim'
@@ -43,6 +48,7 @@ Plugin 'sjl/gundo.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
+Plugin 'tpope/vim-commentary'
 Plugin 'wincent/command-t'
 Plugin 'nvie/vim-flake8'
 Plugin 'davidhalter/jedi-vim'
