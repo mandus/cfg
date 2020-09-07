@@ -60,6 +60,7 @@ addinpath $HOME/bin
 addinpath $HOME/go/bin
 addinpath $HOME/.local/bin
 addinpath /usr/lib/go-1.13/bin
+addinpath /usr/lib/go-1.14/bin
 
 # ssh-agent stuff:
 [ -f ~/.bash_ssh_settings ] && source ~/.bash_ssh_settings
@@ -87,8 +88,11 @@ test -r /home/aasmundo/.opam/opam-init/init.sh && . /home/aasmundo/.opam/opam-in
 #[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 #[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+[ -d $HOME/software/azure-cli ] && source '/home/aasmundo/software/azure-cli/az.completion'
+
 # kubectl completion
 type kubectl >/dev/null 2>&1 && . <(kubectl completion bash)
 
 export PATH
 source ~/.bash_alias
+
