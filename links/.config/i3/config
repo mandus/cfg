@@ -204,44 +204,112 @@ bindsym $altmod+Shift+5 exec dbus-send --print-reply --dest=org.mpris.MediaPlaye
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
+    # These bindings trigger as soon as you enter the resize mode
 
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 15 px or 15 ppt
-        bindsym k resize grow height 15 px or 15 ppt
-        bindsym l resize shrink height 15 px or 15 ppt
-        bindsym semicolon resize grow width 15 px or 15 ppt
+    # Pressing left will shrink the window’s width.
+    # Pressing right will grow the window’s width.
+    # Pressing up will shrink the window’s height.
+    # Pressing down will grow the window’s height.
+    bindsym j resize shrink width 15 px or 15 ppt
+    bindsym k resize grow height 15 px or 15 ppt
+    bindsym l resize shrink height 15 px or 15 ppt
+    bindsym semicolon resize grow width 15 px or 15 ppt
 
-        bindsym Shift+j resize shrink width 1 px or 1 ppt
-        bindsym Shift+k resize grow height 1 px or 1 ppt
-        bindsym Shift+l resize shrink height 1 px or 1 ppt
-        bindsym Shift+semicolon resize grow width 1 px or 1 ppt
+    bindsym Shift+j resize shrink width 1 px or 1 ppt
+    bindsym Shift+k resize grow height 1 px or 1 ppt
+    bindsym Shift+l resize shrink height 1 px or 1 ppt
+    bindsym Shift+semicolon resize grow width 1 px or 1 ppt
 
+    # same bindings, but for the arrow keys
+    bindsym Left resize shrink width 10 px or 10 ppt
+    bindsym Down resize grow height 10 px or 10 ppt
+    bindsym Up resize shrink height 10 px or 10 ppt
+    bindsym Right resize grow width 10 px or 10 ppt
 
-
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
-
-        # back to normal: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
+
+mode "normal" {
+
+    # change focus
+    bindsym h focus left
+    bindsym j focus down
+    bindsym k focus up
+    bindsym l focus right
+
+    # move focused window
+    bindsym Shift+h move left
+    bindsym Shift+j move down
+    bindsym Shift+k move up
+    bindsym Shift+l move right
+
+    # switch to workspace
+    bindsym 1 workspace 1
+    bindsym 2 workspace 2
+    bindsym 3 workspace 3
+    bindsym 4 workspace 4
+    bindsym 5 workspace 5
+    bindsym 6 workspace 6
+    bindsym 7 workspace 7
+    bindsym 8 workspace 8
+    bindsym 9 workspace 9
+    bindsym 0 workspace 10
+
+    # move focused container to workspace
+    bindsym Shift+1 move container to workspace 1
+    bindsym Shift+2 move container to workspace 2
+    bindsym Shift+3 move container to workspace 3
+    bindsym Shift+4 move container to workspace 4
+    bindsym Shift+5 move container to workspace 5
+    bindsym Shift+6 move container to workspace 6
+    bindsym Shift+7 move container to workspace 7
+    bindsym Shift+8 move container to workspace 8
+    bindsym Shift+9 move container to workspace 9
+    bindsym Shift+0 move container to workspace 10
+
+    bindsym n workspace next
+    bindsym f workspace prev
+    bindsym w exec rofi -show window -theme themes/style_normal_grid.rasi
+    bindsym g exec /home/aasmundo/bin/quickswitch.py
+    bindsym Shift+g exec /home/aasmundo/bin/quickswitch.py -m
+    bindsym Shift+n exec --no-startup-id ~/bin/move_out_i3.sh
+
+    # main running sink:
+    bindsym s exec  /home/aasmundo/bin/running_sink_vol.sh m
+    bindsym v exec /home/aasmundo/bin/running_sink_vol.sh p
+    bindsym m exec /home/aasmundo/bin/running_sink_vol.sh mute
+    bindsym t exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
+    bindsym p exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
+
+    # return to input mode which after all is the default:
+    bindsym i mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $altmod+Escape mode "normal"
 
 bindsym $mod+r mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        #position top
-        tray_output primary
-        status_command i3status
-        #status_command /home/aasmundo/bin/custom_i3status_home.sh
+    #position top
+    tray_output primary
+    status_command i3status
+    #status_command /home/aasmundo/bin/custom_i3status_home.sh
+
+    colors {
+        background #05050a
+        separator #404040
+        focused_workspace  #101030 #101080 #ffffff
+        active_workspace   #103010 #108010 #ffffff
+        inactive_workspace #050505 #202020 #ffffff
+        binding_mode       #301010 #801010 #f0b0b0
+        urgent_workspace   #502020 #ee2020 #ffffff
+    }
 }
 
 

@@ -40,7 +40,7 @@
 [difftool "gvimdiff"]
 	path = /usr/bin/gvimdiff
 [mergetool "fugitive"]
-	cmd = vim -f -c \"Gdiffsplit!\" \"$MERGED\"
+	cmd = gvim -f -c \"Gdiffsplit!\" \"$MERGED\"
 [init]
 	templatedir = ~/.git_template
 [filter "media"]
