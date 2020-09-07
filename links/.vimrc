@@ -83,7 +83,9 @@ nnoremap ,sr :%s/\<<C-r><C-w>\>//g<Left><Left>
 nnoremap ,ss <C-W>s
 nnoremap ,sv <C-W>v
 nnoremap ,, <C-^>
+" swap colon and semicolon in normal mode:
 nnoremap ; :
+nnoremap : ; 
 
 " go-specifics
 nnoremap <leader>ga :GoAlternate!<cr>                                                                                                                                                                                                                                                                                          
