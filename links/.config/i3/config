@@ -39,7 +39,7 @@ bindsym $altmod+Return exec uxterm
 bindsym  $mod+Shift+Return exec gnome-terminal  --window-with-profile=contrasy
 
 # start a cute-browser
-bindsym $altmod+b exec qutebrowser --backend webengine
+# bindsym $altmod+b exec qutebrowser --backend webengine
 
 # adjust touchpad feeling
 # bindsym $altmod+t exec toggle_xps_touchpad.sh
@@ -233,6 +233,13 @@ mode "resize" {
 
 mode "normal" {
 
+    # start new programs
+    bindsym space exec --no-startup-id rofi_grid
+    # reload the configuration file
+    bindsym c reload
+    # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+    bindsym r restart
+
     # change focus
     bindsym h focus left
     bindsym j focus down
@@ -305,7 +312,7 @@ bar {
         background #05050a
         separator #404040
         focused_workspace  #101030 #101080 #ffffff
-        active_workspace   #103010 #108010 #ffffff
+        active_workspace   #5050a0 #5050d0 #ffffff
         inactive_workspace #050505 #202020 #ffffff
         binding_mode       #301010 #801010 #f0b0b0
         urgent_workspace   #502020 #ee2020 #ffffff
