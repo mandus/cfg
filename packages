@@ -3,6 +3,7 @@ build-essential
 ffmpeg
 ffmpegthumbnailer
 fish
+flake8
 fonts-hack
 fonts-powerline
 fzf
