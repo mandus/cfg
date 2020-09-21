@@ -91,5 +91,8 @@ test -r /home/aasmundo/.opam/opam-init/init.sh && . /home/aasmundo/.opam/opam-in
 # kubectl completion
 type kubectl >/dev/null 2>&1 && . <(kubectl completion bash)
 
+#gh completion
+type gh &>/dev/null && . <(gh completion -s bash)
+
 export PATH
 source ~/.bash_alias
