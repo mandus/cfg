@@ -8,6 +8,7 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 LDIR=${DIR}/links
 BDIR=${DIR}/bins
 VDIR=${DIR}/venvs
+REPODIR=${DIR}/repos
 VENVDIR=${HOME}/software/venvs
 
 function compile_command_t () {
@@ -29,6 +30,22 @@ function create_venv() {
 	deactivate
 	cd -
 }
+
+
+function add_package_repo() {
+	repo=$1
+	# The "repo" name is the unique package provided by repo that we check for
+	# If not available, we run the script to add repo
+	if ! $(apt-cache show $repo &>/dev/null) ; then
+		bash ${REPODIR}/${repo}
+	fi
+}
+
+# Install additional repos if needed
+cd ${REPODIR}
+for repo in * ; do
+	add_package_repo $repo
+done
 
 # install packages from the package list
 sudo apt update

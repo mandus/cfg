@@ -7,6 +7,7 @@ flake8
 fonts-hack
 fonts-powerline
 fzf
+gh
 git
 imagemagick
 jq
