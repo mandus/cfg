@@ -11,7 +11,7 @@ function draw() {
 
 function font_preview() {
   # if no preview found, generate one
-  if [ ! -f "/tmp${PWD}/$6.png" ]; then
+  if [[ ! -f "/tmp${PWD}/$6.png" || "$6" -nt "/tmp${PWD}/$6.png" ]]; then
     fontpreview -i "$6" -o "/tmp${PWD}/$6.png"
   fi
   declare -p -A cmd=([action]=add [identifier]="$ID_PREVIEW"
@@ -22,7 +22,7 @@ function font_preview() {
 
 function pdf_preview() {
   # if no preview found, generate one
-  if [ ! -f "/tmp${PWD}/$6.png" ]; then
+  if [[ ! -f "/tmp${PWD}/$6.png" || "$6" -nt "/tmp${PWD}/$6.png" ]]; then
     pdftoppm -png -singlefile "$6" "/tmp${PWD}/$6"
   fi
   declare -p -A cmd=([action]=add [identifier]="$ID_PREVIEW"
@@ -33,7 +33,7 @@ function pdf_preview() {
 
 function audio_preview() {
   # if no preview found, generate one
-  if [ ! -f "/tmp${PWD}/$6.png" ]; then
+  if [[ ! -f "/tmp${PWD}/$6.png" || "$6" -nt "/tmp${PWD}/$6.png" ]]; then
     ffmpeg -i "$6" "/tmp${PWD}/$6.png" -y &> /dev/null
   fi
   declare -p -A cmd=([action]=add [identifier]="$ID_PREVIEW"
@@ -44,7 +44,7 @@ function audio_preview() {
 
 function video_preview() {
   # if no preview found, generate one
-  if [ ! -f "/tmp${PWD}/$6.png" ]; then
+  if [[ ! -f "/tmp${PWD}/$6.png" || "$6" -nt "/tmp${PWD}/$6.png" ]]; then
     ffmpegthumbnailer -i "${PWD}/$6" -o "/tmp${PWD}/$6.png" -s 0 -q 10
   fi
   declare -p -A cmd=([action]=add [identifier]="$ID_PREVIEW"
@@ -54,7 +54,7 @@ function video_preview() {
 }
 
 function epub_preview() {
-    if [ ! -f "/tmp$PWD/$6.png" ]; then
+    if [[ ! -f "/tmp$PWD/$6.png" || "$6" -nt "/tmp${PWD}/$6.png" ]]; then
         epub-thumbnailer "$6" "/tmp$PWD/$6.png" 1024
     fi
     declare -p -A cmd=([action]=add [identifier]="$ID_PREVIEW"

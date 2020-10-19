@@ -14,9 +14,9 @@
 # disable window titles by squeezing the border to something thin
 # And hide verical borders at the edge.
 # new_window 1pixel
-new_window pixel 3
+new_window pixel 1
 hide_edge_borders vertical
-client.focused #700000 #303030 #b0b0b0 #b0b0b0 #700000
+client.focused #1070b0 #202020 #b0b0b0 #b0b0b0 #1070b0
 
 set $mod Mod4
 set $altmod Mod3
