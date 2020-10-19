@@ -52,6 +52,11 @@ Plugin 'tpope/vim-commentary'
 Plugin 'wincent/command-t'
 Plugin 'nvie/vim-flake8'
 Plugin 'davidhalter/jedi-vim'
+
+"Consider adding this if debugger in vim is needed:
+"see https://puremourning.github.io/vimspector-web/
+"Plugin 'puremourning/vimspector'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required

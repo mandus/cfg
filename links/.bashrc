@@ -76,6 +76,7 @@ fi
 # Add fzf file finder...
 # Need to set vi mode before loading fzf
 set -o vi
+export FZF_COMPLETION_TRIGGER='\\'
 [ -f ~/.fzf.completion.bash ] && source ~/.fzf.completion.bash
 [ -f ~/.fzf.key-bindings.bash ] && source ~/.fzf.key-bindings.bash
 
