@@ -65,6 +65,7 @@ done
 # link all scripts in the bins directory
 # we force symlink, so destination is overwritten if exists
 cd ${BDIR}
+[[ ! -d $HOME/bin ]] && mkdir $HOME/bin
 for fn in $(find -type f -printf '%P\n') ; do
 	echo ${fn}
 	ln -sf ${BDIR}/${fn} $HOME/bin/.
