@@ -15,6 +15,7 @@ libjpeg-dev
 libpam0g-dev
 libxcb1-dev
 libxext-dev
+mosh
 mpv
 mupdf
 poppler-utils
