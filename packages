@@ -1,5 +1,6 @@
 bat
 build-essential
+firefox
 ffmpeg
 ffmpegthumbnailer
 fish
@@ -10,6 +11,7 @@ fzf
 gh
 git
 htop
+i3
 imagemagick
 jq
 libjpeg-dev
@@ -19,6 +21,7 @@ libxext-dev
 mosh
 mpv
 mupdf
+pandoc
 poppler-utils
 powerline
 pulseaudio-utils
@@ -37,6 +40,10 @@ sxiv
 ttf-bitstream-vera
 vifm
 virtualenv
+wget
+xclip
+xinit
+x11-xserver-utils
 xautolock
 xdotool
 xinput
