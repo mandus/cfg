@@ -23,6 +23,13 @@ set   viminfo='75,\"500,f1,:250,n~/.viminfo
 set nowrap
 set nowritebackup
 
+augroup CustomColors
+	" overrides for colors independent of colorscheme can be set here.
+	autocmd!
+	autocmd ColorScheme * highlight LineNr ctermfg=5 guifg=gray
+					  \ | highlight CursorLineNr ctermfg=5 guifg=gray
+augroup End
+
 colorscheme desert
 
 " set the runtime path to include Vundle and initialize
