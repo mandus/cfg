@@ -177,10 +177,17 @@ def goto_workspace(name):
     return i3.workspace(name)
 
 
+def kill(window):
+    '''Kill the given window.'''
+    return i3.kill(id=window)
+
+
 def main():
     parser = argparse.ArgumentParser(description='''quickswitch for i3''')
     parser.add_argument('-m', '--move', default=False, action="store_true",
                         help="move window to the current workspace")
+    parser.add_argument('-k', '--kill', default=False, action="store_true",
+                        help="kill window")
 
     mutgrp = parser.add_mutually_exclusive_group()
     mutgrp.add_argument('-s', '--scratchpad', default=False, action="store_true",
@@ -229,6 +236,8 @@ def main():
     action_func = focus
     if args.move:
         action_func = move_window_here
+    elif args.kill:
+        action_func = kill
     else:
         if args.scratchpad:
             action_func = get_scratchpad_window
