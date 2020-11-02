@@ -47,7 +47,9 @@ bindsym $mod+Shift+Return exec gnome-terminal --window-with-profile=contrasy
 # bindsym $altmod+t exec toggle_xps_touchpad.sh
 
 # kill focused window
-bindsym $mod+Shift+q kill
+#bindsym $mod+Shift+q kill
+# kill some window, with menu
+bindsym $mod+Shift+q exec /home/aasmundo/bin/quickswitch.py -k
 
 # scratchpad
 bindsym $mod+Shift+minus move scratchpad
