@@ -7,11 +7,9 @@ tmpdir=$(mktemp -d)
 cd $tmpdir
 
 curl -O https://beta.quicklisp.org/quicklisp.lisp
-curl -O https://beta.quicklisp.org/quicklisp.lisp.asc
-gpg --verify quicklisp.lisp.asc quicklisp.lisp
 
-sbcl --load quicklisp.lisp
+sbcl --load quicklisp.lisp --no-linedit 
 
 cd $CURDIR
-echp rm -rf $tmpdir
+echo rm -rf $tmpdir
 
