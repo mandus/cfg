@@ -59,6 +59,7 @@ Plugin 'tpope/vim-commentary'
 Plugin 'wincent/command-t'
 Plugin 'nvie/vim-flake8'
 Plugin 'davidhalter/jedi-vim'
+Plugin 'kovisoft/slimv'
 
 "Consider adding this if debugger in vim is needed:
 "see https://puremourning.github.io/vimspector-web/
@@ -75,9 +76,13 @@ if has('python3')
 endif
 
 nnoremap <leader>a <C-W><C-H>
+nnoremap -a <C-W><C-H>
 nnoremap <leader>s <C-W><C-K>
+nnoremap -s <C-W><C-K>
 nnoremap <leader>d <C-W><C-J>
+nnoremap -d <C-W><C-J>
 nnoremap <leader>f <C-W><C-L>
+nnoremap -f <C-W><C-L>
 nnoremap <leader>A <C-W>L
 nnoremap <leader>F <C-W>R
 nnoremap <leader>S 3<C-W>h<C-W>l<C-W>H<C-W>l
@@ -95,6 +100,7 @@ nnoremap ,sr :%s/\<<C-r><C-w>\>//g<Left><Left>
 nnoremap ,ss <C-W>s
 nnoremap ,sv <C-W>v
 nnoremap ,, <C-^>
+nnoremap -- <C-^>
 " swap colon and semicolon in normal mode:
 nnoremap ; :
 nnoremap : ; 
@@ -130,6 +136,8 @@ if executable('powerline') && has('python3')
   py3 del powerline_setup
 endif
 
+" lisp settings
+let g:lisp_rainbow=1 
 
 " AutoCommands
 
