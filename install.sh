@@ -41,6 +41,9 @@ function add_package_repo() {
 	fi
 }
 
+# Make sure packages for adding repos are installed first:
+sudo apt install software-properties-common
+
 # Install additional repos if needed
 cd ${REPODIR}
 for repo in * ; do

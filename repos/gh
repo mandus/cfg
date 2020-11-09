@@ -2,3 +2,5 @@
 
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0
 sudo apt-add-repository https://cli.github.com/packages
+sudo sed -i.bck '/cli.github.com/ s/sid/bullseye/' /etc/apt/sources.list
+sudo rm /etc/apt/sources.list.bck
