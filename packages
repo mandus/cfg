@@ -19,9 +19,11 @@ libjpeg-dev
 libpam0g-dev
 libxcb1-dev
 libxext-dev
+make
 mosh
 mpv
 mupdf
+network-manager
 pandoc
 poppler-utils
 powerline

@@ -61,6 +61,8 @@ addinpath $HOME/software/bin
 addinpath $HOME/go/bin
 addinpath $HOME/.local/bin
 addinpath /usr/lib/go-1.13/bin
+type go &>/dev/null || addinpath /usr/lib/go-1.14/bin
+type go &>/dev/null || addinpath /usr/lib/go-1.15/bin
 
 # ssh-agent stuff:
 [ -f ~/.bash_ssh_settings ] && source ~/.bash_ssh_settings

@@ -42,7 +42,7 @@ function add_package_repo() {
 }
 
 # Make sure packages for adding repos are installed first:
-sudo apt install software-properties-common
+sudo apt -y install software-properties-common gnupg
 
 # Install additional repos if needed
 cd ${REPODIR}
