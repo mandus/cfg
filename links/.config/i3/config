@@ -39,6 +39,8 @@ bindsym $mod+Return exec urxvt
 bindsym $altmod+Return exec uxterm
 #bindsym $altmod+Return exec alacritty
 bindsym $mod+Shift+Return exec gnome-terminal --window-with-profile=contrasy
+# toggle dropdown terminal
+bindsym $mod+Tab exec --no-startup-id "i3-scratchpad -tmt -atc urxvt"
 
 # start a cute-browser
 # bindsym $altmod+b exec qutebrowser --backend webengine
