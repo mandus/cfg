@@ -172,6 +172,9 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 bindsym $altmod+x exec /home/aasmundo/bin/syncprimaryclip
 # sync clipboard to X
 bindsym $altmod+c exec /home/aasmundo/bin/syncclipprimary
+# xdg-open primary
+bindsym $mod+o exec xdg-open `xclip -o selection primary`
+
 
 # audio
 #
@@ -313,6 +316,14 @@ mode "normal" {
     bindsym m exec /home/aasmundo/bin/running_sink_vol.sh mute
     bindsym t exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
     bindsym p exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
+
+    # clipboard
+    # sync X to clipboard
+    bindsym x exec /home/aasmundo/bin/syncprimaryclip
+    # sync clipboard to X
+    bindsym Control+c exec /home/aasmundo/bin/syncclipprimary
+    # xdg-open primary
+    bindsym o exec xdg-open `xclip -o selection primary`
 
     # return to input mode which after all is the default:
     bindsym i mode "default"
