@@ -39,9 +39,14 @@ bindsym $mod+Return exec urxvt
 bindsym $altmod+Return exec uxterm
 #bindsym $altmod+Return exec alacritty
 bindsym $mod+Shift+Return exec gnome-terminal --window-with-profile=contrasy
+# toggle dropdown terminal
+bindsym $mod+Tab exec --no-startup-id "i3-scratchpad -tmt -atc urxvt"
+# toggle calendar
+bindsym $altmod+Tab exec --no-startup-id "i3-scratchpad -d1024x480 -atc -p0,50 -wtuo -mb showmycal"
 
-# start a cute-browser
+# start an alternative browser
 # bindsym $altmod+b exec qutebrowser --backend webengine
+bindsym $altmod+b exec nyxt
 
 # adjust touchpad feeling
 # bindsym $altmod+t exec toggle_xps_touchpad.sh
@@ -178,6 +183,9 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 bindsym $altmod+x exec /home/aasmundo/bin/syncprimaryclip
 # sync clipboard to X
 bindsym $altmod+c exec /home/aasmundo/bin/syncclipprimary
+# xdg-open primary
+bindsym $mod+o exec xdg-open `xclip -o selection primary`
+
 
 # audio
 #
@@ -319,6 +327,14 @@ mode "normal" {
     bindsym m exec /home/aasmundo/bin/running_sink_vol.sh mute
     bindsym t exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
     bindsym p exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
+
+    # clipboard
+    # sync X to clipboard
+    bindsym x exec /home/aasmundo/bin/syncprimaryclip
+    # sync clipboard to X
+    bindsym Control+c exec /home/aasmundo/bin/syncclipprimary
+    # xdg-open primary
+    bindsym o exec xdg-open `xclip -o selection primary`
 
     # return to input mode which after all is the default:
     bindsym i mode "default"
