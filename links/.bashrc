@@ -97,5 +97,12 @@ type kubectl >/dev/null 2>&1 && . <(kubectl completion bash)
 #gh completion
 type gh &>/dev/null && . <(gh completion -s bash)
 
+# manage python with pyenv
+if [[ -d ~/.pyenv ]] ; then
+	PATH="/home/aasmundo/.pyenv/bin:$PATH"
+	eval "$(pyenv init -)"
+	eval "$(pyenv virtualenv-init -)"
+fi
+
 export PATH
 source ~/.bash_alias
