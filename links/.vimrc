@@ -138,6 +138,8 @@ endif
 
 " lisp settings
 let g:lisp_rainbow=1 
+let g:slimv_repl_split=2
+let g:slimv_repl_split_size=24
 
 " AutoCommands
 
