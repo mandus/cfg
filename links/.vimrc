@@ -149,3 +149,6 @@ au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`
 au BufWritePost *.py call Flake8()
 " Strip trailing white space in python-files
 autocmd BufWritePre *.py :call <SID>StripTrailingWhitespaces()
+" cursorline only in active window and in normal mode
+au WinLeave,InsertEnter * set nocursorline
+au WinEnter,InsertLeave * set   cursorline
