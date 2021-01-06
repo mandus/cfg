@@ -104,5 +104,8 @@ if [[ -d ~/.pyenv ]] ; then
 	eval "$(pyenv virtualenv-init -)"
 fi
 
+# perl-stuff
+[ -f ~/.perl.bash ] && source ~/.perl.bash
+
 export PATH
 source ~/.bash_alias
