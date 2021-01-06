@@ -1,3 +1,3 @@
 #!/bin/bash
 
-gcalcli --calendar='asmund@xal.no#blue' --calendar='Kalender#brightred' --calendar='Dager#white' --calendar='Fam kalender#yellow' calw --monday --details location
+gcalcli --calendar='asmund@xal.no#blue' --calendar='Kalender#brightred' --calendar='Dager#white' calw --monday --details location

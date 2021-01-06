@@ -69,11 +69,11 @@ function gogo() {
 }
 
 function mycal() {
-    gcalcli --calendar='asmund@xal.no#blue' --calendar='Kalender#brightred' --calendar='Dager#white' --calendar='Fam kalender#yellow' calw --monday --details location 
+    gcalcli --calendar='asmund@xal.no#blue' --calendar='Kalender#brightred' --calendar='Dager#white' calw --monday --details location 
 }
 
 function agenda() {
-    gcalcli --calendar='asmund@xal.no#blue' --calendar='Kalender#brightred' --calendar='Dager#white' --calendar='Fam kalender#yellow' agenda --details location $(agenda_range.py)
+    gcalcli --calendar='asmund@xal.no#blue' --calendar='Kalender#brightred' --calendar='Dager#white' agenda --details location $(agenda_range.py)
 }
 
 function today() {
