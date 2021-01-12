@@ -11,21 +11,27 @@ function green() { echo -e "$GREEN$*$NORMAL"; }
 function yellow() { echo -e "$YELLOW$*$NORMAL"; }
 function magenta() { echo -e "$MAGENTA$*$NORMAL"; }
 function blue() { echo -e "$BLUE$*$NORMAL"; }
+
 function edquick() { vim ~/.bash_alias; . ~/.bash_alias; }
+function fd() { DIR=$(find ${1:-*} -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf) && cd "$DIR"; }
+function fopen() { FILE=$(fzf) && open $FILE; }
 function french() { grep -i "$*" ~/Dropbox/Documents/french.txt; grep -i "$*" ~/Dropbox/Documents/french_notes.txt; }
 function getpid() { ps wax | grep $1 | grep -v grep | awk '{print $1}'; }
 function killProc() { for i in `getpid $1` ;  do ps -o user,pid -p $i | grep $i; kill -KILL $i; done; } 
-function pathsplitter() { echo $* | perl -pe 's/:/\n/g'; }
-function testme() { for i in "$@" ; do echo $i; done }
-function testyou() { for i in "$*" ; do echo $i; done }
+function pathsplt() { echo $* | perl -pe 's/:/\n/g'; }
+function proc() { ps auwwwx | grep $*; } 
 function quickcalc() { echo "$*" | bc -q -l; }
+function qcalc() { echo "$*" | bc -q -l; }
+function timetodec() { v="$*"; echo "${v%:*} + ${v#*:}*(1/60)" | bc -q -l; }
+
+function findheader() { find . -iname "*$1*" -print; }
 function makeline() { printf "%${1:-$COLUMNS}s\n" ""|tr " " ${2:-#};}
 function repeatstring(){ printf  "%${2}s" "" | sed -e "s/ /$1/g"; }
-function findheader() { find . -iname "*$1*" -print; }
 function sumuserpids() { ps auwx | awk {'print $1'} | sort | uniq -c | while read -r count user ; do printf "%15s %3s %-$((${COLUMNS}-15-3))s\n" $user $count $(makeline $count); done; }
-function fopen() { FILE=$(fzf) && open $FILE; }
-function fd() { DIR=$(find ${1:-*} -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf) && cd "$DIR"; }
-function timetodec() { v="$*"; echo "${v%:*} + ${v#*:}*(1/60)" | bc -q -l; }
+function testme() { for i in "$@" ; do echo $i; done }
+function testyou() { for i in "$*" ; do echo $i; done }
+
+
 function urldecode() { : "${*//+/ }"; echo -e "${_//%/\\x}"; }
 function urlencode() {
     # urlencode <string>
@@ -123,10 +129,11 @@ alias s="screen -r -x"
 #alias t="tmux a"
 alias vifm=vifmrun
 alias xcli="xclip -i -selection clipboard"
+alias xcboth="xclip -i -selection clipboard -selection primary"
 alias xs="cd"
 
 
 ## compile c from command line (need allheads.h in some system include dir..
 #c_flags="-std=gnu11 -g -Wall -Werror -O3 -include allheads.h `pkg-config --cflags gsl`"
 #c_libs="-lm `pkg-config --libs gsl`"
-alias c_comp="gcc -xc - $c_libs $c_flags"
+#alias c_comp="gcc -xc - $c_libs $c_flags"

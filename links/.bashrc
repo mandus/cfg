@@ -18,12 +18,13 @@ if [ -f ~/.git-prompt.sh ] ; then
    export GIT_PS1_SHOWSTASHSTATE=1
    export GIT_PS1_SHOWUPSTREAM="auto"
    #PS1='\[]2;\h: \w \]\[\e[31m\]\!\[\e[35m\]$(__git_ps1 " (%s)")\[\e[33;1m\]>\[\e[m\]'
+   inssh=$([[ $(ps -ocomm= -p $(ps -o ppid= $$)) =~ (sshd|mosh) ]] && hostname) 
    set_bash_prompt() {
      #PS1='\[]2;\h: \w \]\[\e[31m\]\!\[\e[35m\]$(__git_ps1 " (%s)")\[\e[33;1m\]>\[\e[m\]'
      #PS1='\[]2;\w \]$(date +%H:%M)|\[\e[31m\]\!\[\e[35m\]$(__git_ps1 " (%s)")\[\e[33;1m\]>\[\e[m\]'
      #PS1="\[]2;\w\]$(date +%H:%M)|\[\e[31m\]\!\[\e[35m\]$(__git_ps1 "(%s)")\[\e[33;1m\]>\[\e[m\]"
 	 venv=$([[ -n $VIRTUAL_ENV ]] && basename $VIRTUAL_ENV)
-     PS1="\[]2;\w\]\[$bluecol\]${venv:-$(date +%H:%M)}\[$col_off\]|\[$redcol\]\!\[$magentacol\]$(__git_ps1 "(%s)")\[$yellowcol\]>\[$col_off\]"
+     PS1="\[]2;\w\]\[$yellowcol\]${inssh}\[$col_off\]${inssh:+|}\[$bluecol\]${venv:-$(date +%H:%M)}\[$col_off\]|\[$redcol\]\!\[$magentacol\]$(__git_ps1 "(%s)")\[$yellowcol\]>\[$col_off\]"
    }
    PROMPT_COMMAND=set_bash_prompt
 else
