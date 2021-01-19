@@ -351,8 +351,8 @@ bindsym $mod+r mode "resize"
 bar {
     #position top
     tray_output primary
-    status_command i3status
-    #status_command /home/aasmundo/bin/custom_i3status_home.sh
+    #status_command i3status
+    status_command /home/aasmundo/bin/custom_i3status.sh
 
     colors {
         background #05050a
