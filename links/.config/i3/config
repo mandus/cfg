@@ -204,8 +204,8 @@ bindsym $mod+o exec xdg-open `xclip -o selection primary`
 bindsym $altmod+Shift+1 exec  /home/aasmundo/bin/running_sink_vol.sh m
 bindsym $altmod+Shift+2 exec /home/aasmundo/bin/running_sink_vol.sh p
 bindsym $altmod+Shift+3 exec /home/aasmundo/bin/running_sink_vol.sh mute
-bindsym $altmod+Shift+4 exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
-bindsym $altmod+Shift+5 exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
+bindsym $altmod+Shift+4 exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.ncspot /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
+bindsym $altmod+Shift+5 exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.ncspot /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
 
 
 # audio through pulseaudio/bluetooth 
@@ -326,8 +326,8 @@ mode "normal" {
     bindsym s exec  /home/aasmundo/bin/running_sink_vol.sh m
     bindsym v exec /home/aasmundo/bin/running_sink_vol.sh p
     bindsym m exec /home/aasmundo/bin/running_sink_vol.sh mute
-    bindsym t exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
-    bindsym p exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
+    bindsym t exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.ncspot /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
+    bindsym p exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.ncspot /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
 
     # clipboard
     # sync X to clipboard
