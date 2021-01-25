@@ -62,8 +62,10 @@ bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
 # handle screens (for laptop)
-bindsym $mod+e exec --no-startup-id /home/aasmundo/.screenlayout/ext-usbc.sh
-bindsym $mod+d exec --no-startup-id /home/aasmundo/.screenlayout/laptop.sh
+bindsym $mod+Control+b exec --no-startup-id /home/aasmundo/.screenlayout/laptop-ext-usbc.sh
+bindsym $mod+Control+d exec --no-startup-id /home/aasmundo/.screenlayout/laptop.sh
+bindsym $mod+Control+e exec --no-startup-id /home/aasmundo/.screenlayout/ext-usbc.sh
+bindsym $mod+Control+h exec --no-startup-id /home/aasmundo/.screenlayout/laptop-ext-hdmi.sh
 
 
 # lock screen
