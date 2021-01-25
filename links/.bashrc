@@ -108,5 +108,8 @@ fi
 # perl-stuff
 [ -f ~/.perl.bash ] && source ~/.perl.bash
 
+# rust
+[ -f ~/.cargo/env ] && source ~/.cargo/env
+
 export PATH
 source ~/.bash_alias
