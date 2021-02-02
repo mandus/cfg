@@ -1,11 +1,13 @@
 bat
 build-essential
 curl
+feh
 firefox
 ffmpeg
 ffmpegthumbnailer
 fish
 flake8
+flameshot
 fonts-hack
 fonts-powerline
 fzf
@@ -39,6 +41,7 @@ rofi
 rxvt-unicode
 sakura
 sbcl
+scrot
 silversearcher-ag
 stterm
 sxiv
