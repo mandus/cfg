@@ -1,6 +1,6 @@
 !URxvt.font:     xft:bitstream vera sans mono:size=10:antialias=true
 !URxvt.boldFont: xft:bitstream vera sans mono:bold:size=10:antialias=true
-URxvt.font:     xft:FuraCode Nerd Font Mono:size=10:antialias=true
+URxvt.font:     xft:FuraCode Nerd Font Mono:style=light:size=10:antialias=true
 URxvt.boldFont: xft:FuraCode Nerd Font Mono:style=bold:size=10:antialias=true
 URxvt.scrollBar: 0
 URxvt*depth: 32
