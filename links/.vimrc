@@ -61,6 +61,8 @@ Plugin 'wincent/command-t'
 Plugin 'nvie/vim-flake8'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'kovisoft/slimv'
+"vim status in tmux - doesn't work with powerline?
+"Plugin 'vimpostor/vim-tpipeline'
 
 "Consider adding this if debugger in vim is needed:
 "see https://puremourning.github.io/vimspector-web/
