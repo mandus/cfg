@@ -7,6 +7,7 @@ set nocompatible
 set   expandtab
 set   formatoptions=croql2
 set   guioptions=aed
+set   hidden
 set   ignorecase
 set   incsearch
 set   lazyredraw
