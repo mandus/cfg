@@ -6,10 +6,10 @@ on_wayland=$(env | grep -i wayland)
 ip_file=$HOME/.realip
 
 if [[ -n $on_wayland ]] ; then
-    #trap "killProc i3blocks" EXIT
+    trap "killProc i3blocks" EXIT
     i3blocks
 else
-    #trap "killProc i3status" EXIT
+    trap "killProc i3status" EXIT
     i3status | (read line && echo $line && read line && echo $line && while : 
     do
         read line
