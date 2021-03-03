@@ -32,6 +32,7 @@ powerline
 pulseaudio-utils
 pwgen
 pyflakes3
+python3-dbus
 python3-pil
 python3-pip
 python3-pyflakes
