@@ -78,7 +78,7 @@ if has('python3')
     let g:gundo_prefer_python3 = 1
 endif
 
-nnoremap <leader><space> :!X-open-silent <cWORD><CR><CR>
+nnoremap <leader><space> :silent :exe "!X-open-silent " . expand("<cWORD>")<CR><C-L>
 nnoremap <leader>a <C-W><C-H>
 nnoremap -a <C-W><C-H>
 nnoremap <leader>s <C-W><C-K>
