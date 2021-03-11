@@ -66,7 +66,7 @@ def truncate(name, trunclen):
 
 
 # Default parameters
-output = fix_string(u'{play_pause} {artist}: {song} ({album})')
+output = fix_string(u'{play_pause} {artist}: {song} ({album}) [{volume}]')
 trunclen = 80
 play_pause = fix_string(u'\u25B6,\u23F8')  # first character is play, second is paused
 
@@ -98,6 +98,7 @@ try:
 
     metadata = spotify_properties.Get('org.mpris.MediaPlayer2.Player', 'Metadata')
     status = spotify_properties.Get('org.mpris.MediaPlayer2.Player', 'PlaybackStatus')
+    volume = int(float(spotify_properties.Get('org.mpris.MediaPlayer2.Player', 'Volume'))*100)/100
 
     # Handle play/pause label
 
@@ -131,7 +132,8 @@ try:
         print(truncate(output.format(artist=artist,
                                      song=song,
                                      play_pause=play_pause,
-                                     album=album), trunclen + 4))
+                                     album=album,
+                                     volume=volume), trunclen + 4))
 
 except Exception as e:
     if isinstance(e, dbus.exceptions.DBusException):
