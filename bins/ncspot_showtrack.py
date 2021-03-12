@@ -47,8 +47,9 @@ parser.add_argument(
 
 args = parser.parse_args()
 
-
 def fix_string(string):
+    # escape double quotes in string
+    string = string.replace('"', '\\"')
     # corrects encoding for the python version used
     if sys.version_info.major == 3:
         return string
@@ -66,7 +67,7 @@ def truncate(name, trunclen):
 
 
 # Default parameters
-output = fix_string(u'{play_pause} {artist}: {song} ({album}) [{volume}]')
+output = fix_string(u'{play_pause} [{volume}] {artist}: {song} ({album})')
 trunclen = 80
 play_pause = fix_string(u'\u25B6,\u23F8')  # first character is play, second is paused
 
