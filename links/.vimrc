@@ -5,7 +5,7 @@ set   cinkeys=0{,0},:,!^F,o,O,e
 set   cursorline
 set nocompatible             
 set   expandtab
-set   formatoptions=croql2
+set   formatoptions=cjroql2
 set   guioptions=aed
 set   hidden
 set   ignorecase
