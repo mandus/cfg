@@ -98,6 +98,7 @@ nnoremap <F5> :NERDTreeToggle<CR>
 nnoremap <F6> :GundoToggle<CR>
 nnoremap <F7> :set invlist<CR>
 nnoremap <F8> :TagbarToggle<CR>
+nnoremap ,a :Ack!<CR>
 nnoremap ,gg :exe 'Ggrep ' . expand('<cword>')<CR>
 nnoremap ,sc <C-W>c
 nnoremap ,sr :%s/\<<C-r><C-w>\>//g<Left><Left>
