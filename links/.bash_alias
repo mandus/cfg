@@ -13,7 +13,7 @@ function magenta() { echo -e "$MAGENTA$*$NORMAL"; }
 function blue() { echo -e "$BLUE$*$NORMAL"; }
 
 function edquick() { vim ~/.bash_alias; . ~/.bash_alias; }
-function fd() { DIR=$(find ${1:-*} -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf) && cd "$DIR"; }
+function fd() { DIR=$(find -L ${1:-*} -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf) && cd "$DIR"; }
 function fopen() { FILE=$(fzf) && open $FILE; }
 function french() { grep -i "$*" ~/Dropbox/Documents/french.txt; grep -i "$*" ~/Dropbox/Documents/french_notes.txt; }
 function getpid() { ps wax | grep $1 | grep -v grep | awk '{print $1}'; }
@@ -87,7 +87,7 @@ function today() {
 }
 
 function now() {
-    gcalcli --calendar='asmund@xal.no#blue' --calendar='Kalender#brightred' agenda --details location $(date "+%Y-%m-%dT%H:%M") $(date --date="@$(($(date +%s)+3600))" "+%Y-%m-%dT%H:%M") | tail +2 | head -n-1
+    gcalcli --calendar='asmund@xal.no#blue' --calendar='Kalender#brightred' agenda --details location --details url  $(date "+%Y-%m-%dT%H:%M") $(date --date="@$(($(date +%s)+3600))" "+%Y-%m-%dT%H:%M") | tail +2 | head -n-1
 }
 
 _mypass_files() {
