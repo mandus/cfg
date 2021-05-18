@@ -45,6 +45,10 @@ bindsym $mod+t exec --no-startup-id "i3-scratchpad -tmt -atc telegram-desktop"
 bindsym $mod+u exec --no-startup-id "i3-scratchpad -tmt -atc gvim ~/Dropbox/browser.tabs"
 # toggle calendar
 bindsym $altmod+Tab exec --no-startup-id "i3-scratchpad -d1024x480 -atc -p0,50 -wtuo -mb showmycal"
+# mini cal bottom left corner - not perfect, since week start on sunday
+# bindsym $altmod+m exec --no-startup-id "i3-scratchpad -d395x150 -abr -p-12,-16 -wtu cal -A 1 $(date '+%m %Y')"
+# mini cal with week numbers - not perfect since weeknumber is not accoring to timezone
+# bindsym $altmod+comma exec --no-startup-id "i3-scratchpad -d495x170 -abr -p-12,-16 -wtu ncal -M -w -A 2 $(date '+%m %Y')"
 
 # start an alternative browser
 # bindsym $altmod+b exec qutebrowser --backend webengine
