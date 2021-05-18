@@ -21,6 +21,7 @@ set   splitright
 set   tabstop=4                                                                                                                                                               
 set   tags=./.git/tags,./tags,.git/tags,../.git/tags,.ctags,./TAGS,tags,TAGS
 set   viminfo='75,\"500,f1,:250,n~/.viminfo
+set wildignore=*.fasl
 set nowrap
 set nowritebackup
 
@@ -109,6 +110,8 @@ nnoremap -- <C-^>
 " swap colon and semicolon in normal mode:
 nnoremap ; :
 nnoremap : ; 
+
+set guifont=Source\ Code\ Pro\ Light\ 10
 
 " go-specifics
 nnoremap <leader>ga :GoAlternate!<cr>                                                                                                                                                                                                                                                                                          
