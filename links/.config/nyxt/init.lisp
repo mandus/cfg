@@ -27,23 +27,23 @@
            %slot-default%
            (cl-css:css
             `((body
-               :background-color *grey*
+               :background-color ,*grey*
                :color "white")
               ("#prompt-area"
                :background-color ,*blue*)
               ("#input"
-               :background-color *grey*
-               :border (format nil "2px solid ~a" *grey*)
+               :background-color ,*grey*
+               :border "2px solid #1f1e1e"
                :border-radius "3px"
                :color "white")
               (".source-name"
                :color "white"
-               :background-color *grey*)
+               :background-color ,*grey*)
               (".source-content"
-               :background-color  *grey*)
+               :background-color  ,*grey*)
               (".source-content th"
                :border-left  "3px solid #7c4f8c"
-               :background-color *grey*)
+               :background-color ,*grey*)
               ("#selection"
                :background-color ,*blue*
                :color "white")
@@ -108,9 +108,6 @@
 
 (define-configuration nyxt/emacs-mode:emacs-mode 
   ((glyph "🐮")))
-
-(define-configuration nyxt/vi-mode:vi-mode 
-  ((glyph "")))
 
 (define-configuration nyxt/certificate-exception-mode:certificate-exception-mode
   ((glyph "🕵")))
