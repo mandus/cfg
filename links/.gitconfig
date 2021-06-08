@@ -42,7 +42,7 @@
 [mergetool "fugitive"]
 	cmd = gvim -f -c \"Gdiffsplit!\" \"$MERGED\"
 [init]
-	templatedir = ~/.git_template
+	templatedir = /home/aasmundo/.git_template
 [filter "media"]
 	clean = git-media-clean %f
 	smudge = git-media-smudge %f

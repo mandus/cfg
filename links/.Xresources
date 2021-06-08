@@ -76,13 +76,13 @@ Xft.lcdfilter: lcddefault
 !UXTerm*faceName: Bitstream Vera Serif Mono
 UXTerm*faceName: Source Code Pro
 UXTerm*faceSize: 9 
-UXTerm*background: #000000
-UXTerm*foreground: #00aa00
-UXTerm.vt100.color0:  #001000 
-UXTerm.vt100.color1:  #B40000 // red
+UXTerm*background: #251e1e
+UXTerm*foreground: #20aa20
+UXTerm.vt100.color0:  #308030 
+UXTerm.vt100.color1:  #B42020 // red
 UXTerm.vt100.color2:  #00AA00 // green
 UXTerm.vt100.color3:  #AAAA00 // yellow
-UUXTerm.vt100.color4:  #5555AA // blue
+UXTerm.vt100.color4:  #5555AA // blue
 !UXTerm.vt100.color5:  #AA00AA // magenta
 UXTerm.vt100.color5:  #909090 // magenta
 UXTerm.vt100.color6:  #00AAAA // cyan
