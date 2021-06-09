@@ -3,7 +3,7 @@
 ;; custom swank, since I usually have others running
 (setf nyxt:*swank-port* 4007)
 
-(define-configuration nyxt/web-mode:web-mode ((nyxt/web-mode:hints-alphabet "fjdkslgrthyuieowpnvcmx")))
+(define-configuration nyxt/web-mode:web-mode ((nyxt/web-mode:hints-alphabet "fdslgrthueowpnvcmx")))
 
 ;; vi-bindings for prompt; general vi-bindings set in the auto-config
 (define-configuration prompt-buffer ((default-modes (append '(vi-normal-mode) %slot-default%))))
