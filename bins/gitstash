@@ -1,0 +1,78 @@
+#!/bin/bash
+# Author: Åsmund Ødegård
+#         asmund@xal.no
+# 
+# Copyright (C) 2014
+# Some nice and open license. (Apache License v. 2.0 January 2004)
+
+current_branch=$(git rev-parse --abbrev-ref HEAD)
+nums=$(git stash list | awk -F':' '{print $1}' | sed 's/.*{\(.*\)}/ \1/' | tr -d "\n")
+# Just exit if there are no stash
+[[ -z $nums ]] && exit
+
+run="True"
+
+__stash_branch ()
+{
+   stash=$1
+   stash_branch=$(git stash list | grep $stash | awk '{print $4}' | sed 's/:$//')
+   echo $stash_branch
+}
+
+__is_current () 
+{
+   stash=$1
+   stash_branch=$(__stash_branch $stash)
+   if [[ $stash_branch != $current_branch ]] ;  then
+      echo "warning: ($current_branch, $stash_branch) does not match. (c)ontinue (b)reak? "
+   fi
+}
+
+
+while [[ ! -z $run ]] ; do
+   git stash list | cat
+   echo -ne "Pop a stash (q)uit (s)how+ (p)atch+ (d)rop+ (f)ile+ ${nums}: "
+   read get_stash
+   if [ "$get_stash" != "q" ] ; then 
+      if [[ $get_stash =~ s.* ]] ; then
+         show_stash=${get_stash/#s/}
+         stash="stash@{${show_stash}}"
+         git stash show $stash
+      elif [[ $get_stash =~ p.* ]] ; then
+         show_stash=${get_stash/#p/}
+         stash="stash@{${show_stash}}"
+         git stash show -p $stash
+      elif [[ $get_stash =~ d.* ]] ; then
+         drop_stash=${get_stash/#d/}
+         stash="stash@{${drop_stash}}"
+         git stash drop $stash
+      elif [[ $get_stash =~ f.* ]] ; then
+         print_stash=${get_stash/#f/}
+         stash="stash@{${print_stash}}"
+         stash_branch=$(__stash_branch $stash)
+         fix_stash_branch_name=$(echo ${stash_branch} | sed s'/\//_/g')
+         filename=${fix_stash_branch_name}.patch
+         git stash show -p $stash > $filename
+      elif [[ $nums =~ .*${get_stash}.* ]] ; then
+         stash="stash@{${get_stash}}"
+         echo "Get $stash"
+         msg=$(__is_current $stash)
+         if [[ ! -z $msg ]] ; then 
+            read -p "$msg" continue
+         else
+            continue='c'
+         fi
+         if [[ $continue =~ c.* ]] ; then
+            git stash pop $stash
+         fi
+      else 
+         echo "Stash ${get_stash} not found"
+      fi
+      # re-read stash-nums
+      nums=$(git stash list | awk -F':' '{print $1}' | sed 's/.*{\(.*\)}/ \1/' | tr -d "\n")
+      # if no stah left, exit
+      [[ -z $nums ]] && run=''
+   else
+      run=''
+   fi
+done
