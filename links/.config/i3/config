@@ -279,6 +279,8 @@ mode "normal" {
     # lock screen
     bindsym q exec --no-startup-id i3lock -c 000000
  
+    # toggle floating
+    bindsym Shift+space floating toggle
     # toggle sticky a window (should probably float already)
     bindsym Shift+s sticky toggle
 
