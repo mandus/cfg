@@ -27,6 +27,7 @@ mpv
 mupdf
 network-manager
 pandoc
+pinentry-tty
 poppler-utils
 powerline
 pulseaudio-utils

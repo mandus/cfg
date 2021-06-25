@@ -100,7 +100,9 @@ type gh &>/dev/null && . <(gh completion -s bash)
 
 # manage python with pyenv
 if [[ -d ~/.pyenv ]] ; then
-	PATH="/home/aasmundo/.pyenv/bin:$PATH"
+	export PYENV_ROOT="$HOME/.pyenv"
+	PATH="${PYENV_ROOT}/bin:$PATH"
+	eval "$(pyenv init --path)"
 	eval "$(pyenv init -)"
 	eval "$(pyenv virtualenv-init -)"
 fi
