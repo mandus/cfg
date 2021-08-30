@@ -14,6 +14,7 @@ fonts-powerline
 fzf
 gh
 git
+host
 htop
 i3
 imagemagick
@@ -46,6 +47,7 @@ sakura
 sbcl
 scrot
 silversearcher-ag
+strace
 stterm
 sxiv
 ttf-bitstream-vera
