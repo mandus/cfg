@@ -1,0 +1,7 @@
+#!/bin/bash
+
+curl -sL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/microsoft.gpg >/dev/null
+AZ_REPO=$(lsb_release -cs)
+# If lsb say sid, we use buster (since microsoft doesn't support sid directly)
+[[ $AC_REPO = "sid" ]] && AC_REPO="buster"
+echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" | sudo tee /etc/apt/sources.list.d/azure-cli.list
