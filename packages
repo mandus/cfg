@@ -43,6 +43,7 @@ python3-pyflakes
 python3-virtualenv
 ranger
 rofi
+rsync
 rxvt-unicode
 sakura
 sbcl
