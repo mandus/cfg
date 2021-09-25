@@ -61,9 +61,14 @@ addinpath $HOME/bin
 addinpath $HOME/software/bin
 addinpath $HOME/go/bin
 addinpath $HOME/.local/bin
-addinpath /usr/lib/go-1.13/bin
-type go &>/dev/null || addinpath /usr/lib/go-1.14/bin
+addinpath $HOME/.dotnet
+addinpath $HOME/.vsdbg
+# Add most up-to-date go in PATH
+addinpath /usr/lib/go-1.17/bin
+type go &>/dev/null || addinpath /usr/lib/go-1.16/bin
 type go &>/dev/null || addinpath /usr/lib/go-1.15/bin
+type go &>/dev/null || addinpath /usr/lib/go-1.14/bin
+type go &>/dev/null || addinpath /usr/lib/go-1.13/bin
 
 # ssh-agent stuff:
 [ -f ~/.bash_ssh_settings ] && source ~/.bash_ssh_settings
