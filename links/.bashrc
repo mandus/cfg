@@ -62,6 +62,7 @@ addinpath $HOME/software/bin
 addinpath $HOME/go/bin
 addinpath $HOME/.local/bin
 addinpath $HOME/.dotnet
+addinpath $HOME/.dotnet/tools
 addinpath $HOME/.vsdbg
 # Add most up-to-date go in PATH
 addinpath /usr/lib/go-1.17/bin
