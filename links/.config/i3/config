@@ -41,7 +41,7 @@ bindsym $altmod+Return exec uxterm
 bindsym $mod+Shift+Return exec gnome-terminal --window-with-profile=contrasy
 # toggle dropdown terminal
 bindsym $mod+Tab exec --no-startup-id "i3-scratchpad -tmt -atc urxvt"
-bindsym $mod+t exec --no-startup-id "i3-scratchpad -tmt -atc /opt/telegram/Telegram"
+bindsym $mod+t exec --no-startup-id "i3-scratchpad -tmt -atc /usr/bin/telegram-desktop"
 bindsym $mod+u exec --no-startup-id "i3-scratchpad -tmt -atc gvim ~/Dropbox/browser.tabs"
 # toggle calendar
 bindsym $altmod+Tab exec --no-startup-id "i3-scratchpad -d1024x480 -atc -p0,50 -wtuo -mb /home/aasmundo/bin/showmycal"
