@@ -100,6 +100,7 @@ complete -F _mypass_files mypass
 # Two variants of possible cabal locations
 [[ -f $HOME/Library/Haskell/bin/cabal ]] && alias cabal='~/Library/Haskell/bin/cabal'
 [[ -f $HOME/.cabal/bin/cabal ]] && alias cabal='~/.cabal/bin/cabal'
+type batcat >/dev/null 2>&1 && alias cat=batcat
 alias cdm="cd ~/projects/vipps/go/src/vipps.no/vaam; gogo"
 alias cdv="cd ~/projects/vipps/"
 #alias cdvs="cd ~/projects/vipps/go/src/vipps.no/signup-backend/; gogo"
