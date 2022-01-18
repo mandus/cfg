@@ -11,7 +11,7 @@
 ;; styles - copied/slightly adapted from @aartaka
 
 (defparameter *blue* "#7587A6")
-(defparameter *grey* "#1f1e1e")
+(defparameter *grey* "#8f8f8f")
 
 (define-configuration window
   ((message-buffer-style
