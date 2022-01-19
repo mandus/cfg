@@ -17,6 +17,7 @@ function fd() { DIR=$(find -L ${1:-*} -path '*/\.*' -prune -o -type d -print 2> 
 function fopen() { FILE=$(fzf) && open $FILE; }
 function french() { grep -i "$*" ~/Dropbox/Documents/french.txt; grep -i "$*" ~/Dropbox/Documents/french_notes.txt; }
 function getpid() { ps wax | grep $1 | grep -v grep | awk '{print $1}'; }
+function has_cmd() { type $* >/dev/null 2>&1; }
 function killProc() { for i in `getpid $1` ;  do ps -o user,pid -p $i | grep $i; kill -KILL $i; done; } 
 function pathsplt() { echo $* | perl -pe 's/:/\n/g'; }
 function proc() { ps auwwwx | grep $*; } 
@@ -117,8 +118,8 @@ alias h="history | grep"
 alias l="less"
 [[ $currentos == "Linux" ]] && alias ls="ls --color=auto"
 [[ $currentos == "Linux" ]] && alias open="xdg-open"
-type exa >/dev/null 2>&1 && alias lsl="exa -l --git"
-type powerline >/dev/null 2>&1 && alias psl="powerline shell left"
+has_cmd exa && alias lsl="exa -l --git"
+has_cmd powerline && alias psl="powerline shell left"
 #alias sshxaldev="mosh dev.xal.no -- tmux a"
 alias sshflexi="ssh -i ~/.ssh/flexi-stockholm.pem admin@flexi.xal.no"
 alias sshflexistock="ssh -i ~/.ssh/flexi-stockholm.pem admin@ec2-13-49-77-81.eu-north-1.compute.amazonaws.com"

@@ -171,6 +171,8 @@ nnoremap s :shell<cr>
 
 " Display sorting dialog
 nnoremap S :sort<cr>
+" invert sort order
+nnoremap R :invert o<cr>
 
 " Toggle visibility of preview window
 nnoremap w :view<cr>
