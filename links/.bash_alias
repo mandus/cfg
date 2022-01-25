@@ -12,9 +12,10 @@ function yellow() { echo -e "$YELLOW$*$NORMAL"; }
 function magenta() { echo -e "$MAGENTA$*$NORMAL"; }
 function blue() { echo -e "$BLUE$*$NORMAL"; }
 
+function aptf() { apt-cache search "$*" | fzf --preview="apt-cache show {1}" --bind="space:toggle-preview" --preview-window=:hidden; }
 function edquick() { vim ~/.bash_alias; . ~/.bash_alias; }
 function fd() { DIR=$(find -L ${1:-*} -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf) && cd "$DIR"; }
-function fopen() { FILE=$(fzf) && open $FILE; }
+function fopen() { FILE=$(fdfind --color=always | fzf --ansi --preview="cat {}" --bind="space:toggle-preview" --preview-window=:hidden) && vim $FILE; }
 function french() { grep -i "$*" ~/Dropbox/Documents/french.txt; grep -i "$*" ~/Dropbox/Documents/french_notes.txt; }
 function getpid() { ps wax | grep $1 | grep -v grep | awk '{print $1}'; }
 function has_cmd() { type $* >/dev/null 2>&1; }
