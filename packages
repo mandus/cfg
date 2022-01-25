@@ -3,6 +3,7 @@ bash-completion
 bat
 build-essential
 curl
+fd-find
 feh
 firefox
 ffmpeg
