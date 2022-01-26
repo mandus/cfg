@@ -17,7 +17,7 @@ function edquick() { vim ~/.bash_alias; . ~/.bash_alias; }
 #function fd() { DIR=$(find -L ${1:-*} -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf) && cd "$DIR"; }
 function fd() { DIR=$(fdfind -L ${1:-} --type d --color=always | fzf --ansi --preview="exa -l --git {}" --bind="space:toggle-preview" --preview-window=:hidden) && cd "$DIR"; }
 function fdh() { DIR=$(fdfind -H -L ${1:-} --type d --color=always | fzf --ansi --preview="exa -l --git {}" --bind="space:toggle-preview" --preview-window=:hidden) && cd "$DIR"; }
-function fopen() { FILE=$(fdfind -L --color=always | fzf --ansi --preview="batcat --color=always {}" --bind="space:toggle-preview,shift-up:preview-page-up,shift-down:preview-page-down" --preview-window=:hidden) && vim $FILE; }
+function fopen() { FILE=$(fdfind -L --color=always | fzf --ansi --preview="batcat --color=always {}" --bind="space:toggle-preview,ctrl-p:preview-page-up,ctrl-n:preview-page-down" --preview-window=:hidden) && vim $FILE; }
 function french() { grep -i "$*" ~/Dropbox/Documents/french.txt; grep -i "$*" ~/Dropbox/Documents/french_notes.txt; }
 function getpid() { ps wax | grep $1 | grep -v grep | awk '{print $1}'; }
 function has_cmd() { type $* >/dev/null 2>&1; }
