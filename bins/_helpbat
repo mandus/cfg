@@ -1,0 +1,5 @@
+#!/bin/bash
+
+ARG=$*
+batcat --color=always ${ARG%%:*}
+
