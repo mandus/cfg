@@ -19,7 +19,11 @@ function agopen() {
     LINE=${LINE%:} 
     [[ -n $LINE ]] && vim ${LINE%:*} +${LINE#*:}
 }
-function aptf() { apt-cache search "$*" | fzf --preview="apt-cache show {1}" --bind="space:toggle-preview" --preview-window=:hidden; }
+function aptf() { 
+	line=$(apt-cache search "$*" | fzf --preview="apt-cache show {1}" --bind="space:toggle-preview" --preview-window=:hidden);
+    splline=($line) 
+	sudo apt install ${splline[0]} 
+}
 function edquick() { vim ~/.bash_alias; . ~/.bash_alias; }
 #function fd() { DIR=$(find -L ${1:-*} -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf) && cd "$DIR"; }
 function fd() { DIR=$(fdfind -L ${1:-} --type d --color=always | fzf --ansi --preview="exa -l --git {}" --bind="space:toggle-preview" --preview-window=:hidden) && cd "$DIR"; }
