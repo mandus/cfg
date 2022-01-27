@@ -12,17 +12,17 @@ function yellow() { echo -e "$YELLOW$*$NORMAL"; }
 function magenta() { echo -e "$MAGENTA$*$NORMAL"; }
 function blue() { echo -e "$BLUE$*$NORMAL"; }
 
-function agopen() { 
-	LINE=$(ag --color "$*" | fzf --ansi --preview="_helpbat {1}" --bind="space:toggle-preview" --preview-window=:hidden)
-    LINE=($LINE) 
-    LINE=${LINE[0]} 
-    LINE=${LINE%:} 
-    [[ -n $LINE ]] && vim ${LINE%:*} +${LINE#*:}
+function agopen() {
+	LINE=$(ag --color "$*" | fzf --ansi --preview="_helpbat {1}" --bind="space:toggle-preview,ctrl-p:preview-page-up,ctrl-n:preview-page-down" --preview-window=:hidden)
+	LINE=($LINE)
+	LINE=${LINE[0]}
+	LINE=${LINE%:}
+	[[ -n $LINE ]] && vim ${LINE%:*} +${LINE#*:}
 }
-function aptf() { 
+function aptf() {
 	line=$(apt-cache search "$*" | fzf --preview="apt-cache show {1}" --bind="space:toggle-preview" --preview-window=:hidden);
-    splline=($line) 
-	sudo apt install ${splline[0]} 
+	splline=($line)
+	sudo apt install ${splline[0]}
 }
 function edquick() { vim ~/.bash_alias; . ~/.bash_alias; }
 #function fd() { DIR=$(find -L ${1:-*} -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf) && cd "$DIR"; }
