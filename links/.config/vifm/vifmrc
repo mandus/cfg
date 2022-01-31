@@ -30,7 +30,7 @@ endif
 view
 
 " Selected color scheme
-colorscheme minimal
+colorscheme solarized-dark
 
 " ------------------------------------------------------------------------------
 
@@ -198,16 +198,115 @@ nnoremap A cw
 nnoremap mkd :mkdir<space>
 
 " file types
-set classify='  :dir:/,  :exe:,  :reg:,  :link:'
+"set classify='  :dir:/,  :exe:,  :reg:,  :link:'
 " various file names
-set classify+='  ::../::,  ::*.sh::,  ::*.[hc]pp::,  ::*.[hc]::,  ::/^copying|license$/::,  ::.git/,,*.git/::,  ::*.epub,,*.fb2,,*.djvu::,  ::*.pdf::,  ::*.htm,,*.html,,**.[sx]html,,*.xml::'
+"set classify+='  ::../::,  ::*.cs::,  ::*.py::,  ::*.sh::,  ::*.[hc]pp::,  ::*.[hc]::,  ::/^copying|license$/::,  ::.git/,,*.git/::,  ::*.epub,,*.fb2,,*.djvu::,  ::*.pdf::,  ::*.htm,,*.html,,**.[sx]html,,*.xml::'
 " archives
-set classify+='  ::*.7z,,*.ace,,*.arj,,*.bz2,,*.cpio,,*.deb,,*.dz,,*.gz,,*.jar,,*.lzh,,*.lzma,,*.rar,,*.rpm,,*.rz,,*.tar,,*.taz,,*.tb2,,*.tbz,,*.tbz2,,*.tgz,,*.tlz,,*.trz,,*.txz,,*.tz,,*.tz2,,*.xz,,*.z,,*.zip,,*.zoo::'
+"set classify+='  ::*.7z,,*.ace,,*.arj,,*.bz2,,*.cpio,,*.deb,,*.dz,,*.gz,,*.jar,,*.lzh,,*.lzma,,*.rar,,*.rpm,,*.rz,,*.tar,,*.taz,,*.tb2,,*.tbz,,*.tbz2,,*.tgz,,*.tlz,,*.trz,,*.txz,,*.tz,,*.tz2,,*.xz,,*.z,,*.zip,,*.zoo::'
 " images
-set classify+='  ::*.bmp,,*.gif,,*.jpeg,,*.jpg,,*.ico,,*.png,,*.ppm,,*.svg,,*.svgz,,*.tga,,*.tif,,*.tiff,,*.xbm,,*.xcf,,*.xpm,,*.xspf,,*.xwd::'
+"set classify+='  ::*.bmp,,*.gif,,*.jpeg,,*.jpg,,*.ico,,*.png,,*.ppm,,*.svg,,*.svgz,,*.tga,,*.tif,,*.tiff,,*.xbm,,*.xcf,,*.xpm,,*.xspf,,*.xwd::'
 " audio
-set classify+='  ::*.aac,,*.anx,,*.asf,,*.au,,*.axa,,*.flac,,*.m2a,,*.m4a,,*.mid,,*.midi,,*.mp3,,*.mpc,,*.oga,,*.ogg,,*.ogx,,*.ra,,*.ram,,*.rm,,*.spx,,*.wav,,*.wma,,*.ac3::'
+"set classify+='  ::*.aac,,*.anx,,*.asf,,*.au,,*.axa,,*.flac,,*.m2a,,*.m4a,,*.mid,,*.midi,,*.mp3,,*.mpc,,*.oga,,*.ogg,,*.ogx,,*.ra,,*.ram,,*.rm,,*.spx,,*.wav,,*.wma,,*.ac3::'
 " media
-set classify+='  ::*.avi,,*.ts,,*.axv,,*.divx,,*.m2v,,*.m4p,,*.m4v,,.mka,,*.mkv,,*.mov,,*.mp4,,*.flv,,*.mp4v,,*.mpeg,,*.mpg,,*.nuv,,*.ogv,,*.pbm,,*.pgm,,*.qt,,*.vob,,*.wmv,,*.xvid::'
+"set classify+='  ::*.avi,,*.ts,,*.axv,,*.divx,,*.m2v,,*.m4p,,*.m4v,,.mka,,*.mkv,,*.mov,,*.mp4,,*.flv,,*.mp4v,,*.mpeg,,*.mpg,,*.nuv,,*.ogv,,*.pbm,,*.pgm,,*.qt,,*.vob,,*.wmv,,*.xvid::'
 " office files
-set classify+='  ::*.doc,,*.docx::,  ::*.xls,,*.xls[mx]::,  ::*.pptx,,*.ppt::'
+"set classify+='  ::*.doc,,*.docx::,  ::*.xls,,*.xls[mx]::,  ::*.pptx,,*.ppt::'
+
+
+" Icons
+
+" Filetypes - larger list!
+set classify=' :dir:/, :exe:, :reg:, :link:,? :?:, ::../::'
+
+" Dirs
+set classify+=' ::.git/::/'
+set classify+=' ::.config/::/'
+set classify+=' ::Desktop/::/'
+set classify+=' ::Documents/::/'
+set classify+=' ::Downloads/::/'
+set classify+=' ::Dropbox/::/'
+set classify+=' ::Music/::/'
+set classify+=' ::Pictures/::/'
+set classify+=' ::Public/::/'
+set classify+=' ::Templates/::/'
+set classify+=' ::Videos/::/'
+set classify+=' ::node_modules/::/'
+
+" Files
+set classify+=' ::.Xauthority,,.Xdefaults,,.Xresources,,.bash_aliases,,.bashprofile,,.bash_profile,,.bash_logout,,.bash_history,,.bashrc,,.dmrc,,.DS_Store,,.fasd,,.gitconfig,,.gitattributes,,.gitignore,,.inputrc,,.jack-settings,,.mime.types,,.nvidia-settings-rc,,.pam_environment,,.profile,,.recently-used,,.selected_editor,,.tmux.conf,,.xinitrc,,.xinputrc,,config,,bspwmrc,,sxhkdrc,,Makefile,,Makefile.in,,Makefile.ac,,mimeapps.list,,.zshenv,,.zprofile,,.zshrc,,.zlogin,,.zlogout,,vifmrc,,yabairc,,skhdrc,,ini,,user-dirs.dirs::'
+set classify+=' ::.fehbg::'
+set classify+=' ::.vim,,.vimrc,,.viminfo,,init.vim::'
+set classify+=' ::Dockerfile,,docker-compose.yml::'
+set classify+=' ::dropbox::'
+set classify+='X1 ::exact-match-case-sensitive-1.txt::'
+set classify+='X2 ::exact-match-case-sensitive-2::'
+set classify+=' ::favicon.ico::'
+set classify+=' ::a.out,,configure::'
+set classify+=' ::config.mk,,config.m4,,config.ac::'
+set classify+=' ::Rakefile::'
+set classify+=' ::gruntfile.coffee,,gruntfile.js,,gruntfile.ls::'
+set classify+=' ::gulpfile.coffee,,gulpfile.js,,gulpfile.ls::'
+set classify+=' ::ledger::'
+set classify+=' ::package.json,,package-lock.json,,webpack.config.js::'
+set classify+=' ::.ncmpcpp,,playlists::'
+set classify+=' ::known_hosts,,authorized_keys,,license,,LICENSE.md,,LICENSE,,LICENSE.txt::'
+set classify+=' ::procfile::'
+set classify+=' ::react.jsx::'
+set classify+=' ::README.rst,,README.md,,README.markdown,,README,,README.txt::'
+
+" Extentions
+set classify+=' ::*.7z,,*.apk,,.*.bz2,,*.cpio,,*.deb,,*.gz,,*.gzip,,*.gem,,*.lha,,*.lzh,,*.lzma,,*.rar,,*.rpm,,*.tar,,*.tgz,,*.xbps,,*.xz,,*.zip::'
+set classify+=' ::*.a,,*.cmake,,*.jl,,*.o,,*.so::'
+set classify+=' ::*.ai::'
+set classify+=' ::*.asm,,*.css,,*.less,,*.s,,*.sh::'
+set classify+=' ::*.asp,,*.rom,,*.efi,,*.elf,,*.fish::'
+set classify+=' ::*.aup,,*.cue,,*.flac,,*.m4a,,*.mp3,,*.ogg,,*.wav::'
+set classify+=' ::*.avi,,*.flv,,*.m4v,,*.mkv,,*.mov,,*.mp4,,*.mpeg,,*.mpg,,*.webm::'
+set classify+=' ::*.bat,,*.conf,,*.cvs,,*.htaccess,,*.htpasswd,,*.ini,,*.rc,,*.yaml,,*.yml::'
+set classify+=' ::*.bmp,,*.gif,,*.ico,,*.jpeg,,*.jpg,,*.png,,*.ppt,,*.pptx::'
+set classify+=' ::*.c,,*.h::'
+set classify+=' ::*.cbr,,*.cbz::'
+set classify+=' ::*.class,,*.jar,,*.java::'
+set classify+=' ::*.clj,,*.cljc::'
+set classify+=' ::*.cljs,,*.edn::'
+set classify+=' ::*.coffee::'
+set classify+=' ::*.cs::'
+set classify+=' ::*.cxx,,*.c++,,*.cc,,*.cp,,*.cpp::'
+set classify+=' ::*.d::'
+set classify+=' ::*.dart::'
+set classify+=' ::*.db,,*.dump,,*.img,,*.iso,,*.sql::'
+set classify+=' ::*.diff::'
+set classify+=' ::*.dll,,*.exe,,*.msi::'
+set classify+=' ::*.doc,,*.docx,,*.epub,,*.pdf,,*.rtf,,*.xls,,*.xlsx::'
+set classify+=' ::*.ejs,,*.htm,,*.html,,*.slim,,*.xhtml,,*.xml::'
+set classify+=' ::*.elm::'
+set classify+=' ::*.erl,,*.hrl::'
+set classify+=' ::*.ex,,*.exs,,*.eex::'
+set classify+=' ::*.f#,,*.fs,,*.fsi,,*.fsscript,,*.fsx::'
+set classify+='| ::*.fifo::'
+set classify+=' ::*.go::'
+set classify+=' ::*.hbs,,*.mustache::'
+set classify+=' ::*.hs,,*.lhs::'
+set classify+=' ::*.js::'
+set classify+=' ::*.json::'
+set classify+=' ::*.jsx::'
+set classify+=' ::*.key,,*.pub::'
+set classify+=' ::*.log::'
+set classify+=' ::*.lua::'
+set classify+=' ::*.markdown,,*.md::'
+set classify+='λ ::*.ml,,*.mli::'
+set classify+=' ::*.php::'
+set classify+=' ::*.pl,,*.pm,,*.t::'
+set classify+=' ::*.psb,,*.psd::'
+set classify+=' ::*.py,,*.pyc,,*.pyd,,*.pyo::'
+set classify+=' ::*.rb::'
+set classify+=' ::*.rlib,,*.rs::'
+set classify+=' ::*.rss::'
+set classify+=' ::*.scala::'
+set classify+=' ::*.scss::'
+set classify+=' ::*.sln,,*.suo::'
+set classify+=' ::*.styl::'
+set classify+=' ::*.ts::'
+set classify+=' ::*.twig::'
+set classify+=' ::*.vim,,*.vimrc::'
+set classify+=' ::*.xul::'
