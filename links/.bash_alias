@@ -14,10 +14,9 @@ function blue() { echo -e "$BLUE$*$NORMAL"; }
 
 function agopen() {
 	LINE=$(ag --color "$*" | fzf --ansi --preview="_helpbat {1}" --bind="space:toggle-preview,ctrl-p:preview-page-up,ctrl-n:preview-page-down" --preview-window=:hidden)
-	LINE=($LINE)
-	LINE=${LINE[0]}
-	LINE=${LINE%:}
-	[[ -n $LINE ]] && vim ${LINE%:*} +${LINE#*:}
+    FN=$(echo $LINE | cut -d':' -f1)
+    LN=$(echo $LINE | cut -d':' -f2)
+	[[ -n $LINE ]] && vim ${FN} +${LN}
 }
 function aptf() {
 	line=$(apt-cache search "$*" | fzf --preview="apt-cache show {1}" --bind="space:toggle-preview" --preview-window=:hidden);
