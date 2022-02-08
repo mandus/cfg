@@ -5,17 +5,17 @@ CURDIR=$(pwd)
 if [[ -x $HOME/software/ly ]] ; then
 	cd $HOME/software/ly
 	git pull
+	git submodule update --init --recursive  # in case we're moving from old to new setup
 else
 	mkdir -p $HOME/software/
 	cd $HOME/software
 
 	# clone and build the ly display manager
-	git clone https://github.com/cylgom/ly.git
+	git clone --recurse-submodules https://github.com/nullgemm/ly.git
 
 	cd ly
 fi
 
-make github
 make
 sudo make install
 
