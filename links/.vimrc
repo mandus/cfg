@@ -12,6 +12,8 @@ set   ignorecase
 set   incsearch
 set   lazyredraw
 set   listchars=tab:»·,trail:~,eol:·
+set   number
+set   numberwidth=4
 set   relativenumber
 set   ruler
 set   shiftwidth=4
