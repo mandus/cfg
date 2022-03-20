@@ -51,10 +51,13 @@ shopt -s histappend
 set -o physical
 
 function addinpath() { 
+	declare exitcode=1
 	if [ -x $* ] ; then 
 		declare -i count=$(echo $PATH | sed 's/:/\n/g' | grep -c "$*")
 		[ $count -lt 1 ] && PATH=$*:$PATH
+		exitcode=0
 	fi
+	return ${exitcode}
 }
 
 addinpath $HOME/bin
@@ -70,6 +73,7 @@ type go &>/dev/null || addinpath /usr/lib/go-1.16/bin
 type go &>/dev/null || addinpath /usr/lib/go-1.15/bin
 type go &>/dev/null || addinpath /usr/lib/go-1.14/bin
 type go &>/dev/null || addinpath /usr/lib/go-1.13/bin
+addinpath $HOME/software/installs/q/l32 && export QHOME=$HOME/software/installs/q
 
 # ssh-agent stuff:
 [ -f ~/.bash_ssh_settings ] && source ~/.bash_ssh_settings
