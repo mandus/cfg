@@ -31,8 +31,10 @@ make
 mosh
 mpv
 mupdf
+ncal
 network-manager
 pandoc
+pass
 pinentry-tty
 poppler-utils
 powerline
