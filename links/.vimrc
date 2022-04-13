@@ -114,6 +114,7 @@ nnoremap ; :
 nnoremap : ; 
 " with NO keyboard, just map ø to : to make life a bit easier
 nnoremap ø :
+nnoremap ¤ $
 
 set guifont=Source\ Code\ Pro\ Light\ 10
 
