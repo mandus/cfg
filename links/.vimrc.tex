@@ -1,0 +1,93 @@
+version 4.6
+set diffopt+=iwhite
+set nosmartindent
+set noautoindent
+set nocindent
+set spell
+set indentexpr=""
+set formatoptions-=a
+
+iab Yald    \begin{aligned}o\end{aligned}0O
+iab Yali    \begin{align}o\end{align}0O
+iab Yals    \begin{align*}o\end{align*}0O
+iab Ybfs    {\bfseries}ha
+iab Ydes    \begin{description}o\end{description}0O
+iab Ynot    \begin{note}o\end{note}0O
+iab Ycen    \begin{center}o\end{center}0O
+iab Yenu    \begin{enumerate}o\end{enumerate}0O
+iab Yeq     \begin{equation}o\end{equation}0O
+iab Yeqs    \begin{equation*}o\end{equation*}0O
+iab Yfig    \begin{figure}o\end{figure}0O
+iab Yite    \begin{itemize}o\end{itemize}0O
+iab Ymul    \begin{multline}o\end{multline}0O
+iab Ymp     \begin{minipage}{cm}o\end{minipage}k$hhi
+iab Yseq    \begin{subequations}o\end{subequations}0O
+iab Ysld    \begin{slide}o\end{slide}0k$a{}ha
+iab Ypsp    \begin{pspicture}(12,9)(0,0)%\showgrido\end{pspicture}0O
+iab Ytab    \begin{tabular}o\end{tabular}0O
+iab Ysmul   \begin{multline*}o\end{multline*}0O
+iab YSRL    Simula Research Laboratory
+iab Ysver   \begin{SaveVerbatim}{ex}o\end{SaveVerbatim}0O
+iab Yverb   \begin{verbatim}o\end{verbatim}0O
+iab Yover   \overlays{4}{}O
+iab zsec    \section{}
+iab zssec   \subsection{}
+iab zsssec  \subsubsection{}
+iab Yztt    \texttt{}ha
+iab pjf     \texttt{}ha
+
+nnoremap ,cn :%s/
+nnoremap ,bib :w %:!latex %:!bibtex %<:!latex %
+nnoremap ,te :w %:!tex %
+nnoremap ,la :w %:!latex %
+"nnoremap ,xd :!xdvi %< & 
+"nnoremap ,ps :!dvips -o %<.ps %<
+"nnoremap ,pr :!a2ps %<.ps
+"nnoremap ,gv :!gv %<.ps&
+"map ,sgv :!gv --orientation=Landscape --scale=-3 %<.ps&
+"map ,is :!ispell -t -w"æøåÆØÅ" %:e
+nnoremap ,ll :w %:!latex %; dvips -o %<.ps %<; ps2pdf %<.ps
+nnoremap ,mp :w %:!latex %:!dvips %< -o
+"map ,nconv :%s/å/\\aa{}/g:%s/ø/\\o{}/g:%s/æ/\\ae{}/g:%s/Å/\\AA{}/g:%s/Ø/\\O{}/g:%s/Æ/\\AE{}/g
+"map ,nconc :set noignorecase:%s/\\aa{}/å/g:set ignorecase
+nnoremap ,pdf :w %:!pdflatexmk %
+nnoremap ,pds :w %:!ps2pdf %<.ps
+"map ,ac :!acroread %<.pdf &
+nnoremap ,ac :!zathura %<.pdf &
+"map ,ac :!open -a /Applications/Adobe\ Reader\ 7.0.8/Adobe\ Reader\ 7.0.8.app %<.pdf
+"map ,ac :!open -a /Applications/Adobe\ Reader\ 8/Adobe\ Reader.app %<.pdf
+"nnoremap ,ac :!open -a /Applications/Preview.app %<.pdf
+"nnoremap ,sk :!open -a /Applications/Skim.app %<.pdf
+nnoremap ,sal :grep label %
+nnoremap ,ssl :grep 'label.*sec' %:cl:cc 
+nnoremap ,sel :g/label.*eq/p
+nnoremap ,sfl :g/label.*fig/p
+
+nnoremap ,gd yi}:grep "label{0}" *tex
+nnoremap ,mf i\newslideYcen Ymp 10o Yite \item 
+
+"put texttt on visual highligh:
+vnoremap ,ztt xi\texttt{pa}
+vnoremap ,zpbtoc xi\parbox{.9\linewidth}{pa}
+
+nnoremap ,WD bve"xymaGo"%p0v$"nddd:e ~/.texwordsGo"xp:w:bdn!!sort ~/.texwords:w!~/.texwords:bd!:b n'a
+set   showmatch
+
+set   iskeyword&
+set   iskeyword+=\\
+set nolist
+set nohlsearch
+
+noremap <c-k> :exec '!info latex "Command Index" ' . escape (expand ("<cword>"),'\')<cr>
+
+
+"not sure this is needed anymore.
+if exists("loaded_vimspell")
+  :SpellAutoEnable
+endif
+
+
+"source ~/.vimrc.oommen
+
+"hack
+highlight SpellErrors ctermfg=Black ctermbg=Red guifg=Black guibg=Red
