@@ -137,6 +137,8 @@ if executable('ocp-indent')
   set rtp^="/home/aasmundo/.opam/default/share/ocp-indent/vim"
 endif
 
+let g:CommandTEncoding = 'UTF-8'
+
 " silversearcher
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
