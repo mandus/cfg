@@ -74,6 +74,7 @@ type go &>/dev/null || addinpath /usr/lib/go-1.15/bin
 type go &>/dev/null || addinpath /usr/lib/go-1.14/bin
 type go &>/dev/null || addinpath /usr/lib/go-1.13/bin
 addinpath $HOME/software/installs/q/l32 && export QHOME=$HOME/software/installs/q
+#addinpath $HOME/software/starship
 
 # ssh-agent stuff:
 [ -f ~/.bash_ssh_settings ] && source ~/.bash_ssh_settings
@@ -122,6 +123,9 @@ fi
 
 # rust
 [ -f ~/.cargo/env ] && source ~/.cargo/env
+
+# starship
+# type starship &>/dev/null && eval "$(starship init bash)"
 
 export PATH
 source ~/.bash_alias
