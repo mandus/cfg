@@ -47,6 +47,7 @@ python3-pip
 python3-pyflakes
 python3-virtualenv
 ranger
+rlwrap
 rofi
 rsync
 rxvt-unicode
