@@ -48,6 +48,10 @@ fun! <SID>StripTrailingWhitespaces()
   call cursor(l, c)
 endfun
 
+" Need to stay on ruby CommandT as long as I'm on plain vim (and/or new
+" version become vim 9 compliant)
+let g:CommandTPreferredImplementation='ruby'
+
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
