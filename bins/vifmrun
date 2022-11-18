@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+if [[ "aarch64" = $(uname -m) ]] ; then
+	/usr/bin/vifm "$@"
+	exit 0
+fi
+
 export PATH=$PATH:$HOME/software/venvs/ueberzug/bin
 export FIFO_UEBERZUG="/tmp/vifm-ueberzug-${PPID}"
 
