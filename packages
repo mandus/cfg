@@ -12,6 +12,7 @@ fish
 flake8
 flameshot
 fonts-hack
+fonts-linuxlibertine
 fonts-powerline
 fzf
 gh
@@ -23,6 +24,7 @@ htop
 i3
 imagemagick
 jq
+latexmk
 libjpeg-dev
 libpam0g-dev
 libxcb1-dev
@@ -58,6 +60,10 @@ silversearcher-ag
 strace
 stterm
 sxiv
+texlive-fonts-extra
+texlive-lang-european
+texlive-latex-extra 
+texlive-xetex
 tig
 ttf-bitstream-vera
 vifm
