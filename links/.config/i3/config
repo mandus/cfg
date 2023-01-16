@@ -215,19 +215,19 @@ bindsym $altmod+Shift+5 exec dbus-send --print-reply --dest=org.mpris.MediaPlaye
 
 
 # audio through pulseaudio/bluetooth 
-#bindsym Shift+XF86AudioRaiseVolume exec pactl set-sink-volume 1 '+2%'
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 '+2%'
 #bindsym Shift+XF86AudioRaiseVolume exec bt_sink_vol.sh p
 #bindsym $altmod+Shift+2 exec bt_sink_vol.sh p
-#bindsym Shift+XF86AudioLowerVolume exec pactl set-sink-volume 1 '-2%'
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 '-2%'
 #bindsym Shift+XF86AudioLowerVolume exec bt_sink_vol.sh m
 #bindsym $altmod+Shift+1 exec bt_sink_vol.sh m
-#bindsym Shift+XF86AudioMute exec pactl set-sink-mute 1 toggle
+bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle
 #bindsym Shift+XF86AudioMute exec bt_sink_vol.sh mute
 
 # play next/prev etc in spotify
-#bindsym XF86AudioNext exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
-#bindsym XF86AudioPrevious exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
-#bindsym XF86AudioPlay exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
+bindsym XF86AudioNext exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
+bindsym XF86AudioPrevious exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
+bindsym XF86AudioPlay exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
 
 # brightness
 #bindsym XF86MonBrightnessDown exec xbacklight -dec 25
