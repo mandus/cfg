@@ -8,8 +8,8 @@
 ;; vi-bindings for prompt; general vi-bindings set in the auto-config
 (define-configuration prompt-buffer ((default-modes (append '(vi-normal-mode) %slot-default%))))
 
-;; styles - copied/slightly adapted from @aartaka
 
+;; styles - copied/slightly adapted from @aartaka
 (defparameter *blue* "#7587A6")
 (defparameter *grey* "#8f8f8f")
 
@@ -106,7 +106,7 @@
 (define-configuration nyxt/reduce-tracking-mode:reduce-tracking-mode
   ((glyph "🛤")))
 
-(define-configuration nyxt/emacs-mode:emacs-mode 
+(define-configuration nyxt/emacs-mode:emacs-mode
   ((glyph "🐮")))
 
 (define-configuration nyxt/certificate-exception-mode:certificate-exception-mode
@@ -133,7 +133,7 @@
                :background-color ,*blue*
                :border-top "1px solid white")
               ("#tabs"
-               :background-color ,*grey* 
+               :background-color ,*grey*
                :color "black"
                :border-top "1px solid white")
               (".tab"

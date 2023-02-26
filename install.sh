@@ -107,4 +107,5 @@ sudo sed -i '/fs.inotify.max_user_watches.*/d' /etc/sysctl.conf
 echo fs.inotify.max_user_watches=1000000 | sudo tee -a /etc/sysctl.conf; sudo sysctl -p
 
 # install the ly display manager (fails unless other display mgr than lightdm hasn't been disabled first)
-${DIR}/ly.sh
+# disable ly for now - problem with running things like teamviewer
+# ${DIR}/ly.sh

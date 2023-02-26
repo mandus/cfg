@@ -157,6 +157,11 @@ alias xs="cd"
 
 
 ## compile c from command line (need allheads.h in some system include dir..
-#c_flags="-std=gnu11 -g -Wall -Werror -O3 -include allheads.h `pkg-config --cflags gsl`"
+# 1.ed
 #c_libs="-lm `pkg-config --libs gsl`"
+#c_flags="-std=gnu11 -g -Wall -Werror -O3 -include allheads.h `pkg-config --cflags gsl`"
 #alias c_comp="gcc -xc - $c_libs $c_flags"
+# 2.ed
+go_libs="-lm"
+go_flags="-g -Wall -include allheads.h -O3"
+alias go_c="gcc -xc - $go_libs $go_flags"

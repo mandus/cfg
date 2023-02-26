@@ -5,26 +5,26 @@ if [[ "aarch64" = $(uname -m) ]] ; then
 	exit 0
 fi
 
-export PATH=$PATH:$HOME/software/venvs/ueberzug/bin
-export FIFO_UEBERZUG="/tmp/vifm-ueberzug-${PPID}"
+#export PATH=$PATH:$HOME/software/venvs/ueberzug/bin
+#export FIFO_UEBERZUG="/tmp/vifm-ueberzug-${PPID}"
 
 function getpid() {
 	ps wax | grep $1 | grep -v grep | awk '{print $1}'
 }
 
 function cleanup() {
-    rm "$FIFO_UEBERZUG" 2>/dev/null
+    #rm "$FIFO_UEBERZUG" 2>/dev/null
     pkill -P $$ 2>/dev/null
-	for i in `getpid ueberzug`; 
-	do
-		kill -KILL $i 2>/dev/null;
-	done
+	#for i in `getpid ueberzug`; 
+	#do
+	#	kill -KILL $i 2>/dev/null;
+	#done
 }
 
-rm "$FIFO_UEBERZUG" 2>/dev/null
-mkfifo "$FIFO_UEBERZUG"
+#rm "$FIFO_UEBERZUG" 2>/dev/null
+#mkfifo "$FIFO_UEBERZUG"
 trap cleanup EXIT
-tail --follow "$FIFO_UEBERZUG" | ueberzug layer --silent --parser bash &
+#tail --follow "$FIFO_UEBERZUG" | ueberzug layer --silent --parser bash &
 
 /usr/bin/vifm "$@"
 cleanup
