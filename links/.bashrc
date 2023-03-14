@@ -127,5 +127,8 @@ fi
 # starship
 # type starship &>/dev/null && eval "$(starship init bash)"
 
+# Don't send more info than necessary, for Azure function tools
+export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=1
+
 export PATH
 source ~/.bash_alias
