@@ -2,6 +2,7 @@ azure-cli
 bash-completion
 bat
 build-essential
+black
 curl
 fd-find
 feh
@@ -23,6 +24,7 @@ host
 htop
 i3
 imagemagick
+isort
 jq
 latexmk
 libjpeg-dev

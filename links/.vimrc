@@ -68,6 +68,8 @@ Plugin 'wincent/command-t'
 Plugin 'nvie/vim-flake8'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'kovisoft/slimv'
+Plugin 'psf/black'
+Plugin 'fisadev/vim-isort'
 "vim status in tmux - doesn't work with powerline?
 "Plugin 'vimpostor/vim-tpipeline'
 
@@ -168,6 +170,16 @@ au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`
 au BufWritePost *.py call Flake8()
 " Strip trailing white space in python-files
 autocmd BufWritePre *.py :call <SID>StripTrailingWhitespaces()
+" Black format python files on save:
+augroup black_on_save
+  autocmd!
+  autocmd BufWritePre *.py Black
+augroup end
+" Isort python imports on save:
+augroup isort_on_save
+  autocmd!
+  autocmd BufWritePre *.py Isort
+augroup end
 " Strip trailing white space in lisp-files
 autocmd BufWritePre *.lisp :call <SID>StripTrailingWhitespaces()
 " cursorline only in active window and in normal mode
