@@ -21,6 +21,10 @@ set   vifminfo=dhistory,chistory,state,shistory,phistory,fhistory,dirstack,regis
 set   wildmenu
 set   wildstyle=popup
 
+cnoremap <c-h> <a-b>
+cnoremap <c-l> <a-f>
+cnoremap <c-y> <a-d>
+
 " Don't do too many requests to slow file systems
 if !has('win')
     set slowfs=curlftpfs

@@ -41,6 +41,7 @@ bindsym $altmod+Return exec uxterm
 bindsym $mod+Shift+Return exec gnome-terminal --window-with-profile=contrasy
 # toggle dropdown terminal
 bindsym $mod+Tab exec --no-startup-id "i3-scratchpad -tmt -atc urxvt"
+bindsym $mod+s exec --no-startup-id "i3-scratchpad -tmt -atc /opt/Signal/signal-desktop"
 bindsym $mod+t exec --no-startup-id "i3-scratchpad -tmt -atc /usr/bin/telegram-desktop"
 bindsym $mod+u exec --no-startup-id "i3-scratchpad -tmt -atc gvim ~/Dropbox/browser.tabs"
 # toggle calendar
@@ -121,7 +122,7 @@ bindsym $mod+h split h
 bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen
+bindsym $mod+Shift+f fullscreen
 
 # change container layout (stacked, tabbed, toggle split)
 # save the keys for more important stuff!
@@ -152,7 +153,7 @@ bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
-bindsym $mod+b workspace back_and_forth
+bindsym $mod+Shift+b workspace back_and_forth
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1
