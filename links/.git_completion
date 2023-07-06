@@ -51,6 +51,13 @@ __gitdir ()
 	fi
 }
 
+# Copied from newer completion
+__git ()
+{
+	git ${__git_C_args:+"${__git_C_args{@}}"} \
+		${__git_dir:+--git-dir="$__git_dir"} "$@" 2>/dev/null
+}
+
 # The following function is based on code from:
 #
 #   bash_completion - programmable completion functions for bash 3.2+
@@ -611,7 +618,7 @@ __git_commands () {
 	then
 		printf "%s" "${GIT_TESTING_COMMAND_COMPLETION}"
 	else
-		git help -a|egrep '^  [a-zA-Z0-9]'
+		git help -a|egrep '^[ ]+[a-zA-Z0-9_-]'
 	fi
 }
 
@@ -631,7 +638,8 @@ __git_all_commands=
 __git_compute_all_commands ()
 {
 	test -n "$__git_all_commands" ||
-	__git_all_commands=$(__git_list_all_commands)
+	#__git_all_commands=$(__git_list_all_commands)
+    __git_all_commands=$(__git --list-cmds=main,others,alias,nohelpers)
 }
 
 __git_list_porcelain_commands ()

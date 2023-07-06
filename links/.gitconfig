@@ -23,6 +23,7 @@
    s = stash
    l = log --oneline --graph
    quick-stats = ! /home/aasmundo/software/bin/git-quick-stats
+   r = rev-parse --show-toplevel 
 [color]
 	ui = true
 [grep]
