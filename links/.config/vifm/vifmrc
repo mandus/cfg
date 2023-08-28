@@ -21,6 +21,9 @@ set   vifminfo=dhistory,chistory,state,shistory,phistory,fhistory,dirstack,regis
 set   wildmenu
 set   wildstyle=popup
 
+autocmd DirEnter * set sort=+name
+autocmd DirEnter ~/Downloads setlocal sort=-mtime
+
 cnoremap <c-h> <a-b>
 cnoremap <c-l> <a-f>
 cnoremap <c-y> <a-d>
