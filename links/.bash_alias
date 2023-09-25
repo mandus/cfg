@@ -143,6 +143,7 @@ has_cmd powerline && alias psl="powerline shell left"
 alias sshflexi="ssh -i ~/.ssh/flexi-stockholm.pem admin@flexi.xal.no"
 alias sshflexistock="ssh -i ~/.ssh/flexi-stockholm.pem admin@ec2-13-49-77-81.eu-north-1.compute.amazonaws.com"
 alias sshoro="ssh oro.simula.no"
+has_cmd todoist && alias t=todoist
 alias flexicouchport="ssh -i ~/.ssh/flexi-stockholm.pem -L 5984:localhost:5984 admin@flexi.xal.no"
 alias devflexicouchport="ssh -L 5985:localhost:5984 dev.xal.no"
 #alias flexicouchreplicateport="ssh -i ~/.ssh/ubuntu1.pem -L 6984:localhost:5984 ubuntu@flexi.xal.no"
