@@ -90,7 +90,6 @@ entry {
 }
 
 #element.selected {
-  background-color: @background-focus;
   text-color: @accent;
   border-color: @accent;
 }
