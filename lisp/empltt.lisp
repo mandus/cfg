@@ -35,9 +35,10 @@
     (loop for emp in activeemps
           for cnt = 1 then (+ 1 cnt)
           do
-          (format t "[~2d] anr:~3a ~A, ~A [~A] ~@[(started ~A) born ~A~] ~%"
+          (format t "[~2d] anr:~3A (~A) ~A, ~A [~A] ~@[(started ~A) born ~A~] ~%"
                   cnt
                   (ttu:alis-val emp :employee-number)
+                  (ttu:alis-val emp :id)
                   (ttu:alis-val emp :last-name)
                   (ttu:alis-val emp :first-name)
                   (ttu:alis-val emp :email)
