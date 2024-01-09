@@ -212,11 +212,13 @@ bindsym $mod+o exec xdg-open `xclip -o selection primary`
 #bindsym XF86AudioMute exec pactl set-sink-mute 1 toggle
 
 # main running sink:
-bindsym $altmod+Shift+1 exec  /home/aasmundo/bin/running_sink_vol.sh m
+bindsym $altmod+Shift+1 exec /home/aasmundo/bin/running_sink_vol.sh m
 bindsym $altmod+Shift+2 exec /home/aasmundo/bin/running_sink_vol.sh p
 bindsym $altmod+Shift+3 exec /home/aasmundo/bin/running_sink_vol.sh mute
-bindsym $altmod+Shift+4 exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.ncspot /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
-bindsym $altmod+Shift+5 exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.ncspot /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
+#bindsym $altmod+Shift+4 exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.ncspot /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
+bindsym $altmod+Shift+4 exec playerctl --player=ncspot next
+#bindsym $altmod+Shift+5 exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.ncspot /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
+bindsym $altmod+Shift+5 exec playerctl --player=ncspot play-pause
 
 
 # audio through pulseaudio/bluetooth 

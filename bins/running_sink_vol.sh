@@ -2,7 +2,7 @@
 
 # change volume of main sink according to pactl RUNNING state
 
-run_sink=$(pactl list short sinks | grep RUNNING | awk '{print $1}' | head -1)
+run_sink=$(pactl list short sinks | grep RUNNING | grep -i hdmi | awk '{print $1}' | head -1)
 
 arg=$1
 vol='+5%'
