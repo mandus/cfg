@@ -1,6 +1,6 @@
 currentos=$(uname -s)
 
-#set -x
+# set -x
 
 [ -f /etc/bash_completion ] && source /etc/bash_completion
 
@@ -135,4 +135,3 @@ export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=1
 
 export PATH
 source ~/.bash_alias
-

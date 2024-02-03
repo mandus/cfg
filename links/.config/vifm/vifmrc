@@ -23,6 +23,7 @@ set   wildstyle=popup
 
 autocmd DirEnter * set sort=+name
 autocmd DirEnter ~/Downloads setlocal sort=-mtime
+autocmd DirEnter ~/Dropbox/Documents setlocal sort=-mtime
 
 cnoremap <c-h> <a-b>
 cnoremap <c-l> <a-f>
