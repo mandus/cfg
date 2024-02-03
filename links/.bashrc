@@ -62,6 +62,7 @@ function addinpath() {
 
 addinpath $HOME/bin
 addinpath $HOME/software/bin
+addinpath $HOME/cfg/lisp/bin
 addinpath $HOME/go/bin
 addinpath $HOME/.local/bin
 addinpath $HOME/.dotnet
