@@ -84,8 +84,11 @@
         (finish-output)
         (let* ((project-id (ttu:av proj :id))
                (activity-id (ttu:av act :id))
+               ; Get hours from input:
                (hours (parse-float:parse-float (read-line) :junk-allowed t))
+               ; current logged-in user:
                (employee-id (write-to-string (ttu:av (ttt:get-whoami conf) :employee-id)))
+               ; check if we already have an entry for same project / activity today:
                (entry (car (ts-entry-project-activity (employee-recent-hours conf employee-id) project-id activity-id))))
           (when hours
             (if entry
