@@ -15,20 +15,27 @@
 
 ;; functionality
 (defun recent-proj (conf)
-  (let ((projmap (make-hash-table :test #'equalp)))
+  (let ((projmap (make-hash-table :test #'equalp)) ; lookup for simplified userinput
+        (mapproj (make-hash-table :test #'equalp)) ; lookup by project-id
+        (mapacts (make-hash-table :test #'equalp))) ; lookup by activity-id
     (loop for proj in
           (ttt:employee-recent-ts-projects conf)
           for pcnt = 1 then (1+ pcnt)
+          for pid = (ttu:av proj :id)
           do
           (progn
             (setf (gethash pcnt projmap) (pairlis `(:id :name :activities)
-                                                  `(,(ttu:av proj :id) ,(ttu:av proj :name) ,(make-hash-table :test #'equalp))))
+                                                  `(,pid ,(ttu:av proj :name) ,(make-hash-table :test #'equalp))))
+            (setf (gethash pid mapproj) proj)
             (loop for act in (ttt:employee-recent-ts-project-activities conf (write-to-string (ttu:av proj :id)))
+                  for aid = (ttu:av act :id)
                   for acnt = 1 then (1+ acnt)
                   for actmap = (ttu:av (gethash pcnt projmap) :activities)
                   do
-                  (setf (gethash acnt actmap) act))))
-    projmap))
+                  (progn
+                    (setf (gethash aid mapacts) act)
+                    (setf (gethash acnt actmap) act)))))
+    (values projmap mapproj mapacts)))
 
 (defun display-recent (projmap)
  (loop for pcnt being the hash-key
@@ -40,6 +47,19 @@
                 do
                 (format t "~a.~a: ~a / ~a~%" pcnt acnt (ttu:av proj :name) (ttu:av act :name)))))
 
+(defun display-timesheet (timesheet projs acts)
+  (progn
+    (format t "~%--------- timeliste ----------~%")
+    (loop for entry in timesheet
+        do
+        (let ((comment (ttu:av entry :comment)))
+          (format t "~a / ~a: ~ah ~@[(~a)~]~%"
+                (ttu:av (gethash (ttu:av entry :project) projs) :name)
+                (ttu:av (gethash (ttu:av entry :activity) acts) :name)
+                (ttu:av entry :hours)
+                (when (string/= "" comment)
+                  comment))))))
+
 ; get timesheet entries for the current day for current user
 (defun employee-recent-hours (conf employee-id)
   (loop for entry in
@@ -49,11 +69,12 @@
                   :to (ttu:day-offset 1)
                   :employeeid employee-id)
                 :values)
-        collect (pairlis `(:project :activity :entry :hours )
+        collect (pairlis `(:project :activity :entry :hours :comment)
                          `(,(ttu:av (ttu:av entry :project) :id)
                             ,(ttu:av (ttu:av entry :activity) :id)
                             ,(ttu:av entry :id)
-                            ,(ttu:av entry :hours)))))
+                            ,(ttu:av entry :hours)
+                            ,(ttu:av entry :comment)))))
 
 (defun ts-entry-project-activity (timesheet project activity)
   "Find entry in timesheet list for given project and activity if any"
@@ -75,46 +96,53 @@
          (aname (when act (ttu:av act :name))))
     (values proj act pname aname)))
 
-(defun add-hours-if-match (conf inp projmap)
+(defun add-hours-if-match (conf employee-id inp projmap timesheet)
   (multiple-value-bind (proj act pname aname) (parse-input inp projmap)
-   (progn
+    (progn
       (format t "selected ~a: ~a / ~a~%" inp pname aname)
       (when (and proj act)
         (format t "hours: ")
         (finish-output)
-        (let* ((project-id (ttu:av proj :id))
-               (activity-id (ttu:av act :id))
-               ; Get hours from input:
-               (hours (parse-float:parse-float (read-line) :junk-allowed t))
-               ; current logged-in user:
-               (employee-id (write-to-string (ttu:av (ttt:get-whoami conf) :employee-id)))
-               ; check if we already have an entry for same project / activity today:
-               (entry (car (ts-entry-project-activity (employee-recent-hours conf employee-id) project-id activity-id))))
-          (when hours
-            (if entry
-                (progn ;update existing entry
-                  (format t "Update entry ~a for ~a / ~a with ~a h. (previous ~a h.)~%" (ttu:av entry :entry) pname aname hours (ttu:av entry :hours))
-                  (ttt:update-timesheet-entry conf :id (ttu:av entry :entry) :hours hours))
-                (progn ;create new entry
-                  (format t "Add entry for ~a / ~a with ~a h.~%" pname aname hours)
-                  (ttt:add-timesheet-entry conf
-                    :project-id project-id :activity-id activity-id :employee-id employee-id
-                    :date (ttu:today) :hours hours)))))))))
+        (let ((hours (parse-float:parse-float (read-line) :junk-allowed t)))
+          (format t "comment [⏎ for blank]: ")
+          (finish-output)
+          (let* ((project-id (ttu:av proj :id))
+                 (activity-id (ttu:av act :id))
+                 ; Get hours from input:
+                 (comment (read-line))
+                 ; check if we already have an entry for same project / activity today:
+                 (entry (car (ts-entry-project-activity timesheet project-id activity-id))))
+            (when hours
+              (if entry
+                  (progn ;update existing entry
+                    (format t "Update entry ~a for ~a / ~a with ~a h. (previous ~a h.)~%" (ttu:av entry :entry) pname aname hours (ttu:av entry :hours))
+                    (ttt:update-timesheet-entry conf :id (ttu:av entry :entry) :hours hours :comment comment))
+                  (progn ;create new entry
+                    (format t "Add entry for ~a / ~a with ~a h.~%" pname aname hours)
+                    (ttt:add-timesheet-entry conf
+                                             :project-id project-id :activity-id activity-id :employee-id employee-id
+                                             :date (ttu:today) :hours hours :comment comment))))))))))
 
 (defun main ()
   (let* ((conf (ttconf:config))
-         (projmap (recent-proj conf)))
-    (loop named main-loop
-          do
-          (progn
-            (display-recent projmap)
-            (format t "~%select project.activity [q if done]: ")
-            (finish-output)
-            (let ((inp (read-line)))
-              (progn
-                (if  (or (string= inp "d") (string= inp "q"))
-                     (return-from main-loop)
-                     (add-hours-if-match conf inp projmap))))))))
+         ; current logged-in user:
+         (employee-id (write-to-string (ttu:av (ttt:get-whoami conf) :employee-id)))
+         (ts (employee-recent-hours conf employee-id))
+         )
+    (multiple-value-bind (projmap projs acts) (recent-proj conf)
+      (loop named main-loop
+            for timesheet = ts then (employee-recent-hours conf employee-id)
+            do
+            (progn
+              (display-recent projmap)
+              (display-timesheet timesheet projs acts)
+              (format t "~%select project.activity [q if done]: ")
+              (finish-output)
+              (let ((inp (read-line)))
+                (progn
+                  (if  (or (string= inp "d") (string= inp "q"))
+                       (return-from main-loop)
+                       (add-hours-if-match conf employee-id inp projmap timesheet)))))))))
 
 ;; run
 (defun run ()
