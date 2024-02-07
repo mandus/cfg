@@ -38,27 +38,27 @@
     (values projmap mapproj mapacts)))
 
 (defun display-recent (projmap)
- (loop for pcnt being the hash-key
-          using (hash-value proj) of projmap
-          for actmap = (ttu:av proj :activities)
-          do
-          (loop for acnt being the hash-keys of actmap
-                for act being the hash-values of actmap
-                do
-                (format t "~a.~a: ~a / ~a~%" pcnt acnt (ttu:av proj :name) (ttu:av act :name)))))
+  (loop for pcnt being the hash-key
+        using (hash-value proj) of projmap
+        for actmap = (ttu:av proj :activities)
+        do
+        (loop for acnt being the hash-keys of actmap
+              for act being the hash-values of actmap
+              do
+              (format t "~a.~a: ~a / ~a~%" pcnt acnt (ttu:av proj :name) (ttu:av act :name)))))
 
 (defun display-timesheet (timesheet projs acts)
   (progn
     (format t "~%--------- timeliste ----------~%")
     (loop for entry in timesheet
-        do
-        (let ((comment (ttu:av entry :comment)))
-          (format t "~a / ~a: ~ah ~@[(~a)~]~%"
-                (ttu:av (gethash (ttu:av entry :project) projs) :name)
-                (ttu:av (gethash (ttu:av entry :activity) acts) :name)
-                (ttu:av entry :hours)
-                (when (string/= "" comment)
-                  comment))))))
+          do
+          (let ((comment (ttu:av entry :comment)))
+            (format t "~a / ~a: ~ah ~@[(~a)~]~%"
+                    (ttu:av (gethash (ttu:av entry :project) projs) :name)
+                    (ttu:av (gethash (ttu:av entry :activity) acts) :name)
+                    (ttu:av entry :hours)
+                    (when (string/= "" comment)
+                      comment))))))
 
 ; get timesheet entries for the current day for current user
 (defun employee-recent-hours (conf employee-id)
