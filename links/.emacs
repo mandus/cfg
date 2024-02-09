@@ -18,7 +18,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(evil-collection helm helm-ag ac-slime evil-surround paredit-everywhere rainbow-mode smartparens auto-complete-exuberant-ctags evil-paredit evil exwm slime magit notmuch)))
+   '(gnu-apl-mode evil-collection helm helm-ag ac-slime evil-surround paredit-everywhere rainbow-mode smartparens auto-complete-exuberant-ctags evil-paredit evil exwm slime magit notmuch)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -32,5 +32,5 @@
 (setq slime-contribs '(slime-fancy slime-quicklisp slime-asdf))
 
 ;; we want evil by default
-(require 'evil)
-(evil-mode 1)
+;(require 'evil)
+;(evil-mode 1)
