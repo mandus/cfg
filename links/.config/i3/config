@@ -179,9 +179,8 @@ bindsym $altmod+Shift+n exec --no-startup-id ~/bin/move_out_i3.sh
 bindsym $mod+m exec i3-input -F 'mark %s' -l 1 -P 'Mark: '
 bindsym $mod+apostrophe exec i3-input -F'[con_mark="%s"] focus' -l 1 -P 'Goto: '
 
-# screen-grab
-# can't get this to work... 
-bindsym --release $altmod+4 exec scrot -s -e 'mv $f /tmp/ && gimp /tmp/$f && rm /tmp/$f'
+# screen-grab (rarely used, so disabled for now)
+#bindsym --release $altmod+4 exec scrot -s -e 'mv $f /tmp/ && gimp /tmp/$f && rm /tmp/$f'
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
