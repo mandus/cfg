@@ -71,6 +71,7 @@ Plugin 'kovisoft/slimv'
 Plugin 'psf/black'
 Plugin 'fisadev/vim-isort'
 Plugin 'zoomlogo/vim-apl'
+Plugin 'github/copilot.vim'
 "vim status in tmux - doesn't work with powerline?
 "Plugin 'vimpostor/vim-tpipeline'
 

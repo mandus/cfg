@@ -95,6 +95,9 @@ export FZF_COMPLETION_TRIGGER='\\'
 [ -f ~/.fzf.completion.bash ] && source ~/.fzf.completion.bash
 [ -f ~/.fzf.key-bindings.bash ] && source ~/.fzf.key-bindings.bash
 
+# set up zoxide if available
+type zoxide &>/dev/null && eval "$(zoxide init bash)"
+
 # opam configuration
 addinpath $HOME/software/ocaml-4.09.1/bin
 test -r /home/aasmundo/.opam/opam-init/init.sh && . /home/aasmundo/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
