@@ -7,7 +7,7 @@
 
 (in-package :tthours)
 
-;;; remove when happy
+;;; optimize for speed and safety.
 (declaim (optimize (speed 3) (safety 3) (debug 0)))
 
 ;; errors
@@ -47,6 +47,24 @@
               do
               (format t "~a.~a: ~a / ~a~%" pcnt acnt (ttu:av proj :name) (ttu:av act :name)))))
 
+(defun default-project-activity (projmap ts-entry)
+  "Format the ts-entry as project.activity if present in the projmap"
+  (let* ((epid (ttu:av (ttu:av ts-entry :project) :id))
+         (eaid (ttu:av (ttu:av ts-entry :activity) :id))
+         (result (car ; outer collect make list
+                   (car ; inner collect make list
+                     (loop
+                       for pcnt being the hash-key using (hash-value proj) of projmap
+                       for actmap = (ttu:av proj :activities)
+                       when (eq  epid (ttu:av proj :id)) collect
+                       (loop
+                         for acnt being the hash-key using (hash-value act) of actmap
+                         when (eq eaid (ttu:av act :id)) collect
+                         (cons pcnt acnt)))))))
+    (if result
+        (format nil "~a.~a" (car result) (cdr result))
+        "")))
+
 (defun display-timesheet (timesheet projs acts)
   (progn
     (format t "~%--------- timeliste ----------~%")
@@ -60,8 +78,8 @@
                     (when (string/= "" comment)
                       comment))))))
 
-; get timesheet entries for the current day for current user
 (defun employee-recent-hours (conf employee-id)
+  "get timesheet entries for the current day for current user"
   (loop for entry in
         (ttu:av (ttt:get-recent-project-timesheet-entry
                   conf
@@ -75,6 +93,15 @@
                             ,(ttu:av entry :id)
                             ,(ttu:av entry :hours)
                             ,(ttu:av entry :comment)))))
+
+(defun last-hours-previous-week (conf employee-id)
+  "get the last timesheet entry for the previous week, including the current date"
+  (car (ttu:av (ttt:get-recent-project-timesheet-entry
+                 conf
+                 :from (ttu:day-offset -7)
+                 :to (ttu:day-offset 1)
+                 :employeeid employee-id)
+               :values)))
 
 (defun ts-entry-project-activity (timesheet project activity)
   "Find entry in timesheet list for given project and activity if any"
@@ -125,24 +152,28 @@
 
 (defun main ()
   (let* ((conf (ttconf:config))
-         ; current logged-in user:
          (employee-id (write-to-string (ttu:av (ttt:get-whoami conf) :employee-id)))
-         (ts (employee-recent-hours conf employee-id))
-         )
+         (ts (employee-recent-hours conf employee-id)))
     (multiple-value-bind (projmap projs acts) (recent-proj conf)
-      (loop named main-loop
-            for timesheet = ts then (employee-recent-hours conf employee-id)
-            do
-            (progn
-              (display-recent projmap)
-              (display-timesheet timesheet projs acts)
-              (format t "~%select project.activity [q if done]: ")
-              (finish-output)
-              (let ((inp (read-line)))
-                (progn
-                  (if  (or (string= inp "d") (string= inp "q"))
-                       (return-from main-loop)
-                       (add-hours-if-match conf employee-id inp projmap timesheet)))))))))
+      (let ((default (default-project-activity projmap (last-hours-previous-week conf employee-id))))
+        (loop named main-loop
+              ; update timesheet on each iteration to display most recent data
+              for timesheet = ts then (employee-recent-hours conf employee-id)
+              ; also update the default project.activity, in case it has changed
+              for tsdefault = default then (default-project-activity projmap (last-hours-previous-week conf employee-id))
+              do
+              (progn
+                (display-recent projmap)
+                (display-timesheet timesheet projs acts)
+                (format t "~%select project.activity [q if done] [~a]: " tsdefault)
+                (finish-output)
+                (let ((inp (read-line)))
+                  (progn
+                    (if (or (string= inp "d") (string= inp "q"))
+                        (return-from main-loop)
+                        (if (string= inp "")
+                            (add-hours-if-match conf employee-id tsdefault projmap timesheet)
+                            (add-hours-if-match conf employee-id inp projmap timesheet)))))))))))
 
 ;; run
 (defun run ()
