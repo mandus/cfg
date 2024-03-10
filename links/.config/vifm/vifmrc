@@ -106,44 +106,44 @@ fileviewer <text/*> env -uCOLORTERM batcat --color always --wrap never --pager n
 
 " PDFs
 filextype *.pdf zathura %c %i &
-fileviewer *.pdf
-        \ vifmimg pdf %px %py %pw %ph %c
-        \ %pc
-        \ vifmimg clear
-
+" fileviewer *.pdf
+"         \ vifmimg pdf %px %py %pw %ph %c
+"         \ %pc
+"         \ vifmimg clear
+ 
 " ePUBs
 filextype *.epub mupdf %c %i &
-fileviewer *.epub
-        \ vifmimg epub %px %py %pw %ph %c
-        \ %pc
-        \ vifmimg clear
+" fileviewer *.epub
+"         \ vifmimg epub %px %py %pw %ph %c
+"         \ %pc
+"         \ vifmimg clear
 
 " Fonts
-fileviewer *.otf,*.ttf,*.woff
-        \ vifmimg font %px %py %pw %ph %c
-        \ %pc
-        \ vifmimg clear
+" fileviewer *.otf,*.ttf,*.woff
+"         \ vifmimg font %px %py %pw %ph %c
+"         \ %pc
+"         \ vifmimg clear
 
 " Audios
 filetype <audio/*> mpv %c %i &
-fileviewer <audio/*>
-        \ vifmimg audio %px %py %pw %ph %c
-        \ %pc
-        \ vifmimg clear
+" fileviewer <audio/*>
+"         \ vifmimg audio %px %py %pw %ph %c
+"         \ %pc
+"         \ vifmimg clear
 
 " Videos
 filetype <video/*> mpv %c %i &
-fileviewer <video/*>
-        \ vifmimg video %px %py %pw %ph %c
-        \ %pc
-        \ vifmimg clear
+" fileviewer <video/*>
+"         \ vifmimg video %px %py %pw %ph %c
+"         \ %pc
+"         \ vifmimg clear
 
 " Images
 filextype <image/*> mpv %c %i &
-fileviewer <image/*>
-        \ vifmimg draw %px %py %pw %ph %c
-        \ %pc
-        \ vifmimg clear
+" fileviewer <image/*>
+"         \ vifmimg draw %px %py %pw %ph %c
+"         \ %pc
+"         \ vifmimg clear
 
 " Archives
 fileviewer *.zip,*.jar,*.war,*.ear,*.oxt zip -sf %c
