@@ -10,6 +10,7 @@ set   guioptions=aed
 set   hidden
 set   ignorecase
 set   incsearch
+set   laststatus=2
 set   lazyredraw
 set   listchars=tab:»·,trail:~,eol:·
 set   number
@@ -164,6 +165,10 @@ let g:lisp_rainbow=1
 let g:slimv_repl_split=2
 let g:slimv_repl_split_size=24
 
+" copilot settings - keep Tab for regular omni complete (e.g. in slimv)
+imap <silent><script><expr> <C-j> copilot#Accept("\<CR>")
+let g:copilot_no_tab_map = v:true
+
 " AutoCommands
 
 " move cursor to last know position in file when opening
@@ -187,3 +192,5 @@ autocmd BufWritePre *.lisp :call <SID>StripTrailingWhitespaces()
 " cursorline only in active window and in normal mode
 au WinLeave,InsertEnter * set nocursorline
 au WinEnter,InsertLeave * set   cursorline
+" prefer wrapped markdownfiles. 
+au BufRead,BufNewFile,BufEnter *.md setlocal wrap
