@@ -1,8 +1,9 @@
 (eval-when (:compile-toplevel :load-toplevel :execute)
-  (ql:quickload '(:with-user-abort :adopt :str :parse-float :ttcon) :silent t))
+  (ql:quickload '(:with-user-abort :adopt :str :parse-float :cl-charms :fuzzy-match :ttcon) :silent t))
 
 (defpackage :tthours
   (:use :cl)
+  (:local-nicknames (:ch :charms) (:fm :fuzzy-match))
   (:export :toplevel *ui*))
 
 (in-package :tthours)
@@ -123,32 +124,165 @@
          (aname (when act (ttu:av act :name))))
     (values proj act pname aname)))
 
+(defun add-hours-with-comment (conf timesheet employee-id pname project-id aname activity-id)
+  (format t "hours: ")
+  (finish-output)
+  (let ((hours (parse-float:parse-float (read-line) :junk-allowed t)))
+    (format t "comment [⏎ for blank]: ")
+    (finish-output)
+    (let* (; Get comment from input:
+           (comment (read-line))
+           ; check if we already have an entry for same project / activity today:
+           (entry (car (ts-entry-project-activity timesheet project-id activity-id))))
+      (when hours
+        (if entry
+            (progn ;update existing entry
+              (format t "Update entry ~a for ~a / ~a with ~a h. (previous ~a h.)~%" (ttu:av entry :entry) pname aname hours (ttu:av entry :hours))
+              (ttt:update-timesheet-entry conf :id (ttu:av entry :entry) :hours hours :comment comment))
+            (progn ;create new entry
+              (format t "Add entry for ~a / ~a with ~a h.~%" pname aname hours)
+              (ttt:add-timesheet-entry conf
+                                       :project-id project-id :activity-id activity-id :employee-id employee-id
+                                       :date (ttu:today) :hours hours :comment comment)))))))
+
 (defun add-hours-if-match (conf employee-id inp projmap timesheet)
   (multiple-value-bind (proj act pname aname) (parse-input inp projmap)
     (progn
       (format t "selected ~a: ~a / ~a~%" inp pname aname)
       (when (and proj act)
-        (format t "hours: ")
-        (finish-output)
-        (let ((hours (parse-float:parse-float (read-line) :junk-allowed t)))
-          (format t "comment [⏎ for blank]: ")
-          (finish-output)
-          (let* ((project-id (ttu:av proj :id))
-                 (activity-id (ttu:av act :id))
-                 ; Get hours from input:
-                 (comment (read-line))
-                 ; check if we already have an entry for same project / activity today:
-                 (entry (car (ts-entry-project-activity timesheet project-id activity-id))))
-            (when hours
-              (if entry
-                  (progn ;update existing entry
-                    (format t "Update entry ~a for ~a / ~a with ~a h. (previous ~a h.)~%" (ttu:av entry :entry) pname aname hours (ttu:av entry :hours))
-                    (ttt:update-timesheet-entry conf :id (ttu:av entry :entry) :hours hours :comment comment))
-                  (progn ;create new entry
-                    (format t "Add entry for ~a / ~a with ~a h.~%" pname aname hours)
-                    (ttt:add-timesheet-entry conf
-                                             :project-id project-id :activity-id activity-id :employee-id employee-id
-                                             :date (ttu:today) :hours hours :comment comment))))))))))
+        (let* ((project-id (ttu:av proj :id))
+               (activity-id (ttu:av act :id)))
+          (add-hours-with-comment conf timesheet employee-id pname project-id aname activity-id))))))
+
+
+;;; Functions for manually searching for project/activity in a curses interface
+;;;
+
+(defun print-at (line str)
+  (multiple-value-bind (w h) (ch:window-dimensions ch:*standard-window*)
+    (declare (ignorable w))
+    (ch:write-string-at-point ch:*standard-window* str 1 (- h line))))
+
+; TODO: should check that we have enough lines in window, else curses will crash
+(defun print-cust-proj (cust proj act displaynames)
+  (loop named disp-loop
+        for name in displaynames
+        for i from 1
+        do
+        (progn
+          (print-at (- 17 i) (format nil "~a: ~a" i name))
+          ; just display at most 10 first
+          (when (= i 10) (return-from disp-loop))))
+  (print-at 5 (format nil "customer: ~a" cust))
+  (print-at 4 (format nil "project:  ~a" proj))
+  (print-at 3 (format nil "activity: ~a" act)))
+
+(defun print-state (state)
+  (print-at 2 (format nil "input> ~a" state)))
+
+(defun get-projs (conf)
+  (ttu:av (ttt:list-active-projects conf) :values))
+
+(defun get-customer-names (projs)
+  (remove-duplicates
+    (loop for p in projs
+          for cust = (ttu:av (ttu:av p :customer) :name)
+          when cust collect cust) :test #'string=))
+
+(defun get-project-names (projs &optional (customer nil))
+  "Return a list of project names, but only for the given customer if customer is set"
+  (if customer
+      (loop for p in projs
+        for cust = (ttu:av (ttu:av p :customer) :name)
+        when (string= cust customer) collect (ttu:av p :name))
+      (loop for p in projs collect (ttu:av p :name))
+      ))
+
+(defun get-project-id-by-cust-and-proj (projs cust proj)
+  "Return the project id based on customer name and project name"
+  (car (loop for p in projs
+        for pname = (ttu:av p :name)
+        for cname = (ttu:av (ttu:av p :customer) :name)
+        when (and (string= cust cname) (string= proj pname)) collect (ttu:av p :id))))
+
+(defun get-activities (conf pid)
+  (let* ((acts (ttu:av (ttt:project-timesheet-activities conf (write-to-string pid))  :values))
+         (actmap (make-hash-table :test #'equalp))
+         (names (loop for a in acts
+                      for aid = (ttu:av a :id)
+                      for aname = (ttu:av a :name)
+                      do (setf (gethash aname actmap) aid)
+                      collect aname)))
+    (values names actmap)))
+
+(defun curses-search (conf)
+  (let* ((allprojs (get-projs conf))
+         (customers (get-customer-names allprojs))
+         (searchnames customers))
+    (ch:with-curses
+    ()
+    (ch:disable-echoing)
+    (ch:enable-raw-input :interpret-control-characters t)
+    (charms:enable-non-blocking-mode charms:*standard-window*)
+
+    (let
+      ((state "")
+       (cust-selected nil)
+       (proj-selected nil)
+       (cust "")
+       (proj "")
+       (pid nil)
+       (projectnames nil)
+       (act "")
+       (actnames nil)
+       (actmap nil))
+      (loop named event-loop
+          for c = (ch:get-char charms:*standard-window* :ignore-error t)
+          do
+          (progn
+
+            ;; update state
+            (when (and c (not (char= c #\Linefeed)))
+              (progn
+                (setf state (concatenate 'string state (string c)))
+                (cond ((and cust-selected proj-selected) (progn
+                                                           (setf searchnames (fm:fuzzy-match state actnames))
+                                                           (setf act (car searchnames))))
+                      (cust-selected (progn
+                                       (setf searchnames (fm:fuzzy-match state projectnames))
+                                       (setf proj (car searchnames))))
+                      (t (progn
+                           (setf searchnames (fm:fuzzy-match state customers))
+                           (setf cust (car searchnames))) ))))
+
+            ;; redraw
+            (charms:clear-window charms:*standard-window*)
+            (print-cust-proj cust proj act searchnames)
+            (print-state state)
+            (charms:refresh-window charms:*standard-window*)
+
+            (case c
+              ((nil) nil)
+              ((#\Linefeed #\Return) (cond ((and cust-selected proj-selected) (return-from event-loop))
+                                           (cust-selected (progn
+                                                            (setf state  "")
+                                                            (setf pid (get-project-id-by-cust-and-proj allprojs cust proj))
+                                                            (multiple-value-bind (an am)(get-activities conf pid)
+                                                              (setf actnames an)
+                                                              (setf actmap am))
+                                                            (setf searchnames actnames)
+                                                            (setf proj-selected t)))
+                                           (t (progn
+                                                (setf state "")
+                                                (setf projectnames (get-project-names allprojs cust))
+                                                (setf searchnames projectnames)
+                                                (setf cust-selected t))))))))
+      (values proj pid act (gethash act actmap))))))
+
+(defun add-by-search (conf timesheet employee-id)
+  (multiple-value-bind (pname project-id aname activity-id) (curses-search conf)
+    (format t "selected ~a / ~a~%" pname aname)
+    (add-hours-with-comment conf timesheet employee-id pname project-id aname activity-id)))
 
 (defun main ()
   (let* ((conf (ttconf:config))
@@ -165,15 +299,19 @@
               (progn
                 (display-recent projmap)
                 (display-timesheet timesheet projs acts)
-                (format t "~%select project.activity [q if done] [~a]: " tsdefault)
+                (format t "~%select project.activity [q exit|s search] [~a]: " tsdefault)
                 (finish-output)
                 (let ((inp (read-line)))
                   (progn
-                    (if (or (string= inp "d") (string= inp "q"))
-                        (return-from main-loop)
-                        (if (string= inp "")
-                            (add-hours-if-match conf employee-id tsdefault projmap timesheet)
-                            (add-hours-if-match conf employee-id inp projmap timesheet)))))))))))
+                    (cond ((or (string= inp "d") (string= inp "q"))
+                           (return-from main-loop))
+                          ((string= inp "s") (progn
+                                               (add-by-search conf timesheet employee-id)
+                                               (multiple-value-bind (pm ps as) (recent-proj conf)
+                                                 (setf projmap pm) (setf projs ps) (setf acts as))))
+                          (t (if (string= inp "")
+                                 (add-hours-if-match conf employee-id tsdefault projmap timesheet)
+                                 (add-hours-if-match conf employee-id inp projmap timesheet))))))))))))
 
 ;; run
 (defun run ()
