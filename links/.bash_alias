@@ -111,6 +111,11 @@ _mypass_files() {
 }
 complete -F _mypass_files mypass
 
+function _z_wrap() {
+	z $*; pwd; exa --git --grid --icons
+}
+has_cmd z && has_cmd exa && alias z=_z_wrap
+
 # Two variants of possible cabal locations
 [[ -f $HOME/Library/Haskell/bin/cabal ]] && alias cabal='~/Library/Haskell/bin/cabal'
 [[ -f $HOME/.cabal/bin/cabal ]] && alias cabal='~/.cabal/bin/cabal'
@@ -155,7 +160,6 @@ alias vifm=vifmrun
 alias xcli="xclip -i -selection clipboard"
 alias xcboth="xclip -i -selection clipboard -selection primary"
 alias xs="cd"
-
 
 ## compile c from command line (need allheads.h in some system include dir..
 # 1.ed
