@@ -283,12 +283,23 @@
                                                 (setf cust-selected t))))))))
       (values proj pid act (gethash act actmap))))))
 
-(defun add-by-search (conf timesheet employee-id)
+(defun add-by-search (conf timesheet employee-id hours)
   (multiple-value-bind (pname project-id aname activity-id) (curses-search conf)
     (format t "selected ~a / ~a~%" pname aname)
-    (add-hours-with-comment conf timesheet employee-id pname project-id aname activity-id)))
+    (add-hours-with-comment conf timesheet employee-id hours pname project-id aname activity-id)))
 
-(defun main (hours)
+(defun get-project-activity (accept-default tsdefault projmap timesheet projs acts)
+  (display-recent projmap)
+  (display-timesheet timesheet projs acts)
+  (format t "~%select project.activity [q exit|s search] [~a]: " tsdefault)
+  (finish-output)
+  (if accept-default
+      (progn
+        (format t "~a~%" tsdefault)
+        tsdefault)
+      (read-line)))
+
+(defun main (hours &key (accept-project nil))
   (let* ((conf (ttconf:config))
          (employee-id (write-to-string (ttu:av (ttt:get-whoami conf) :employee-id)))
          (ts (employee-recent-hours conf employee-id)))
@@ -301,28 +312,26 @@
               for tsdefault = default then (default-project-activity projmap (last-hours-previous-week conf employee-id))
               do
               (progn
-                (display-recent projmap)
-                (display-timesheet timesheet projs acts)
-                (format t "~%select project.activity [q exit|s search] [~a]: " tsdefault)
-                (finish-output)
-                (let ((inp (read-line)))
+                (let ((inp (get-project-activity accept-project tsdefault projmap timesheet projs acts)))
                   (progn
                     (cond ((or (string= inp "d") (string= inp "q"))
                            (return-from main-loop))
                           ((string= inp "s") (progn
-                                               (add-by-search conf timesheet employee-id)
+                                               (add-by-search conf timesheet employee-id hours)
                                                (multiple-value-bind (pm ps as) (recent-proj conf)
                                                  (setf projmap pm) (setf projs ps) (setf acts as))))
-                          (t (if (string= inp "")
+                          (t (progn
+                               (if (string= inp "")
                                  (add-hours-if-match conf employee-id hours tsdefault projmap timesheet)
-                                 (add-hours-if-match conf employee-id hours inp projmap timesheet))))))))))))
+                                 (add-hours-if-match conf employee-id hours inp projmap timesheet))
+                               (when accept-project (return-from main-loop)))))))))))))
 
 ;; run
-(defun run (args)
+(defun run (args &key (accept-project nil))
   (let ((hours (and args (car args))))
     (progn
       (ttconf:setenv :environment :prod)
-      (main hours))))
+      (main hours :accept-project accept-project))))
 
 ;; user interface
 (defparameter *option-help*
@@ -332,12 +341,19 @@
                      :short #\h
                      :reduce (constantly t)))
 
-(adopt:defparameters (*option-debug* *option-no-debug*)
-                     (adopt:make-boolean-options 'debug
-                                                 :long "debug"
-                                                 :short #\d
-                                                 :help "Enable the lisp debugger."
-                                                 :help-no "Disable the lisp debugger (default)."))
+(defparameter *option-debug*
+  (adopt:make-option 'debug
+                     :long "debug"
+                     :short #\d
+                     :help "Enable the lisp debugger."
+                     :reduce (constantly t)))
+
+(defparameter *option-accept-project*
+  (adopt:make-option 'accept-project
+                     :long "acceptproject"
+                     :short #\p
+                     :help "Accept the default project and activity. Quit after submitting one entry."
+                     :reduce (constantly t)))
 
 (defparameter *ui*
   (adopt:make-interface
@@ -347,7 +363,8 @@
     :help "n/a"
     :manual "Just run the command"
     :contents (list *option-help*
-                    *option-debug* *option-no-debug*)))
+                    *option-accept-project*
+                    *option-debug*)))
 
 (defmacro exit-on-ctrl-c (&body body)
   `(handler-case (with-user-abort:with-user-abort (progn ,@body))
@@ -365,5 +382,5 @@
       (handler-case
         (cond
           ((gethash 'help opts) (adopt:print-help-and-exit *ui*))
-          (t (run args)))
+          (t (run args :accept-project (gethash 'accept-project opts))))
         (user-error (e) (adopt:print-error-and-exit e))))))
