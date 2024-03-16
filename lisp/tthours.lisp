@@ -124,10 +124,11 @@
          (aname (when act (ttu:av act :name))))
     (values proj act pname aname)))
 
-(defun add-hours-with-comment (conf timesheet employee-id pname project-id aname activity-id)
-  (format t "hours: ")
+(defun add-hours-with-comment (conf timesheet employee-id hours-default pname project-id aname activity-id)
+  (format t "hours [~:a]: " hours-default)
   (finish-output)
-  (let ((hours (parse-float:parse-float (read-line) :junk-allowed t)))
+  (let ((hours (or (parse-float:parse-float (read-line) :junk-allowed t)
+                   (and hours-default (parse-float:parse-float hours-default :junk-allowed t)))))
     (format t "comment [⏎ for blank]: ")
     (finish-output)
     (let* (; Get comment from input:
@@ -145,14 +146,14 @@
                                        :project-id project-id :activity-id activity-id :employee-id employee-id
                                        :date (ttu:today) :hours hours :comment comment)))))))
 
-(defun add-hours-if-match (conf employee-id inp projmap timesheet)
+(defun add-hours-if-match (conf employee-id hours inp projmap timesheet)
   (multiple-value-bind (proj act pname aname) (parse-input inp projmap)
     (progn
       (format t "selected ~a: ~a / ~a~%" inp pname aname)
       (when (and proj act)
         (let* ((project-id (ttu:av proj :id))
                (activity-id (ttu:av act :id)))
-          (add-hours-with-comment conf timesheet employee-id pname project-id aname activity-id))))))
+          (add-hours-with-comment conf timesheet employee-id hours pname project-id aname activity-id))))))
 
 
 ;;; Functions for manually searching for project/activity in a curses interface
@@ -244,7 +245,10 @@
             ;; update state
             (when (and c (not (char= c #\Linefeed)))
               (progn
-                (setf state (concatenate 'string state (string c)))
+                (if (or (char= c #\Backspace) (char= c #\Rubout))
+                    (when (< 0 (length state))
+                      (setf state (subseq state 0 (1- (length state)))))
+                    (setf state (concatenate 'string state (string c))))
                 (cond ((and cust-selected proj-selected) (progn
                                                            (setf searchnames (fm:fuzzy-match state actnames))
                                                            (setf act (car searchnames))))
@@ -284,7 +288,7 @@
     (format t "selected ~a / ~a~%" pname aname)
     (add-hours-with-comment conf timesheet employee-id pname project-id aname activity-id)))
 
-(defun main ()
+(defun main (hours)
   (let* ((conf (ttconf:config))
          (employee-id (write-to-string (ttu:av (ttt:get-whoami conf) :employee-id)))
          (ts (employee-recent-hours conf employee-id)))
@@ -310,14 +314,15 @@
                                                (multiple-value-bind (pm ps as) (recent-proj conf)
                                                  (setf projmap pm) (setf projs ps) (setf acts as))))
                           (t (if (string= inp "")
-                                 (add-hours-if-match conf employee-id tsdefault projmap timesheet)
-                                 (add-hours-if-match conf employee-id inp projmap timesheet))))))))))))
+                                 (add-hours-if-match conf employee-id hours tsdefault projmap timesheet)
+                                 (add-hours-if-match conf employee-id hours inp projmap timesheet))))))))))))
 
 ;; run
-(defun run ()
-  (progn
-    (ttconf:setenv :environment :prod)
-    (main)))
+(defun run (args)
+  (let ((hours (and args (car args))))
+    (progn
+      (ttconf:setenv :environment :prod)
+      (main hours))))
 
 ;; user interface
 (defparameter *option-help*
@@ -337,8 +342,8 @@
 (defparameter *ui*
   (adopt:make-interface
     :name "tthours"
-    :usage ""
-    :summary "add hours today for recent project/activity in tripltex"
+    :usage "tthours [hours]"
+    :summary "add hours today for recent project/activity in tripltex. If hours given as argument, then that number will be used as default."
     :help "n/a"
     :manual "Just run the command"
     :contents (list *option-help*
@@ -355,9 +360,10 @@
       ;; handle options here
       (when (gethash 'debug opts)
         (sb-ext:enable-debugger)
-        (format t "~a (len ~a)" args (length args)))
+        (format t "~a (len ~a)~%options:~%" args (length args))
+        (maphash (lambda (k v) (format t "~a => ~a~%" k v)) opts))
       (handler-case
         (cond
           ((gethash 'help opts) (adopt:print-help-and-exit *ui*))
-          (t (run)))
+          (t (run args)))
         (user-error (e) (adopt:print-error-and-exit e))))))
