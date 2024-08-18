@@ -56,7 +56,7 @@ let g:CommandTPreferredImplementation='ruby'
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-Plugin 'fatih/vim-go'
+"Plugin 'fatih/vim-go'
 Plugin 'majutsushi/tagbar'
 Plugin 'mileszs/ack.vim'
 Plugin 'preservim/nerdtree'
@@ -67,11 +67,11 @@ Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-commentary'
 Plugin 'wincent/command-t'
 Plugin 'nvie/vim-flake8'
-Plugin 'davidhalter/jedi-vim'
+"Plugin 'davidhalter/jedi-vim'
 Plugin 'kovisoft/slimv'
-Plugin 'psf/black'
-Plugin 'fisadev/vim-isort'
-Plugin 'zoomlogo/vim-apl'
+"Plugin 'psf/black'
+"Plugin 'fisadev/vim-isort'
+"Plugin 'zoomlogo/vim-apl'
 Plugin 'github/copilot.vim'
 "vim status in tmux - doesn't work with powerline?
 "Plugin 'vimpostor/vim-tpipeline'
@@ -105,6 +105,7 @@ nnoremap <leader>S 3<C-W>h<C-W>l<C-W>H<C-W>l
 nnoremap <leader>D 3<C-W>l<C-W>h<C-W>L<C-W>h
 nnoremap <F1> :set invpaste<CR>
 nnoremap <F2> :set hls!<CR>
+nnoremap <F3> :set invwrap<CR>
 nnoremap <F4> :NERDTreeFind<CR>
 nnoremap <F5> :NERDTreeToggle<CR>
 nnoremap <F6> :GundoToggle<CR>
