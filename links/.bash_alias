@@ -25,8 +25,8 @@ function aptf() {
 }
 function edquick() { vim ~/.bash_alias; . ~/.bash_alias; }
 #function fd() { DIR=$(find -L ${1:-*} -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf) && cd "$DIR"; }
-function fd() { DIR=$(fdfind -L ${1:-} --type d --color=always | fzf --ansi --preview="exa -l --git {}" --bind="space:toggle-preview" --preview-window=:hidden) && cd "$DIR"; }
-function fdh() { DIR=$(fdfind -H -L ${1:-} --type d --color=always | fzf --ansi --preview="exa -l --git {}" --bind="space:toggle-preview" --preview-window=:hidden) && cd "$DIR"; }
+function fd() { DIR=$(fdfind -L ${1:-} --type d --color=always | fzf --ansi --preview="eza -l --git {}" --bind="space:toggle-preview" --preview-window=:hidden) && cd "$DIR"; }
+function fdh() { DIR=$(fdfind -H -L ${1:-} --type d --color=always | fzf --ansi --preview="eza -l --git {}" --bind="space:toggle-preview" --preview-window=:hidden) && cd "$DIR"; }
 function fopen() { FILE=$(fdfind -L --color=always | fzf --ansi --preview="batcat --color=always {}" --bind="space:toggle-preview,ctrl-p:preview-page-up,ctrl-n:preview-page-down" --preview-window=:hidden) && vim $FILE; }
 function french() { grep -i "$*" ~/Dropbox/Documents/french.txt; grep -i "$*" ~/Dropbox/Documents/french_notes.txt; }
 function getpid() { ps wax | grep $1 | grep -v grep | awk '{print $1}'; }
@@ -112,9 +112,9 @@ _mypass_files() {
 complete -F _mypass_files mypass
 
 function _z_wrap() {
-	z $*; pwd; exa --git --grid --icons
+	z $*; pwd; eza --git --grid --icons
 }
-has_cmd z && has_cmd exa && alias z=_z_wrap
+has_cmd z && has_cmd eza && alias z=_z_wrap
 
 # Two variants of possible cabal locations
 [[ -f $HOME/Library/Haskell/bin/cabal ]] && alias cabal='~/Library/Haskell/bin/cabal'
@@ -139,10 +139,10 @@ has_cmd k && alias k='rlwrap k ~/projects/various/k/k/repl.k'
 alias l="less"
 [[ $currentos == "Linux" ]] && alias ls="ls --color=auto"
 [[ $currentos == "Linux" ]] && alias open="xdg-open"
-has_cmd exa && alias lsa="exa -a --git --grid --icons"
-has_cmd exa && alias lss="pwd; exa --git --grid --icons"
-has_cmd exa && alias lsl="exa -l --git --icons"
-has_cmd exa && alias lsg="exa -l --git --grid --icons"
+has_cmd eza && alias lsa="eza -a --git --grid --icons"
+has_cmd eza && alias lss="pwd; eza --git --grid --icons"
+has_cmd eza && alias lsl="eza -l --git --icons"
+has_cmd eza && alias lsg="eza -l --git --grid --icons"
 has_cmd powerline && alias psl="powerline shell left"
 #alias sshxaldev="mosh dev.xal.no -- tmux a"
 alias sshflexi="ssh -i ~/.ssh/flexi-stockholm.pem admin@flexi.xal.no"

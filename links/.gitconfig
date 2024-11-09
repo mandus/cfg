@@ -6,6 +6,14 @@
 	excludesfile = ~/.global_ignore
 	quotepath = false
 	editor = vim
+	pager = delta
+[interactive]
+    diffFilter = delta --color-only
+[delta]
+    navigate = true    # use n and N to move between diff sections
+    # delta detects terminal colors automatically; set one of these to disable auto-detection
+    # dark = true
+    # light = true
 [credential]
 	helper = !/usr/lib/jvm/java-11-openjdk-amd64/bin/java -Ddebug=false -Djava.net.useSystemProxies=true -jar /home/aasmundo/software/bin/git-credential-manager-2.0.4.jar
 	canFallBackToInsecureStore = true

@@ -75,6 +75,7 @@ Plugin 'kovisoft/slimv'
 Plugin 'github/copilot.vim'
 "vim status in tmux - doesn't work with powerline?
 "Plugin 'vimpostor/vim-tpipeline'
+Plugin 'https://codeberg.org/anaseto/vim-goal.git'
 
 "Consider adding this if debugger in vim is needed:
 "see https://puremourning.github.io/vimspector-web/
