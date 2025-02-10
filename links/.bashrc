@@ -76,6 +76,7 @@ type go &>/dev/null || addinpath /usr/lib/go-1.14/bin
 type go &>/dev/null || addinpath /usr/lib/go-1.13/bin
 addinpath $HOME/software/installs/q/l32 && export QHOME=$HOME/software/installs/q
 #addinpath $HOME/software/starship
+addinpath $HOME/software/zen
 
 # ssh-agent stuff:
 [ -f ~/.bash_ssh_settings ] && source ~/.bash_ssh_settings
