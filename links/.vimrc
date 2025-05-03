@@ -127,7 +127,7 @@ nnoremap : ;
 nnoremap ø :
 nnoremap ¤ $
 
-set guifont=Source\ Code\ Pro\ Light\ 13
+set guifont=Source\ Code\ Pro\ Light\ 15
 
 " go-specifics
 nnoremap <leader>ga :GoAlternate!<cr>                                                                                                                                                                                                                                                                                          

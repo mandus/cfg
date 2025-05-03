@@ -74,6 +74,15 @@ _test_files() {
     #fi
 }
 
+function compile_command_t () {
+	cd $HOME/.vim/bundle/command-t/ruby/command-t/ext/command-t
+	sudo apt -y install ruby ruby-dev
+	make clean
+	ruby extconf.rb
+	make
+	cd -
+}
+
 function find_bashrc_go() { 
     gogodir=`pwd`
     while ! [[ -f $gogodir/.bashrc_go ]] && ! [[ $gogodir/.. -ef $gogodir ]] ; do
