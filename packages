@@ -27,6 +27,7 @@ imagemagick
 isort
 jq
 latexmk
+lazygit
 libjpeg-dev
 libpam0g-dev
 libxcb1-dev
