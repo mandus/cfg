@@ -29,7 +29,8 @@
    cpk = cherry-pick
    g = grep --break --heading --line-number
    s = stash
-   l = log --oneline --graph
+   #l = log --oneline --graph
+   l = log --graph --decorate=short --date=short  --pretty=format:\"%C(yellow)%h%Creset %C(auto)%d%Creset %Cgreen%ad%Creset %s\"
    quick-stats = ! /home/aasmundo/software/bin/git-quick-stats
    r = rev-parse --show-toplevel 
 [color]

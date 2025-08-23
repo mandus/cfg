@@ -74,7 +74,7 @@ type go &>/dev/null || addinpath /usr/lib/go-1.16/bin
 type go &>/dev/null || addinpath /usr/lib/go-1.15/bin
 type go &>/dev/null || addinpath /usr/lib/go-1.14/bin
 type go &>/dev/null || addinpath /usr/lib/go-1.13/bin
-addinpath $HOME/q/l64 && export QHOME=$HOME/q
+#addinpath $HOME/q/l64 && export QHOME=$HOME/q
 #addinpath $HOME/software/starship
 addinpath $HOME/software/zen
 
@@ -140,3 +140,9 @@ export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=1
 
 export PATH
 source ~/.bash_alias
+
+# KDB-X Installation Configuration - Mon Aug  4 04:04:24 PM CEST 2025
+unset QHOME  # Unset any previous QHOME setting
+addinpath $HOME/.kx/bin
+has_cmd q && alias q="rlwrap -r q"
+# End KDB-X Installation Configuration

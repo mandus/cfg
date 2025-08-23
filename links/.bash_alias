@@ -163,7 +163,7 @@ has_cmd todoist && alias t=todoist
 alias flexicouchport="ssh -i ~/.ssh/flexi-stockholm.pem -L 5984:localhost:5984 admin@flexi.xal.no"
 alias devflexicouchport="ssh -L 5985:localhost:5984 dev.xal.no"
 #alias flexicouchreplicateport="ssh -i ~/.ssh/ubuntu1.pem -L 6984:localhost:5984 ubuntu@flexi.xal.no"
-has_cmd q && alias q="QHOME=~/q rlwrap -r ~/q/l64/q"
+#has_cmd q && alias q="QHOME=~/q rlwrap -r ~/q/l64/q"
 #alias rossbcl="ros -Q -l ~/.sbclrc -L sbcl run"
 alias s="screen -r -x"
 #alias t="tmux a"
