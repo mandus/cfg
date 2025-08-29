@@ -6,7 +6,7 @@ black
 curl
 fd-find
 feh
-firefox
+firefox-esr
 ffmpeg
 ffmpegthumbnailer
 fish
@@ -76,7 +76,6 @@ wmctrl
 xclip
 xinit
 x11-xserver-utils
-xautolock
 xdotool
 xinput
 xterm
