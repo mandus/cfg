@@ -6,7 +6,7 @@ set   cursorline
 set nocompatible             
 set   expandtab
 set   formatoptions=cjroql2
-set   guioptions=aed
+"set   guioptions=aed "not supported
 set   hidden
 set   ignorecase
 set   incsearch

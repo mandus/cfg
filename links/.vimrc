@@ -49,9 +49,43 @@ fun! <SID>StripTrailingWhitespaces()
   call cursor(l, c)
 endfun
 
+" Daily Notes Configuration for Vim
+" Function to open or create daily note
+function! OpenDailyNote()
+    " Get current date components
+    let l:year = strftime('%Y')
+    let l:month = strftime('%m')
+    let l:date = strftime('%Y-%m-%d')
+    
+    " Build the full path
+    let l:dir_path = g:obsidian_vault_path . '/DailyNotes/' . l:year . '/' . l:month
+    let l:file_path = l:dir_path . '/' . l:date . '.md'
+    
+    " Create directory structure if it doesn't exist
+    if !isdirectory(l:dir_path)
+        call mkdir(l:dir_path, 'p')
+    endif
+    
+    " Open the file (creates it if it doesn't exist)
+    execute 'edit ' . fnameescape(l:file_path)
+    
+    " Optional: Add a header if this is a new file
+    if line('$') == 1 && getline(1) == ''
+        call setline(1, '---')
+        call append(1, 'place:  ')
+        call append(2, '---')
+        call cursor(2, 7)
+    endif
+endfunction
+" Create a command to call the function
+command! DailyNote call OpenDailyNote()
+
 " Need to stay on ruby CommandT as long as I'm on plain vim (and/or new
 " version become vim 9 compliant)
 let g:CommandTPreferredImplementation='ruby'
+
+" Configure your Obsidian vault path here
+let g:obsidian_vault_path = expand('~/Documents/Obsidian')
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
@@ -65,7 +99,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-commentary'
-Plugin 'wincent/command-t'
+Plugin 'wincent/command-t', {'pinned': 1} "keep using the ruby version in branch '7-x-release'
 Plugin 'nvie/vim-flake8'
 "Plugin 'davidhalter/jedi-vim'
 Plugin 'kovisoft/slimv'
@@ -113,6 +147,8 @@ nnoremap <F6> :GundoToggle<CR>
 nnoremap <F7> :set invlist<CR>
 nnoremap <F8> :TagbarToggle<CR>
 nnoremap ,a :Ack!<CR>
+"create daily note in obsidian
+nnoremap ,dn :DailyNote<CR> 
 nnoremap ,gg :exe 'Ggrep ' . expand('<cword>')<CR>
 nnoremap ,sc <C-W>c
 nnoremap ,sr :%s/\<<C-r><C-w>\>//g<Left><Left>

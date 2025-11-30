@@ -142,10 +142,11 @@ alias gup="git pull"
 alias gpu="git push -u"
 alias gsl="gitstash"
 alias gst="git status -v -v"
-has_cmd goal && alias gl='rlwrap goal'
+has_cmd goal && alias gl='rlfe -h ~/.goal_history goal'
 alias h="history | grep"
 has_cmd k && alias kjup='env NGNKDIR="/home/aasmundo/projects/various/k/k" jupyter-notebook'
-has_cmd k && alias k='rlwrap k ~/projects/various/k/k/repl.k'
+#has_cmd k && alias k='rlwrap k ~/projects/various/k/k/repl.k'
+has_cmd k && alias k='rlfe -h ~/.k_history k ~/projects/various/k/k/repl.k'
 alias l="less"
 alias lg="lazygit"
 [[ $currentos == "Linux" ]] && alias ls="ls --color=auto"
@@ -153,7 +154,7 @@ alias lg="lazygit"
 has_cmd eza && alias lsa="eza -a --git --grid --icons -x"
 has_cmd eza && alias lss="pwd; eza --git --grid --icons -x"
 has_cmd eza && alias lsl="eza -l --git --icons"
-has_cmd eza && alias lsg="eza -l --git --grid --icons -x"
+has_cmd eza && alias lsg="eza --git --grid --icons -x"
 has_cmd powerline && alias psl="powerline shell left"
 #alias sshxaldev="mosh dev.xal.no -- tmux a"
 alias sshflexi="ssh -i ~/.ssh/flexi-stockholm.pem admin@flexi.xal.no"

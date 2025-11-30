@@ -197,7 +197,6 @@ bindsym $altmod+c exec /home/aasmundo/bin/syncclipprimary
 # xdg-open primary
 bindsym $mod+o exec xdg-open `xclip -o selection primary`
 
-
 # audio
 #
 # regular volume-control on laptop
