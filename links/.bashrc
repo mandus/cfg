@@ -144,5 +144,5 @@ source ~/.bash_alias
 # KDB-X Installation Configuration - Mon Aug  4 04:04:24 PM CEST 2025
 #unset QHOME  # Unset any previous QHOME setting
 addinpath $HOME/.kx/bin
-has_cmd q && alias q="rlwrap -r q"
+has_cmd q && alias q="rlfe -h ~/.q_history q"
 # End KDB-X Installation Configuration
