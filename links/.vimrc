@@ -23,6 +23,7 @@ set nosplitbelow
 set   splitright
 set   tabstop=4                                                                                                                                                               
 set   tags=./.git/tags,./tags,.git/tags,../.git/tags,.ctags,./TAGS,tags,TAGS
+set   timeoutlen=500  "shorter timeout for multi-key mappings 
 set   viminfo='75,\"500,f1,:250,n~/.viminfo
 set wildignore=*.fasl
 set nowrap
