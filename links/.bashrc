@@ -146,3 +146,6 @@ source ~/.bash_alias
 addinpath $HOME/.kx/bin
 has_cmd q && alias q="rlfe -h ~/.q_history q"
 # End KDB-X Installation Configuration
+
+# R packages
+[ -d $HOME/.local/lib/R/site-library ] && export R_LIBS_USER=$HOME/.local/lib/R/site-library
