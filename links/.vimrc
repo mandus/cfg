@@ -187,9 +187,15 @@ endif
 
 let g:CommandTEncoding = 'UTF-8'
 
-" silversearcher
+" search program for ack.vim: prefer ag, then ack-grep, then ack, fallback to grep
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
+elseif executable('ack-grep')
+  let g:ackprg = 'ack-grep --nogroup --nocolor --column'
+elseif executable('ack')
+  let g:ackprg = 'ack --nogroup --nocolor --column'
+else
+  let g:ackprg = 'grep -rnH'
 endif
 
 " powerline
