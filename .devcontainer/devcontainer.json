@@ -1,0 +1,27 @@
+{
+  "name": "Common Lisp (SBCL)",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "installZsh": true,
+      "configureZshAsDefaultShell": true
+    }
+  },
+  "onCreateCommand": "sudo apt-get update && sudo apt-get install -y sbcl curl",
+  "postCreateCommand": ".devcontainer/setup.sh",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "rheller.alive"
+      ],
+      "settings": {
+        "alive.lsp.startCommand": ["sbcl", "--dynamic-space-size", "2048"],
+        "editor.formatOnSave": false,
+        "files.associations": {
+          "*.lisp": "lisp",
+          "*.asd": "lisp"
+        }
+      }
+    }
+  }
+}
