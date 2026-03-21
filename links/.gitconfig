@@ -15,9 +15,9 @@
     # dark = true
     # light = true
 [credential]
-	helper = !/usr/lib/jvm/java-11-openjdk-amd64/bin/java -Ddebug=false -Djava.net.useSystemProxies=true -jar /home/aasmundo/software/bin/git-credential-manager-2.0.4.jar
+	# helper = !/usr/lib/jvm/java-11-openjdk-amd64/bin/java -Ddebug=false -Djava.net.useSystemProxies=true -jar /home/aasmundo/software/bin/git-credential-manager-2.0.4.jar
 	canFallBackToInsecureStore = true
-	#helper = osxkeychain
+	# helper = osxkeychain
 [push]
 	default = current
 [alias]

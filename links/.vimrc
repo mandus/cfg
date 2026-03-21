@@ -157,6 +157,9 @@ nnoremap ,ss <C-W>s
 nnoremap ,sv <C-W>v
 nnoremap ,, <C-^>
 nnoremap -- <C-^>
+"Test out easier access to CommandT when on norwegian keyboard
+nnoremap -b :CommandTBuffer<CR> 
+nnoremap -t :CommandT<CR>
 " swap colon and semicolon in normal mode:
 nnoremap ; :
 nnoremap : ; 
@@ -206,6 +209,7 @@ let g:slimv_repl_split_size=24
 
 " copilot settings - keep Tab for regular omni complete (e.g. in slimv)
 imap <silent><script><expr> <C-j> copilot#Accept("\<CR>")
+imap <silent><script><expr> <C-f> copilot#AcceptWord()
 let g:copilot_no_tab_map = v:true
 
 " AutoCommands

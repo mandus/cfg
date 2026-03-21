@@ -93,8 +93,9 @@ fi
 # Need to set vi mode before loading fzf
 set -o vi
 export FZF_COMPLETION_TRIGGER='\\'
-[ -f ~/.fzf.completion.bash ] && source ~/.fzf.completion.bash
-[ -f ~/.fzf.key-bindings.bash ] && source ~/.fzf.key-bindings.bash
+eval $(fzf --bash)
+#[ -f ~/.fzf.completion.bash ] && source ~/.fzf.completion.bash
+#[ -f ~/.fzf.key-bindings.bash ] && source ~/.fzf.key-bindings.bash
 
 # set up zoxide if available
 type zoxide &>/dev/null && eval "$(zoxide init bash)"
