@@ -1,12 +1,11 @@
-azure-cli
 bash-completion
 bat
 build-essential
 black
+btop
 curl
 fd-find
 feh
-firefox-esr
 ffmpeg
 ffmpegthumbnailer
 fish
@@ -20,14 +19,12 @@ gh
 git
 git-crypt
 golang
-host
 htop
 i3
 imagemagick
 isort
 jq
 latexmk
-lazygit
 libjpeg-dev
 libpam0g-dev
 libxcb1-dev
@@ -52,9 +49,11 @@ python3-pip
 python3-pyflakes
 python3-virtualenv
 ranger
+rlfe
 rlwrap
 rofi
 rsync
+rustup
 rxvt-unicode
 sakura
 sbcl
@@ -68,6 +67,7 @@ texlive-lang-european
 texlive-latex-extra 
 texlive-xetex
 tig
+tmux
 ttf-bitstream-vera
 vifm
 virtualenv
@@ -80,3 +80,4 @@ xdotool
 xinput
 xterm
 zathura
+zoxide

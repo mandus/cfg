@@ -86,12 +86,12 @@ command! DailyNote call OpenDailyNote()
 let g:CommandTPreferredImplementation='ruby'
 
 " Configure your Obsidian vault path here
-let g:obsidian_vault_path = expand('~/Documents/Obsidian')
+let g:obsidian_vault_path = expand('~/Documents/obsnotes')
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-"Plugin 'fatih/vim-go'
+Plugin 'fatih/vim-go'
 Plugin 'majutsushi/tagbar'
 Plugin 'mileszs/ack.vim'
 Plugin 'preservim/nerdtree'
@@ -167,7 +167,8 @@ nnoremap : ;
 nnoremap ø :
 nnoremap ¤ $
 
-set guifont=Source\ Code\ Pro\ Light\ 15
+set guifont=Source\ Code\ Pro\ Light\ 12
+" set guifont=Noto\ Mono\ 14
 
 " go-specifics
 nnoremap <leader>ga :GoAlternate!<cr>                                                                                                                                                                                                                                                                                          

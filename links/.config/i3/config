@@ -45,7 +45,7 @@ bindsym $mod+s exec --no-startup-id "i3-scratchpad -tmt -atc /opt/Signal/signal-
 bindsym $mod+t exec --no-startup-id "i3-scratchpad -tmt -atc /usr/bin/telegram-desktop"
 bindsym $mod+u exec --no-startup-id "i3-scratchpad -tmt -atc gvim ~/Dropbox/browser.tabs"
 # toggle calendar
-bindsym $altmod+Tab exec --no-startup-id "i3-scratchpad -d1024x480 -atc -p0,50 -wtuo -mb /home/aasmundo/bin/showmycal"
+bindsym $altmod+Tab exec --no-startup-id "i3-scratchpad -d1024x480 -atc -p0,50 -wtuo -mb /home/asmund/bin/showmycal"
 # mini cal with week numbers 
 bindsym $altmod+comma exec --no-startup-id "i3-scratchpad -d530x170 -abr -p-12,-16 -wtu ncal -M -w -W 4 -A 2 $(date '+%m %Y')"
 
@@ -59,17 +59,17 @@ bindsym $altmod+comma exec --no-startup-id "i3-scratchpad -d530x170 -abr -p-12,-
 # kill focused window
 #bindsym $mod+Shift+q kill
 # kill some window, with menu
-bindsym $mod+Shift+q exec /home/aasmundo/bin/quickswitch.py -k
+bindsym $mod+Shift+q exec /home/asmund/bin/quickswitch.py -k
 
 # scratchpad
 bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
 # handle screens (for laptop)
-bindsym $mod+Control+b exec --no-startup-id /home/aasmundo/.screenlayout/laptop-ext-usbc.sh
-bindsym $mod+Control+d exec --no-startup-id /home/aasmundo/.screenlayout/laptop.sh
-bindsym $mod+Control+e exec --no-startup-id /home/aasmundo/.screenlayout/ext-usbc.sh
-bindsym $mod+Control+h exec --no-startup-id /home/aasmundo/.screenlayout/laptop-ext-hdmi.sh
+bindsym $mod+Control+b exec --no-startup-id /home/asmund/.screenlayout/laptop-ext-usbc.sh
+bindsym $mod+Control+d exec --no-startup-id /home/asmund/.screenlayout/laptop.sh
+bindsym $mod+Control+e exec --no-startup-id /home/asmund/.screenlayout/ext-usbc.sh
+bindsym $mod+Control+h exec --no-startup-id /home/asmund/.screenlayout/laptop-ext-hdmi.sh
 
 
 # lock screen
@@ -84,8 +84,8 @@ bindsym $mod+q exec --no-startup-id i3lock -c 000000
 #bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 #bindsym $mod+d exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu -i -fn 'Roboto Sans-14' -nb '#202020' -nf '#30d020' -sf '#30d020' -sb '#404040'" --usage-log=$HOME/.j4dmenulog
 #bindsym Control+space exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu -i -fn 'Roboto Sans-14' -nb '#202020' -nf '#30d020' -sf '#30d020' -sb '#404040'" --usage-log=$HOME/.j4dmenulog
-bindsym Control+space exec --no-startup-id /home/aasmundo/bin/rofi_grid
-#bindsym $mod+p exec --no-startup-id sbcl --script /home/aasmundo/Dropbox/Prosjekter/gits/powerlisp/powerlisp.deb304.fasl --no-linedit
+bindsym Control+space exec --no-startup-id /home/asmund/bin/rofi_grid
+#bindsym $mod+p exec --no-startup-id sbcl --script /home/asmund/Dropbox/Prosjekter/gits/powerlisp/powerlisp.deb304.fasl --no-linedit
 
 # change focus
 bindsym $mod+j focus left
@@ -171,8 +171,8 @@ bindsym $altmod+n workspace next
 bindsym $altmod+p workspace prev
 bindsym $mod+w exec rofi -show window -theme themes/style_normal_grid.rasi
 bindsym $altmod+w exec rofi -show window -theme themes/style_normal_grid.rasi
-bindsym $altmod+g exec /home/aasmundo/bin/quickswitch.py
-bindsym $altmod+Shift+g exec /home/aasmundo/bin/quickswitch.py -m
+bindsym $altmod+g exec /home/asmund/bin/quickswitch.py
+bindsym $altmod+Shift+g exec /home/asmund/bin/quickswitch.py -m
 bindsym $altmod+Shift+n exec --no-startup-id ~/bin/move_out_i3.sh
 
 # Input one-char "vim-like" mark with mod-m; move to mark with mod+'
@@ -191,9 +191,9 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 
 # clipboard
 # sync X to clipboard
-bindsym $altmod+x exec /home/aasmundo/bin/syncprimaryclip
+bindsym $altmod+x exec /home/asmund/bin/syncprimaryclip
 # sync clipboard to X
-bindsym $altmod+c exec /home/aasmundo/bin/syncclipprimary
+bindsym $altmod+c exec /home/asmund/bin/syncclipprimary
 # xdg-open primary
 bindsym $mod+o exec xdg-open `xclip -o selection primary`
 
@@ -205,14 +205,14 @@ bindsym $mod+o exec xdg-open `xclip -o selection primary`
 #bindsym XF86AudioMute exec amixer -q -D pulse set Master 1+ toggle
 
 # audio through pulseaudio/hdmi (headphones on screen or D6000)
-#bindsym XF86AudioRaiseVolume exec /home/aasmundo/bin/running_sink_vol.sh p
-#bindsym XF86AudioLowerVolume exec /home/aasmundo/bin/running_sink_vol.sh m
+#bindsym XF86AudioRaiseVolume exec /home/asmund/bin/running_sink_vol.sh p
+#bindsym XF86AudioLowerVolume exec /home/asmund/bin/running_sink_vol.sh m
 #bindsym XF86AudioMute exec pactl set-sink-mute 1 toggle
 
 # main running sink:
-bindsym $altmod+Shift+1 exec /home/aasmundo/bin/running_sink_vol.sh m
-bindsym $altmod+Shift+2 exec /home/aasmundo/bin/running_sink_vol.sh p
-bindsym $altmod+Shift+3 exec /home/aasmundo/bin/running_sink_vol.sh mute
+bindsym $altmod+Shift+1 exec /home/asmund/bin/running_sink_vol.sh m
+bindsym $altmod+Shift+2 exec /home/asmund/bin/running_sink_vol.sh p
+bindsym $altmod+Shift+3 exec /home/asmund/bin/running_sink_vol.sh mute
 #bindsym $altmod+Shift+4 exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.ncspot /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
 bindsym $altmod+Shift+4 exec playerctl --player=ncspot next
 #bindsym $altmod+Shift+5 exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.ncspot /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
@@ -271,7 +271,7 @@ mode "resize" {
 mode "normal" {
 
     # start new programs
-    bindsym space exec --no-startup-id /home/aasmundo/bin/rofi_grid
+    bindsym space exec --no-startup-id /home/asmund/bin/rofi_grid
     bindsym Return exec urxvt
 
     # reload the configuration file
@@ -335,22 +335,22 @@ mode "normal" {
     bindsym n workspace next
     bindsym f workspace prev
     bindsym w exec rofi -show window -theme themes/style_normal_grid.rasi
-    bindsym g exec /home/aasmundo/bin/quickswitch.py
-    bindsym Shift+g exec /home/aasmundo/bin/quickswitch.py -m
+    bindsym g exec /home/asmund/bin/quickswitch.py
+    bindsym Shift+g exec /home/asmund/bin/quickswitch.py -m
     bindsym Shift+n exec --no-startup-id ~/bin/move_out_i3.sh
 
     # main running sink:
-    bindsym s exec  /home/aasmundo/bin/running_sink_vol.sh m
-    bindsym v exec /home/aasmundo/bin/running_sink_vol.sh p
-    bindsym m exec /home/aasmundo/bin/running_sink_vol.sh mute
+    bindsym s exec  /home/asmund/bin/running_sink_vol.sh m
+    bindsym v exec /home/asmund/bin/running_sink_vol.sh p
+    bindsym m exec /home/asmund/bin/running_sink_vol.sh mute
     bindsym t exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.ncspot /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
     bindsym p exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.ncspot /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
 
     # clipboard
     # sync X to clipboard
-    bindsym x exec /home/aasmundo/bin/syncprimaryclip
+    bindsym x exec /home/asmund/bin/syncprimaryclip
     # sync clipboard to X
-    bindsym Control+c exec /home/aasmundo/bin/syncclipprimary
+    bindsym Control+c exec /home/asmund/bin/syncclipprimary
     # xdg-open primary
     bindsym o exec xdg-open `xclip -o selection primary`
 
@@ -369,7 +369,7 @@ bar {
     #position top
     tray_output primary
     #status_command i3status
-    status_command /home/aasmundo/bin/custom_i3status.sh
+    status_command /home/asmund/bin/custom_i3status.sh
 
     colors {
         background #05050a
@@ -385,7 +385,7 @@ bar {
 
 #exec --no-startup-id /usr/lib/unity-settings-daemon/unity-settings-daemon
 
-exec --no-startup-id xrdb -merge /home/aasmundo/.Xresources
+exec --no-startup-id xrdb -merge /home/asmund/.Xresources
 
 #exec --no-startup-id onboard
 exec --no-startup-id nm-applet

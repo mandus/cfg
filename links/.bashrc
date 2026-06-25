@@ -40,6 +40,11 @@ export LANG=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
 export MOZ_USE_XINPUT2=1
 
+# Set custom go tmp dir to build to avoid (intility?) issues
+export GOTMPDIR=$HOME/tmp
+# Set custom tmpdir used by e.g. cargo, to avoid (intility?) issues
+export TMPDIR=$HOME/tmp
+
 # some history stuff
 HISTCONTROL=ignoredups
 HISTFILESIZE=50000
@@ -69,11 +74,11 @@ addinpath $HOME/.dotnet
 addinpath $HOME/.dotnet/tools
 addinpath $HOME/.vsdbg
 # Add most up-to-date go in PATH
-addinpath /usr/lib/go-1.21/bin
-type go &>/dev/null || addinpath /usr/lib/go-1.16/bin
-type go &>/dev/null || addinpath /usr/lib/go-1.15/bin
-type go &>/dev/null || addinpath /usr/lib/go-1.14/bin
-type go &>/dev/null || addinpath /usr/lib/go-1.13/bin
+#addinpath /usr/lib/go-1.21/bin
+#type go &>/dev/null || addinpath /usr/lib/go-1.16/bin
+#type go &>/dev/null || addinpath /usr/lib/go-1.15/bin
+#type go &>/dev/null || addinpath /usr/lib/go-1.14/bin
+#type go &>/dev/null || addinpath /usr/lib/go-1.13/bin
 #addinpath $HOME/q/l64 && export QHOME=$HOME/q
 #addinpath $HOME/software/starship
 addinpath $HOME/software/zen
@@ -93,9 +98,9 @@ fi
 # Need to set vi mode before loading fzf
 set -o vi
 export FZF_COMPLETION_TRIGGER='\\'
-eval $(fzf --bash)
-#[ -f ~/.fzf.completion.bash ] && source ~/.fzf.completion.bash
-#[ -f ~/.fzf.key-bindings.bash ] && source ~/.fzf.key-bindings.bash
+#eval $(fzf --bash)
+[ -f ~/.fzf.completion.bash ] && source ~/.fzf.completion.bash
+[ -f ~/.fzf.key-bindings.bash ] && source ~/.fzf.key-bindings.bash
 
 # set up zoxide if available
 type zoxide &>/dev/null && eval "$(zoxide init bash)"
@@ -105,9 +110,9 @@ addinpath $HOME/software/ocaml-4.09.1/bin
 test -r /home/aasmundo/.opam/opam-init/init.sh && . /home/aasmundo/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
 
 #echo "node version mgr disabled"
-#export NVM_DIR="$HOME/.nvm"
-#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-#[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # kubectl completion
 type kubectl >/dev/null 2>&1 && . <(kubectl completion bash)
@@ -134,7 +139,7 @@ fi
 # type starship &>/dev/null && eval "$(starship init bash)"
 
 # broot / br (https://dystroy.org/broot)
-[ -f ~/.config/broot/launcher/bash/br ] && source /home/aasmundo/.config/broot/launcher/bash/br
+[ -f ~/.config/broot/launcher/bash/br ] && source ~/.config/broot/launcher/bash/br
 
 # Don't send more info than necessary, for Azure function tools
 export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=1

@@ -1,4 +1,4 @@
-#!/home/aasmundo/software/venvs/i3py/bin/python
+#!/home/asmund/software/venvs/i3py/bin/python
 # -*- coding: utf-8 -*-
 # quickswitch for i3 - quickly change to and locate windows in i3.
 #

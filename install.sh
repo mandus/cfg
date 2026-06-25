@@ -12,6 +12,9 @@ REPODIR=${DIR}/repos
 VENVDIR=${HOME}/software/venvs
 
 function compile_command_t () {
+	cd $HOME/.vim/bundle/command-t
+	git checkout 7-x-release
+	git pull
 	cd $HOME/.vim/bundle/command-t/ruby/command-t/ext/command-t
 	sudo apt -y install ruby ruby-dev
 	make clean

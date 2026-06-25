@@ -31,7 +31,7 @@
    s = stash
    #l = log --oneline --graph
    l = log --graph --decorate=short --date=short  --pretty=format:\"%C(yellow)%h%Creset %C(auto)%d%Creset %Cgreen%ad%Creset %s\"
-   quick-stats = ! /home/aasmundo/software/bin/git-quick-stats
+   #quick-stats = ! ~/software/bin/git-quick-stats
    r = rev-parse --show-toplevel 
 [color]
 	ui = true
@@ -52,7 +52,7 @@
 [mergetool "fugitive"]
 	cmd = gvim -f -c \"Gdiffsplit!\" \"$MERGED\"
 [init]
-	templatedir = /home/aasmundo/.git_template
+	templatedir = ~/.git_template
 [filter "media"]
 	clean = git-media-clean %f
 	smudge = git-media-smudge %f
