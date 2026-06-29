@@ -30,8 +30,10 @@ else
         realip=$(cat ${ip_file} | jq -jr .ip)
         ipthrough=$(cat ${ip_file} | jq -jr .org)
         track=$(ncspot_showtrack.py)
+		vpn=$(custom_vpn_check.sh)
         custom="${custom}{ \"full_text\": \"${track}\"}, "
-        custom="${custom}{ \"full_text\": \"⇹ ${realip} by ${ipthrough}\" },"
+        custom="${custom}{ \"full_text\": \"⇹ ${realip} by ${ipthrough}\" }, "
+        custom="${custom}{ \"full_text\": \"${vpn}\" }, "
         echo "${line/[/$custom}" || exit 1
     done)
 fi
