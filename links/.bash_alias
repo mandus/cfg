@@ -37,15 +37,12 @@ function proc() { ps auwwwx | grep $*; }
 function quickcalc() { echo "$*" | bc -q -l; }
 function qcalc() { echo "$*" | bc -q -l; }
 function timetodec() { v="$*"; echo "${v%:*} + ${v#*:}*(1/60)" | bc -q -l; }
-
 function findheader() { find . -iname "*$1*" -print; }
 function makeline() { printf "%${1:-$COLUMNS}s\n" ""|tr " " ${2:-#};}
 function repeatstring(){ printf  "%${2}s" "" | sed -e "s/ /$1/g"; }
 function sumuserpids() { ps auwx | awk {'print $1'} | sort | uniq -c | while read -r count user ; do printf "%15s %3s %-$((${COLUMNS}-15-3))s\n" $user $count $(makeline $count); done; }
 function testme() { for i in "$@" ; do echo $i; done }
 function testyou() { for i in "$*" ; do echo $i; done }
-
-
 function urldecode() { : "${*//+/ }"; echo -e "${_//%/\\x}"; }
 function urlencode() {
     # urlencode <string>
@@ -90,6 +87,30 @@ function find_bashrc_go() {
     done
     echo $gogodir
 }
+# Interactive git checkout with fzf branch selection
+# Usage: gco [partial]   — fuzzy-select a branch to checkout
+#        gco branch_name — checkout directly if exact match
+gco() {
+    _gco_branches() {
+        #git branch --format='%(refname:short)' 2>/dev/null
+        git branch -r --format='%(refname:short)' 2>/dev/null \
+            | grep -v '^origin$' | sed 's|^[^/]*/||'
+    }
+    if [ $# -eq 0 ]; then
+        branch=$(_gco_branches | sort -u \
+            | fzf --height=40% --reverse --prompt="checkout> ")
+    else
+        # If exact match exists, checkout directly
+        if git show-ref --verify --quiet "refs/heads/$1" 2>/dev/null; then
+            branch="$1"
+        else
+            # Otherwise fuzzy-filter with the argument as query
+            branch=$(_gco_branches | sort -u \
+                | fzf --height=40% --reverse --prompt="checkout> " --query="$1")
+        fi
+    fi
+    [ -n "$branch" ] && git checkout "$branch"
+}
 function gogo() {
     gogodir=$(find_bashrc_go)
     # if $GOPATH is set, remove its bin-dir
@@ -97,21 +118,21 @@ function gogo() {
     [ -f ${gogodir}/.bashrc_go ] && cd $gogodir && source .bashrc_go && cd -
 }
 
-function mycal() {
-    gcalcli --calendar='asmund@xal.no#blue' --calendar='Kalender#brightred' --calendar='Dager#white' calw --monday --details location 
-}
-
-function agenda() {
-    gcalcli --calendar='asmund@xal.no#blue' --calendar='Kalender#brightred' --calendar='Dager#white' agenda --details location $(agenda_range.py)
-}
-
-function today() {
-    gcalcli --calendar='asmund@xal.no#blue' --calendar='Kalender#brightred' --calendar='Dager#white' --calendar='Fam kalender#yellow' agenda --details all $(date "+%Y-%m-%dT00:01") $(date "+%Y-%m-%dT23:59") 
-}
-
-function now() {
-    gcalcli --calendar='asmund@xal.no#blue' --calendar='Kalender#brightred' agenda --details location --details url  $(date "+%Y-%m-%dT%H:%M") $(date --date="@$(($(date +%s)+3600))" "+%Y-%m-%dT%H:%M") | tail +2 | head -n-1
-}
+# function mycal() {
+#    gcalcli --calendar='asmund@xal.no#blue' --calendar='Kalender#brightred' --calendar='Dager#white' calw --monday --details location 
+#}
+#
+#function agenda() {
+#    gcalcli --calendar='asmund@xal.no#blue' --calendar='Kalender#brightred' --calendar='Dager#white' agenda --details location $(agenda_range.py)
+#}
+#
+#function today() {
+#    gcalcli --calendar='asmund@xal.no#blue' --calendar='Kalender#brightred' --calendar='Dager#white' --calendar='Fam kalender#yellow' agenda --details all $(date "+%Y-%m-%dT00:01") $(date "+%Y-%m-%dT23:59") 
+#}
+#
+#function now() {
+#    gcalcli --calendar='asmund@xal.no#blue' --calendar='Kalender#brightred' agenda --details location --details url  $(date "+%Y-%m-%dT%H:%M") $(date --date="@$(($(date +%s)+3600))" "+%Y-%m-%dT%H:%M") | tail +2 | head -n-1
+#}
 
 _mypass_files() {
     local cur=${COMP_WORDS[COMP_CWORD]}
@@ -171,8 +192,9 @@ alias devflexicouchport="ssh -L 5985:localhost:5984 dev.xal.no"
 alias s="screen -r -x"
 #alias t="tmux a"
 alias vifm=vifmrun
-alias xcli="xclip -i -selection clipboard"
 alias xcboth="xclip -i -selection clipboard -selection primary"
+alias xcli="xclip -i -selection clipboard"
+alias xclo="xclip -o -selection clipboard"
 alias xs="cd"
 
 ## compile c from command line (need allheads.h in some system include dir..

@@ -15,3 +15,6 @@ xinput set-prop 11 "libinput Natural Scrolling Enabled" 1
 (xrandr -q |rg -q -P '^HDMI-[0-9]+.(?!dis)connected') && xrandr --output $(xrandr -q |rg -o -P -r '$1' '^(HDMI-[0-9]+).(?!dis)connected') --primary && echo "set HDMI as primary"
 # external DP (probably over usb-c) connected - make it primary (skip disconnected)
 (xrandr -q |rg -q -P '^DP-[0-9]+.(?!dis)connected') && xrandr --output $(xrandr -q |rg -o -P -r '$1' '^(DP-[0-9]+).(?!dis)connected') --primary && echo "set DP as primary"
+
+echo "Connected displays:"
+xrandr -q|rg '\<connected'

@@ -2,7 +2,7 @@
 
 # script can be improved by using 'xrandr -q | grep '\<connected\>'' to find
 # information about laptop-screen (primary) and other screen
-#
+
 if ! xrandr -q|rg -q '\<connected.*\<primary' ; then
 	echo "No primary connected display detected"
 	exit 1
@@ -22,10 +22,10 @@ if [[ $(xrandr -q | rg '\<connected\>' | wc -l) -eq 2 ]] ; then
     other_y=$(echo $otherscreen | awk '{print $3}' | sed 's/.*x\([^+]*\).*/\1/')
 
     center_vert=$(($main_y/2-$other_y/2))
-	echo "main $main_id --pos ${other_x}x0"
-	echo "other $other_id --pos 0x${center_vert}"
+	echo "main $main_id --pos 0x0"
+	echo "other $other_id --pos ${main_x}x${center_vert}"
 
 
-    # use xrandr to center laptop screen vertically left of the main screen
-    xrandr --output "$main_id" --pos ${other_x}x0 --output "$other_id" --pos 0x${center_vert}
+	# use xrandr to place laptop (the "other") right of and vertically centered 
+    xrandr --output "$main_id" --pos 0x0 --output "$other_id" --pos ${main_x}x${center_vert}
 fi
