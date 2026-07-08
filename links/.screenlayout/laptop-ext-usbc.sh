@@ -32,3 +32,6 @@ if [[ $(xrandr -q | rg '\<connected\>' | wc -l) -eq 2 ]] ; then
 	# use xrandr to place laptop (the "other") right of and vertically centered 
     xrandr --output "$main_id" --pos 0x0 --output "$other_id" --pos ${main_x}x${center_vert}
 fi
+
+# just in case; refresh xmodmap
+xmodmap ~/.xmodmap

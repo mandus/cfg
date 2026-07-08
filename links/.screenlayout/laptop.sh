@@ -8,3 +8,6 @@ done
 
 # make internal display primary
 xrandr --output eDP-1 --auto --primary
+
+# just in case; refresh xmodmap
+xmodmap ~/.xmodmap
