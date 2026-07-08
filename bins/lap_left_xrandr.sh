@@ -1,8 +1,13 @@
 #!/bin/bash
-
-# script can be improved by using 'xrandr -q | grep '\<connected\>'' to find
-# information about laptop-screen (primary) and other screen
 #
+# first make sure the first connected displayport (usb-c) display is activated and primary
+dpdisp=$(xrandr -q|rg '\<connected'|rg -o -P -r '$1' '^(DP-[0-9])')
+echo "Main display will be $dpdisp"
+
+if [ -n $dpdisp ] ; then 
+    xrandr --output $dpdisp --auto --primary
+fi
+
 if ! xrandr -q|rg -q '\<connected.*\<primary' ; then
 	echo "No primary connected display detected"
 	exit 1

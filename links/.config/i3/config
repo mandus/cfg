@@ -68,8 +68,8 @@ bindsym $mod+minus scratchpad show
 # handle screens (for laptop)
 bindsym $mod+Control+b exec --no-startup-id /home/asmund/.screenlayout/laptop-ext-usbc.sh
 bindsym $mod+Control+d exec --no-startup-id /home/asmund/.screenlayout/laptop.sh
-bindsym $mod+Control+e exec --no-startup-id /home/asmund/.screenlayout/ext-usbc.sh
-bindsym $mod+Control+h exec --no-startup-id /home/asmund/.screenlayout/laptop-ext-hdmi.sh
+#bindsym $mod+Control+e exec --no-startup-id /home/asmund/.screenlayout/ext-usbc.sh
+#bindsym $mod+Control+h exec --no-startup-id /home/asmund/.screenlayout/laptop-ext-hdmi.sh
 
 
 # lock screen

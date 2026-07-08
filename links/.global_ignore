@@ -23,3 +23,5 @@ target/
 .tern-project
 htmlcov/
 .texpadtmp/
+
+**/.claude/settings.local.json
