@@ -34,3 +34,6 @@ if [[ $(xrandr -q | rg '\<connected\>' | wc -l) -eq 2 ]] ; then
     # use xrandr to center laptop screen vertically left of the main screen
     xrandr --output "$main_id" --pos ${other_x}x0 --output "$other_id" --pos 0x${center_vert}
 fi
+
+# just in case; refresh xmodmap
+xmodmap ~/.xmodmap

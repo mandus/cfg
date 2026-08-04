@@ -5,9 +5,10 @@ ssh-add
 # pass will not prompt for passphrase, so get agent going with a working passphrase
 gpg -dq ~/.password-store/dev/mistral.ai/for-pi-api-key.gpg >/dev/null
 
-# various mouses - should probably check if they are available first...
-# the internal one
-xinput set-prop 11 "libinput Natural Scrolling Enabled" 1
+# various mouses - 
+for id in $(xinput list|rg -o -P -r '$1' '.*SYNA.*(?<=id=)([0-9]+)') ; do
+	(xinput list-props $id|rg -q 'Natural Scrolling') && xinput set-prop $id "libinput Natural Scrolling Enabled" 1
+done
 # Ergo MX trackball
 (xinput list|rg -q Ergo) && xinput set-prop $(xinput list|grep "Ergo.*pointer"|rg -P -o '(?<=id=)[0-9]+') "libinput Natural Scrolling Enabled" 1
 

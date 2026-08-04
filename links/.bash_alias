@@ -164,6 +164,7 @@ alias gpu="git push -u"
 alias gsl="gitstash"
 alias gst="git status -v -v"
 has_cmd goal && alias gl='rlfe -h ~/.goal_history goal'
+has_cmd ari && alias gla='rlfe -h ~/.ari_history ari'
 alias h="history | grep"
 alias home="ssh mandus.freemyip.com -l aasmundo -t tmux a"
 has_cmd k && alias kjup='env NGNKDIR="/home/aasmundo/projects/various/k/k" jupyter-notebook'

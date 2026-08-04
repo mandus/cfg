@@ -150,8 +150,17 @@ nnoremap <F8> :TagbarToggle<CR>
 nnoremap ,a :Ack!<CR>
 "create daily note in obsidian
 nnoremap ,dn :DailyNote<CR> 
-nnoremap ,gg :exe 'Ggrep ' . expand('<cword>')<CR>
+"nnoremap ,gg :exe 'Ggrep ' . expand('<cword>')<CR>
+"new git grep version
+nnoremap ,gg :exe 'Ggrep ' . expand('<cword>')<CR>:copen<CR><CR>
+" select text and yank, e.g. visually and then y - then it will be used as '@@':
+nnoremap <SPACE>gg :exe 'Ggrep ' . shellescape(@@)<CR>:copen<CR><CR>
+" in obsidian folder, find "åpne oppgaver"
+nnoremap ,oo :Ack "^\-\ \[ \] "<CR> 
+nnoremap ,pdf :w%<CR>:silent exec "!pandoc -Vpapersize:a4 --to pdf -o %<.pdf %"<CR>
+nnoremap ,pr :silent call system("sumatrapdf " . shellescape(expand('%:r')) . ".pdf")<CR><CR>
 nnoremap ,sc <C-W>c
+nnoremap ,sl :w%<CR>:call system("pandoc -t beamer --syntax-highlighting zenburn -o " . shellescape(expand('%:r')) . ".pdf " . shellescape(expand('%')))<CR><CR>
 nnoremap ,sr :%s/\<<C-r><C-w>\>//g<Left><Left>
 nnoremap ,ss <C-W>s
 nnoremap ,sv <C-W>v
@@ -167,7 +176,7 @@ nnoremap : ;
 nnoremap ø :
 nnoremap ¤ $
 
-set guifont=Source\ Code\ Pro\ Light\ 12
+set guifont=Source\ Code\ Pro\ Light\ 10
 " set guifont=Noto\ Mono\ 14
 
 " go-specifics
@@ -192,8 +201,8 @@ endif
 let g:CommandTEncoding = 'UTF-8'
 
 " silversearcher
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
+if executable('rg')
+  let g:ackprg = 'rg --vimgrep'
 endif
 
 " powerline
@@ -212,6 +221,9 @@ let g:slimv_repl_split_size=24
 imap <silent><script><expr> <C-j> copilot#Accept("\<CR>")
 imap <silent><script><expr> <C-f> copilot#AcceptWord()
 let g:copilot_no_tab_map = v:true
+let g:copilot_filetypes = {
+			\ 'markdown': v:false,
+			\ }
 
 " AutoCommands
 

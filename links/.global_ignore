@@ -7,6 +7,7 @@ Session.vim
 *.log
 *.bbl
 *.blg
+**/.env
 *.fdb_latexmk
 *.fls
 *.toc
