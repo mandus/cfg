@@ -31,9 +31,11 @@ else
         ipthrough=$(cat ${ip_file} | jq -jr .org)
         track=$(ncspot_showtrack.py)
 		vpn=$(custom_vpn_check.sh)
+		vpncolor="#b0b0b0"
+		[[ $vpn =~ UP ]] && vpncolor="#008030"
         custom="${custom}{ \"full_text\": \"${track}\"}, "
         custom="${custom}{ \"full_text\": \"⇹ ${realip} by ${ipthrough}\" }, "
-        custom="${custom}{ \"full_text\": \"${vpn}\" }, "
+        custom="${custom}{\"name\":\"vpn\",\"color\":\"${vpncolor}\",\"markup\":\"none\",\"full_text\":\"${vpn}\"}, "
         echo "${line/[/$custom}" || exit 1
     done)
 fi

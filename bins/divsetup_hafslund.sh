@@ -12,10 +12,13 @@ done
 # Ergo MX trackball
 (xinput list|rg -q Ergo) && xinput set-prop $(xinput list|grep "Ergo.*pointer"|rg -P -o '(?<=id=)[0-9]+') "libinput Natural Scrolling Enabled" 1
 
-# external hdmi connected directly - make it primary (skip disconnected)
-(xrandr -q |rg -q -P '^HDMI-[0-9]+.(?!dis)connected') && xrandr --output $(xrandr -q |rg -o -P -r '$1' '^(HDMI-[0-9]+).(?!dis)connected') --primary && echo "set HDMI as primary"
-# external DP (probably over usb-c) connected - make it primary (skip disconnected)
-(xrandr -q |rg -q -P '^DP-[0-9]+.(?!dis)connected') && xrandr --output $(xrandr -q |rg -o -P -r '$1' '^(DP-[0-9]+).(?!dis)connected') --primary && echo "set DP as primary"
+## external hdmi connected directly - make it primary (skip disconnected)
+#(xrandr -q |rg -q -P '^HDMI-[0-9]+.(?!dis)connected') && xrandr --output $(xrandr -q |rg -o -P -r '$1' '^(HDMI-[0-9]+).(?!dis)connected') --primary && echo "set HDMI as primary"
+## external DP (probably over usb-c) connected - make it primary (skip disconnected)
+#(xrandr -q |rg -q -P '^DP-[0-9]+.(?!dis)connected') && xrandr --output $(xrandr -q |rg -o -P -r '$1' '^(DP-[0-9]+).(?!dis)connected') --primary && echo "set DP as primary"
+#
+# just run the lap_left script
+lap_left_xrandr.sh
 
 echo "Connected displays:"
 xrandr -q|rg '\<connected'

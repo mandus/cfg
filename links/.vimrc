@@ -164,6 +164,7 @@ nnoremap ,sl :w%<CR>:call system("pandoc -t beamer --syntax-highlighting zenburn
 nnoremap ,sr :%s/\<<C-r><C-w>\>//g<Left><Left>
 nnoremap ,ss <C-W>s
 nnoremap ,sv <C-W>v
+nnoremap ,ts :exe 'Ggrep \#' . expand('<cword>')<CR>:copen<CR><CR>
 nnoremap ,, <C-^>
 nnoremap -- <C-^>
 "Test out easier access to CommandT when on norwegian keyboard
