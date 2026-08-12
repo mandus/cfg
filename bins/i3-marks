@@ -1,0 +1,69 @@
+#!/usr/bin/env python3
+"""i3 marks helper: show which window each mark is bound to.
+
+Usage:
+  i3-marks list        plain text listing:  mark  [ws]  class  title
+  i3-marks menu        rofi picker, focuses the window of the picked mark
+"""
+import json
+import os
+import subprocess
+import sys
+
+
+def entries():
+    tree = json.loads(subprocess.check_output(["i3-msg", "-t", "get_tree"]))
+
+    def walk(node, ws=None):
+        if node.get("type") == "workspace":
+            ws = node.get("name")
+        if node.get("marks"):
+            yield ws, node
+        for kid in node.get("nodes", []) + node.get("floating_nodes", []):
+            yield from walk(kid, ws)
+
+    rows = []
+    for ws, node in walk(tree):
+        props = node.get("window_properties") or {}
+        cls = props.get("class") or node.get("app_id") or "?"
+        for mark in node["marks"]:
+            rows.append((mark, ws or "?", cls, node.get("name") or ""))
+    return sorted(rows)
+
+
+def listing():
+    rows = entries()
+    if not rows:
+        return "(no marks)"
+    mw = max(len(r[0]) for r in rows)
+    ww = max(len(r[1]) for r in rows)
+    cw = max(len(r[2]) for r in rows)
+    return "\n".join(
+        "%s  %s  %s  %s" % (m.ljust(mw), ("[" + w + "]").ljust(ww + 2), c.ljust(cw), t)
+        for m, w, c, t in rows
+    )
+
+
+def menu():
+    rows = entries()
+    if not rows:
+        subprocess.call(["notify-send", "-u", "low", "i3 marks", "(no marks)"])
+        return
+    lines = "\n".join("%s\t[%s] %s — %s" % r for r in rows)
+    theme = os.path.expanduser("~/.config/rofi/themes/style_normal_grid.rasi")
+    cmd = ["rofi", "-dmenu", "-i", "-p", "goto mark", "-no-custom"]
+    if os.path.exists(theme):
+        cmd += ["-theme", theme]
+    sel = subprocess.run(cmd, input=lines, capture_output=True, text=True).stdout.strip()
+    if sel:
+        subprocess.call(["i3-msg", '[con_mark="^%s$"] focus' % sel.split("\t")[0]],
+                        stdout=subprocess.DEVNULL)
+
+
+cmd = sys.argv[1] if len(sys.argv) > 1 else "list"
+if cmd == "list":
+    print(listing())
+elif cmd == "menu":
+    menu()
+else:
+    sys.exit(__doc__)
