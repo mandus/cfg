@@ -30,6 +30,7 @@ function fdh() { DIR=$(fdfind -H -L ${1:-} --type d --color=always | fzf --ansi 
 function fopen() { FILE=$(fdfind -L --color=always | fzf --ansi --preview="batcat --color=always {}" --bind="space:toggle-preview,ctrl-p:preview-page-up,ctrl-n:preview-page-down" --preview-window=:hidden) && vim $FILE; }
 function french() { grep -i "$*" ~/Dropbox/Documents/french.txt; grep -i "$*" ~/Dropbox/Documents/french_notes.txt; }
 function getpid() { ps wax | grep $1 | grep -v grep | awk '{print $1}'; }
+function gop() { vim -q <(rg --vimgrep "$*") -c copen; }
 function has_cmd() { type $* >/dev/null 2>&1; }
 function killProc() { for i in `getpid $1` ;  do ps -o user,pid -p $i | grep $i; kill -KILL $i; done; } 
 function pathsplt() { echo $* | perl -pe 's/:/\n/g'; }
