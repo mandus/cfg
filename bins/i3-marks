@@ -4,6 +4,7 @@
 Usage:
   i3-marks list        plain text listing:  mark  [ws]  class  title
   i3-marks menu        rofi picker, focuses the window of the picked mark
+  i3-marks help        Show this message
 """
 import json
 import os

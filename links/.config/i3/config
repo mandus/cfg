@@ -377,11 +377,10 @@ bar {
 
 
 #exec --no-startup-id /usr/lib/unity-settings-daemon/unity-settings-daemon
-
 exec --no-startup-id xrdb -merge /home/asmund/.Xresources
-
 #exec --no-startup-id onboard
 exec --no-startup-id nm-applet
-exec --no-startup-id dropbox start
+#exec --no-startup-id dropbox start
 #exec --no-startup-id clipit
 #exec --no-startup-id synapse
+exec --no-startup-id inputplug -c /home/asmund/bin/kbd_change.sh
