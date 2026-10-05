@@ -150,3 +150,23 @@ has_cmd q && alias q="rlfe -h ~/.q_history q"
 
 # R packages
 [ -d $HOME/.local/lib/R/site-library ] && export R_LIBS_USER=$HOME/.local/lib/R/site-library
+
+# # >>> juliaup initialize >>>
+
+# # !! Contents within this block are managed by juliaup !!
+
+# case ":$PATH:" in
+#     *:/home/aasmundo/.juliaup/bin:*)
+#         ;;
+
+#     *)
+#         export PATH=/home/aasmundo/.juliaup/bin${PATH:+:${PATH}}
+#         ;;
+# esac
+
+# # <<< juliaup initialize <<<
+
+# Julia / juliaup tab completion
+addinpath $HOME/.juliaup/bin
+has_cmd juliaup && . <(juliaup completions bash)
+

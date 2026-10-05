@@ -17,26 +17,31 @@ set   number
 set   numberwidth=4
 set   relativenumber
 set   ruler
+set   signcolumn="true"
 set   shiftwidth=4
 set   softtabstop=4
 set nosplitbelow
 set   splitright
 set   tabstop=4                                                                                                                                                               
 set   tags=./.git/tags,./tags,.git/tags,../.git/tags,.ctags,./TAGS,tags,TAGS
+set   termguicolors
 set   timeoutlen=500  "shorter timeout for multi-key mappings 
+set   updatetime=250
 set   viminfo='75,\"500,f1,:250,n~/.viminfo
 set wildignore=*.fasl
 set nowrap
 set nowritebackup
 
-augroup CustomColors
-	" overrides for colors independent of colorscheme can be set here.
-	autocmd!
-	autocmd ColorScheme * highlight LineNr ctermfg=5 guifg=gray
-					  \ | highlight CursorLineNr ctermfg=5 guifg=gray
-augroup End
+" augroup CustomColors
+" 	" overrides for colors independent of colorscheme can be set here.
+" 	autocmd!
+" 	autocmd ColorScheme * highlight LineNr ctermfg=5 guifg=gray
+" 					  \ | highlight CursorLineNr ctermfg=5 guifg=gray
+" augroup End
 
-colorscheme desert
+" colorscheme desert
+let g:evergarden_transparent = 0
+colorscheme evergarden
 
 " set the runtime path to include Vundle and initialize
 filetype off               
@@ -111,6 +116,7 @@ Plugin 'github/copilot.vim'
 "vim status in tmux - doesn't work with powerline?
 "Plugin 'vimpostor/vim-tpipeline'
 Plugin 'https://codeberg.org/anaseto/vim-goal.git'
+Plugin 'airblade/vim-gitgutter'
 
 "Consider adding this if debugger in vim is needed:
 "see https://puremourning.github.io/vimspector-web/
@@ -155,6 +161,7 @@ nnoremap ,sc <C-W>c
 nnoremap ,sr :%s/\<<C-r><C-w>\>//g<Left><Left>
 nnoremap ,ss <C-W>s
 nnoremap ,sv <C-W>v
+nnoremap ,ts :exe 'Ggrep \#' . expand('<cword>')<CR>:copen<CR><CR>
 nnoremap ,, <C-^>
 nnoremap -- <C-^>
 "Test out easier access to CommandT when on norwegian keyboard
