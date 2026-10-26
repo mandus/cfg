@@ -23,20 +23,22 @@ set nosplitbelow
 set   splitright
 set   tabstop=4                                                                                                                                                               
 set   tags=./.git/tags,./tags,.git/tags,../.git/tags,.ctags,./TAGS,tags,TAGS
+set   termguicolors
 set   timeoutlen=500  "shorter timeout for multi-key mappings 
 set   viminfo='75,\"500,f1,:250,n~/.viminfo
 set wildignore=*.fasl
 set nowrap
 set nowritebackup
 
-augroup CustomColors
-	" overrides for colors independent of colorscheme can be set here.
-	autocmd!
-	autocmd ColorScheme * highlight LineNr ctermfg=5 guifg=gray
-					  \ | highlight CursorLineNr ctermfg=5 guifg=gray
-augroup End
+" augroup CustomColors
+" 	" overrides for colors independent of colorscheme can be set here.
+" 	autocmd!
+" 	autocmd ColorScheme * highlight LineNr ctermfg=5 guifg=gray
+" 					  \ | highlight CursorLineNr ctermfg=5 guifg=gray
+" augroup End
 
-colorscheme desert
+" colorscheme desert
+colorscheme evergarden
 
 " set the runtime path to include Vundle and initialize
 filetype off               
@@ -165,6 +167,7 @@ nnoremap ,sr :%s/\<<C-r><C-w>\>//g<Left><Left>
 nnoremap ,ss <C-W>s
 nnoremap ,sv <C-W>v
 nnoremap ,ts :exe 'Ggrep \#' . expand('<cword>')<CR>:copen<CR><CR>
+nnoremap ,tms :exe 'Ggrep \#' . expand('<cword>') . ' -- "*.md"'<CR>:copen<CR><CR>
 nnoremap ,, <C-^>
 nnoremap -- <C-^>
 "Test out easier access to CommandT when on norwegian keyboard

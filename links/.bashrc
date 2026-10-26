@@ -44,6 +44,8 @@ export MOZ_USE_XINPUT2=1
 export GOTMPDIR=$HOME/tmp
 # Set custom tmpdir used by e.g. cargo, to avoid (intility?) issues
 export TMPDIR=$HOME/tmp
+# Set standard goallib
+export GOALLIB=$HOME/projects/various/goal/lib
 
 # some history stuff
 HISTCONTROL=ignoredups

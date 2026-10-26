@@ -3,7 +3,7 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 # disable window titles by squeezing the border to something thin
-new_window pixel 4
+new_window pixel 2
 hide_edge_borders vertical
 client.focused #1070b0 #202020 #b0b0b0 #b0b0b0 #1070b0
 show_marks yes
@@ -30,7 +30,7 @@ bindsym $altmod+Return exec uxterm
 #bindsym $altmod+Return exec alacritty
 bindsym $mod+Shift+Return exec gnome-terminal --window-with-profile=contrasy
 # toggle dropdown terminal
-bindsym $mod+Tab exec --no-startup-id "i3-scratchpad -tmt -atc urxvt"
+bindsym $mod+Tab exec --no-startup-id "i3-scratchpad -tmt -d '34%x50%' -atc urxvt"
 bindsym $mod+s exec --no-startup-id "i3-scratchpad -tmt -atc /opt/Signal/signal-desktop"
 bindsym $mod+t exec --no-startup-id "i3-scratchpad -tmt -atc /usr/bin/telegram-desktop"
 bindsym $mod+u exec --no-startup-id "i3-scratchpad -tmt -atc gvim ~/Dropbox/browser.tabs"
